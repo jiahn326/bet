@@ -7,12 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class DemoApplication {
 
     public static void main(String[] args) {
-        System.out.println("메롱");
-        System.out.println("jangkunsuguri");
-        System.out.println("메롱");
-        System.out.println("왜안돼...?");
-        
         SpringApplication.run(DemoApplication.class, args);
+        
     }
 
 }
