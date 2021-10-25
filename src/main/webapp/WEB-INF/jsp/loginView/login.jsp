@@ -12,5 +12,6 @@
 </head>
 <body>
     <h1>Welcome to BET website!</h1>
+    My name is ${userName}~!~!
 </body>
 </html>
