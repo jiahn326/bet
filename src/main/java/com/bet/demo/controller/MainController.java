@@ -17,24 +17,16 @@ public class MainController {
 
     @RequestMapping("/")
     public String open(){
-        return "redirect:/login";
+        return "redirect:/openBet";
     }
 
-//    @RequestMapping("/openTms")
-//    public String openTms(HttpServletRequest request){
-//        HttpSession session = request.getSession(false);
-//        if(session != null){
-//            SessionVO sesionVO = (SessionVO) session.getAttribute("SessionVO");
-//            if(sesionVO == null ){
-//                return "loginView/login";
-//            }else{
-//                return "content";
-//            }
-//        }else{
-//            return "loginView/login";
-//        }
-//    }
-//
+    // main page(home page)
+    @RequestMapping("/openBet")
+    public String openBet(){
+        return "content";
+    }
+
+    // login page
     @RequestMapping("/login")
     public ModelAndView test() throws Exception{
         ModelAndView mv = new ModelAndView();
@@ -42,26 +34,28 @@ public class MainController {
         mv.addObject("userName", "Jihyun");
         return mv;
     }
-//    public ModelAndView loginCheck(HttpServletRequest request, User user){
-////        HttpSession session = request.getSession(false);
-////        ModelAndView mv = new ModelAndView();
-////        mv.setViewName("loginView/login");
-////        if(session != null){
-//////            SessionVO sessionVO = (SessionVO) session.getAttribute("SessionVO");
-//////            if(sessionVO == null) {
-//////                mv.addObject("userId", vo.getUserId());
-//////                return mv;
-//////            }else {
-//////                mv.setViewName("content");
-//////                return mv;
-//////            }
-////            mv.addObject("userName", user.getFname());
-////            return mv;
-////        }else{
-////            mv.addObject("userId",user.getId());
-////            return mv;
-////        }
+
+//    // sign up page
+//    @RequestMapping(value = "/signUp")
+//    public String logout(HttpServletRequest request, HttpServletResponse response){
+//        HttpSession session = request.getSession();
 //
+//        if(session != null) {
+//            session.invalidate();
+//        }
 //
+//        return "loginView/login";
+//    }
+//
+//    // logout page --> return to login page
+//    @RequestMapping(value = "/logout")
+//    public String logout(HttpServletRequest request, HttpServletResponse response){
+//        HttpSession session = request.getSession();
+//
+//        if(session != null) {
+//            session.invalidate();
+//        }
+//
+//        return "loginView/login";
 //    }
 }
