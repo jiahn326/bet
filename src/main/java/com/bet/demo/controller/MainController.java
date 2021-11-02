@@ -23,7 +23,7 @@ public class MainController {
     // main page(home page)
     @RequestMapping("/openBet")
     public String openBet(){
-        return "content";
+        return "loginView/signUp";
     }
 
     // login page

@@ -5,6 +5,8 @@
 <link href="${pageContext.request.contextPath}/template/assets/css/layout.min.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/template/assets/css/components.min.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/template/assets/css/colors.min.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/template/global_assets/css/extras/animate.min.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/template/global_assets/css/icons/icomoon/styles.min.css" rel="stylesheet" type="text/css">
 <!-- /global stylesheets -->
 
 <!-- Core JS files -->
@@ -33,3 +35,7 @@
 <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_charts/pages/dashboard/light/pies.js"></script>
 <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_charts/pages/dashboard/light/bullets.js"></script>
 <!-- /theme JS files -->
+
+<!-- common JS files -->
+<script src="${pageContext.request.contextPath}/js/common/common.js"></script>
+<!-- /common JS files -->
