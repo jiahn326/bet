@@ -8584,19 +8584,19 @@ body.swal2-toast-column .swal2-toast {
   border-radius: 0.1875rem; }
 
 .ui-selectmenu-images .demo-img-amazon {
-  background: url("../../../../../../../../Users/Jihyun Ahn/Desktop/[UB]/Important Papers/themeforest-8BxLmJEp-limitless-responsive-web-application-kit/Limitless_2_3/Template/global_assets/images/brands/amazon.png") no-repeat; }
+  background: url("../../../../../../global_assets/images/brands/amazon.png") no-repeat; }
 
 .ui-selectmenu-images .demo-img-youtube {
-  background: url("../../../../../../../../Users/Jihyun Ahn/Desktop/[UB]/Important Papers/themeforest-8BxLmJEp-limitless-responsive-web-application-kit/Limitless_2_3/Template/global_assets/images/brands/youtube.png") no-repeat; }
+  background: url("../../../../../../global_assets/images/brands/youtube.png") no-repeat; }
 
 .ui-selectmenu-images .demo-img-twitter {
-  background: url("../../../../../../../../Users/Jihyun Ahn/Desktop/[UB]/Important Papers/themeforest-8BxLmJEp-limitless-responsive-web-application-kit/Limitless_2_3/Template/global_assets/images/brands/twitter.png") no-repeat; }
+  background: url("../../../../../../global_assets/images/brands/twitter.png") no-repeat; }
 
 .ui-selectmenu-images .demo-img-bing {
-  background: url("../../../../../../../../Users/Jihyun Ahn/Desktop/[UB]/Important Papers/themeforest-8BxLmJEp-limitless-responsive-web-application-kit/Limitless_2_3/Template/global_assets/images/brands/bing.png") no-repeat; }
+  background: url("../../../../../../global_assets/images/brands/bing.png") no-repeat; }
 
 .ui-selectmenu-images .demo-img-spotify {
-  background: url("../../../../../../../../Users/Jihyun Ahn/Desktop/[UB]/Important Papers/themeforest-8BxLmJEp-limitless-responsive-web-application-kit/Limitless_2_3/Template/global_assets/images/brands/spotify.png") no-repeat; }
+  background: url("../../../../../../global_assets/images/brands/spotify.png") no-repeat; }
 
 .ui-slider {
   position: relative;
@@ -13055,7 +13055,7 @@ a.fc-more {
  *
  * ---------------------------------------------------------------------------- */
 .login-cover {
-  background: url(../../../../../../../../Users/Jihyun Ahn/Desktop/[UB]/Important Papers/themeforest-8BxLmJEp-limitless-responsive-web-application-kit/Limitless_2_3/Template/global_assets/images/login_cover.jpg) no-repeat;
+  background: url(../../../../../../global_assets/images/login_cover.jpg) no-repeat;
   background-size: cover; }
 
 .login-form {
