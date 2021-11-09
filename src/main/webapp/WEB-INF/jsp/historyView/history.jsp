@@ -16,7 +16,7 @@
     <script src="${pageContext.request.contextPath}/js/table/inputPage.js"></script>
     <script src="${pageContext.request.contextPath}/js/table/pageListBox.js"></script>
     <script src="${pageContext.request.contextPath}/js/table/dataTable.js"></script>
-    <script src="${pageContext.request.contextPath}/js/domain/domain.js"></script>
+    <script src="${pageContext.request.contextPath}/js/history/history.js"></script>7
 
     <title>History</title>
 
@@ -53,7 +53,7 @@
         }
 
         #domainTable tbody tr {
-            cursor: pointe
+            cursor: pointer;
         }
 
         table.modalTable > thead {
@@ -91,7 +91,7 @@
     <div class="content">
         <div class="card">
             <div class="card-header header-elements-inline font-size-base">
-                <h5 class="card-title font-size-lg"><strong>도메인 목록</strong></h5>
+                <h5 class="card-title font-size-lg"><strong>History</strong></h5>
                 <div class="header-elements">
                     <div class="list-icons">
                         <a class="list-icons-item" data-action="reload" onclick="resetSearch();"></a>
@@ -99,10 +99,15 @@
                 </div>
             </div>
 
+            <!-- Drop box Start -->
             <div class="form-group row font-size-xs" style="margin-left: 10px;">
+                <!-- search 'All' -->
                 <select class="form-control font-size-xs" aria-hidden="true" style="width: 150px; margin-left: 10px;" name="searchType" id="searchType">
-                    <option value="all">전체</option>
+                    <option value="all">All</option>
                 </select>
+                <!-- /search 'All' -->
+
+                <!-- search input -->
                 <div class="col-lg-1" style="margin-left: -5px;">
                     <div class="input-group" style="width: 400px;">
                         <input type="text" class="form-control border-right-0 font-size-xs" placeholder="" name="keyword" id="keyword">
@@ -111,9 +116,10 @@
 									</span>
                     </div>
                 </div>
+                <!-- /search input -->
                 <button class="btn btn-outline bg-slate-600 text-slate-600 border-slate-600 font-size-xs" type="button" data-toggle="modal" data-target="#modal" id="newButton" onclick="openModal('add');" style="margin-left: auto; margin-right: 30px;">신규 등록</button>
-                <!--  -->
             </div>
+            <!-- /Drop box Start -->
 
             <table class="table-bordered-0 table-sm datatable-pagination table-striped table-hover" id="domainTable" style="font-size: 12px">
                 <thead>
