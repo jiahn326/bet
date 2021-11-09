@@ -19,7 +19,7 @@ function getCookie(Name) {
 	}
 }
 
-//입력값 유호성 검사
+//입력값 유효성 검사
 function loginValidation(){
     if($("input[name=userId]").val().length == 0){
         alertMessage("경고!","아이디를 입력해주세요.","warning");
