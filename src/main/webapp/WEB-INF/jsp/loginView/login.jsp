@@ -34,7 +34,7 @@
         <div class="content d-flex justify-content-center align-items-center">
 
             <!-- Login form -->
-            <form class="login-form" action="index.html">
+            <form class="login-form">
                 <div class="card mb-0">
                     <div class="card-body">
                         <div class="text-center mb-3">
@@ -43,34 +43,51 @@
                             <span class="d-block text-muted">Your credentials</span>
                         </div>
 
+                        <!-- User email -->
                         <div class="form-group form-group-feedback form-group-feedback-left">
-                            <input type="email" class="form-control" placeholder="User Email">
+                            <input type="email" value="${userEmail}" class="form-control" name="userEmail" placeholder="User Email">
                             <div class="form-control-feedback">
                                 <i class="icon-user text-muted"></i>
                             </div>
+<%--                            <input type="text" value="${ usrId }" class="form-control" name="userId" id="id" aria-describedby="id" placeholder="아이디">--%>
                         </div>
+                        <!-- User email -->
 
+                        <!-- User password -->
                         <div class="form-group form-group-feedback form-group-feedback-left">
-                            <input type="password" class="form-control" placeholder="Password">
+                            <input type="password" class="form-control" name="userPwd" id="userPwd" placeholder="Password">
                             <div class="form-control-feedback">
                                 <i class="icon-lock2 text-muted"></i>
                             </div>
+<%--                            <input type="password" class="form-control" name="userPwd" id="password" placeholder="비밀번호">--%>
                         </div>
+                        <!-- /User password -->
 
+                        <!-- Remember user email&password -->
                         <div class="form-group d-flex align-items-center">
-                            <div class="form-check mb-0">
+                            <div class="dt-checkbox d-block mb-6">
                                 <label class="form-check-label">
-                                    <input type="checkbox" name="remember" class="form-input-styled" checked data-fouc>
+                                    <input type="checkbox" name="boxRemember" class="form-input-styled" checked data-fouc>
                                     Remember
                                 </label>
                             </div>
 
                             <a href="login_password_recover.html" class="ml-auto">Forgot password?</a>
                         </div>
+                        <!-- /Remember user email&password -->
 
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-block">Sign in <i class="icon-circle-right2 ml-2"></i></button>
                         </div>
+
+                        <!-- Form Group -->
+<%--                        <div class="form-group">--%>
+<%--                            <button id="login_btn" class="btn btn-primary text-uppercase" onclick="loginConfirm();" style="background-color: #324148!important;">Login</button>--%>
+<%--                            &lt;%&ndash; <span class="d-inline-block ml-4">--%>
+<%--                                 아직 회원이 아니신가요?  <a href="${pageContext.request.contextPath}/signup" style="color:324148;">&nbsp;&nbsp;&nbsp;회원가입</a>--%>
+<%--                            </span> &ndash;%&gt;--%>
+<%--                        </div>--%>
+                        <!-- /form group -->
 
                         <div class="form-group text-center text-muted content-divider">
                             <span class="px-2">Don't have an account?</span>
