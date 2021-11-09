@@ -24,7 +24,7 @@ public class DemoApplication {
                 .build();
         FirebaseApp.initializeApp(options);
 
-        //dell is better 
+        //dell is better    
         Firestore db = FirestoreClient.getFirestore();
 
     }
