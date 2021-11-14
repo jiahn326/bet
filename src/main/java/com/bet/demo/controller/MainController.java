@@ -24,6 +24,7 @@ public class MainController {
     @RequestMapping("/openBet")
     public String openBet(){
         return "content";
+//        return "redirect:/login";
     }
 
     // login page

@@ -18,6 +18,13 @@
     <script src="${pageContext.request.contextPath}/template/assets/js/app.js"></script>
     <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_pages/login.js"></script>
     <!-- /theme JS files -->
+
+    <style>
+        .form-control-feedback{
+            display: inline-block;
+            vertical-align: -0.25em;
+        }
+    </style>
 </head>
 <body>
 <!-- Main header -->
@@ -46,7 +53,7 @@
                         <!-- User email -->
                         <div class="form-group form-group-feedback form-group-feedback-left">
                             <input type="email" value="${userEmail}" class="form-control" name="userEmail" placeholder="User Email">
-                            <div class="form-control-feedback">
+                            <div class="form-control-feedback" >
                                 <i class="icon-user text-muted"></i>
                             </div>
 <%--                            <input type="text" value="${ usrId }" class="form-control" name="userId" id="id" aria-describedby="id" placeholder="아이디">--%>

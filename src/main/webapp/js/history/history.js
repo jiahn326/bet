@@ -181,21 +181,13 @@ function searchList(searchType, keyword, orderNumber) {
             { data: 'domainSeq', width: "10%" },
             { data: 'domainNm' },
             { data: 'domainTypeNm' },
-            { data: 'dataType' },
-            { data: 'dataLen', width: "10%" },
-            { data: 'dcmlLen', width: "10%" },
-            { data: 'summaryDomainDscrpt' },
-            { data: 'updDt'}
+            { data: 'dataType' }
         ],
         columnDefs: [
-            { targets:[0], title: 'ID' },
-            { targets:[1], title: '도메인명' },
-            { targets:[2], title: '도메인 분류명' },
-            { targets:[3], title: '데이터 타입' },
-            { targets:[4], title: '데이터 길이' },
-            { targets:[5], title: '소수점 길이' },
-            { targets:[6], title: '설명' },
-            { targets:[7], title: '수정 날짜', visible: false }
+            { targets:[0], title: 'Date' },
+            { targets:[1], title: 'Description' },
+            { targets:[2], title: 'Type' },
+            { targets:[3], title: 'Category' }
         ],
         order: [[orderNumber, order]],
 
