@@ -117,7 +117,7 @@
                     <a href="#" class="nav-link second" onclick="changeMenu('${pageContext.request.contextPath}/budget/info',this)">
                         <i class="icon-piggy-bank"></i>
                         <span>
-                                    Budget System
+                                    Budget
                                 </span>
                     </a>
                 </li>
