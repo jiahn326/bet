@@ -145,11 +145,10 @@ function dataTypeSelect() {
     });
 }
 
-//도메인 목록
 // list of History
 function searchList(searchType, keyword, orderNumber) {
 
-    //Sorting 하기 위한 컬럼들 서버로 가지고감
+    // columns of History
     let columns = ['DOMAIN_SEQ','DOMAIN_NM','DOMAIN_TYPE_NM','DATA_TYPE', 'DATA_LEN', 'DCML_LEN', 'DOMAIN_DSCRPT', 'UPD_DT'];
     let order = 'asc';
 
@@ -165,7 +164,7 @@ function searchList(searchType, keyword, orderNumber) {
 
 
     //sAjaxSource 를 사용하면 기본적인 DataTable에 사용되는 옵션들을 객체로 가지고 감. 서버의 DomainVO 객체 확인하기
-    $("#domainTable").DataTable({
+    $("#historyTable").DataTable({
         processing: true,
         serverSide: true,
         responsive: true,
@@ -217,9 +216,9 @@ function searchList(searchType, keyword, orderNumber) {
         }
     });
 
-    $('#domainTable tbody').on('dblclick', 'tr', function () {
+    $('#historyTable tbody').on('dblclick', 'tr', function () {
 
-        let table = $("#domainTable").DataTable();
+        let table = $("#historyTable").DataTable();
         let rowData = table.row( this ).data();
 
         if(rowData != undefined) {
@@ -276,7 +275,7 @@ function searchDomain() {
 
     let searchType = $("#searchType").val();
     let keyword = $("#keyword").val();
-    let dataTable = $("#domainTable").DataTable();
+    let dataTable = $("#historyTable").DataTable();
 
     if(keyword == '') {
         if($("#searchType").val() == 'all') {
@@ -292,14 +291,13 @@ function searchDomain() {
     }
 }
 
-//검색 초기화 아이콘 클릭 이벤트
 // reset Search input
 function resetSearch() {
 
     $("#searchType").val('all');
     $("#keyword").val('');
 
-    let dataTable = $("#domainTable").DataTable();
+    let dataTable = $("#historyTable").DataTable();
     dataTable.destroy();
     searchList();
 

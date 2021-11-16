@@ -16,7 +16,7 @@
     <script src="${pageContext.request.contextPath}/js/table/inputPage.js"></script>
     <script src="${pageContext.request.contextPath}/js/table/pageListBox.js"></script>
     <script src="${pageContext.request.contextPath}/js/table/dataTable.js"></script>
-    <script src="${pageContext.request.contextPath}/js/history/history.js"></script>7
+    <script src="${pageContext.request.contextPath}/js/history/history.js"></script>
 
     <title>History</title>
 
@@ -90,14 +90,21 @@
 <div class="content-wrapper">
     <div class="content">
         <div class="card">
+            <!-- card header -->
             <div class="card-header header-elements-inline font-size-base">
+                <!-- title of the page -->
                 <h5 class="card-title font-size-lg"><strong>History</strong></h5>
+                <!-- /title of the page -->
+
+                <!-- reload the search input -->
                 <div class="header-elements">
                     <div class="list-icons">
                         <a class="list-icons-item" data-action="reload" onclick="resetSearch();"></a>
                     </div>
                 </div>
+                <!-- /reload the search input -->
             </div>
+            <!-- /card header -->
 
             <!-- Drop box Start -->
             <div class="form-group row font-size-xs" style="margin-left: 10px;">
@@ -117,11 +124,12 @@
                     </div>
                 </div>
                 <!-- /search input -->
-                <button class="btn btn-outline bg-slate-600 text-slate-600 border-slate-600 font-size-xs" type="button" data-toggle="modal" data-target="#modal" id="newButton" onclick="openModal('add');" style="margin-left: auto; margin-right: 30px;">신규 등록</button>
+                <button class="btn btn-outline bg-slate-600 text-slate-600 border-slate-600 font-size-xs" type="button" data-toggle="modal" data-target="#modal" id="newButton" onclick="openModal('add');" style="margin-left: auto; margin-right: 30px;">New</button>
             </div>
             <!-- /Drop box Start -->
 
-            <table class="table-bordered-0 table-sm datatable-pagination table-striped table-hover" id="domainTable" style="font-size: 12px">
+            <!-- History table -->
+            <table class="table-bordered-0 table-sm datatable-pagination table-striped table-hover" id="historyTable" style="font-size: 12px">
                 <thead>
                 <tr style="background-color: #4DB6AC; color: white">
                     <th></th>
@@ -135,6 +143,7 @@
                 </tr>
                 </thead>
             </table>
+            <!-- /History table -->
         </div>
     </div>
 </div>
