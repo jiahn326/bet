@@ -10,22 +10,22 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.*;
 import java.util.Objects;
+import java.util.concurrent.ExecutionException;
 
 @SpringBootApplication
 public class DemoApplication {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ExecutionException, InterruptedException {
         SpringApplication.run(DemoApplication.class, args);
 
-        InputStream serviceAccount = new FileInputStream("src/main/resources/serviceAccountKey.json");
-        GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
-        FirebaseOptions options = new FirebaseOptions.Builder()
-                .setCredentials(credentials)
-                .build();
-        FirebaseApp.initializeApp(options);
-
-        //dell is better    
-        Firestore db = FirestoreClient.getFirestore();
+//        InputStream serviceAccount = new FileInputStream("src/main/resources/serviceAccountKey.json");
+//        GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
+//        FirebaseOptions options = new FirebaseOptions.Builder()
+//                .setCredentials(credentials)
+//                .build();
+//        FirebaseApp.initializeApp(options);
+//
+//        Firestore db = FirestoreClient.getFirestore();
 
     }
 }
