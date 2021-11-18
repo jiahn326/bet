@@ -53,7 +53,7 @@
                                 </div>
 
                                 <div class="form-group form-group-feedback form-group-feedback-right">
-                                    <input type="text" class="form-control" name="nickname" placeholder="Create Nickname">
+                                    <input type="text" class="form-control" name="username" placeholder="Create Username">
                                     <div class="form-control-feedback">
                                         <i class="icon-user-plus text-muted"></i>
                                     </div>

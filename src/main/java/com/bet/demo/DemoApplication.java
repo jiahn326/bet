@@ -31,7 +31,7 @@ public class DemoApplication {
 
         Firestore db = FirestoreClient.getFirestore();
 
-        DocumentReference docRef = db.collection("users").document("johndoe");
+        DocumentReference docRef = db.collection("users").document("admin");
         // asynchronously retrieve the document
         ApiFuture<DocumentSnapshot> future = docRef.get();
         // ...
@@ -40,12 +40,13 @@ public class DemoApplication {
         User user = null;
         DocumentSnapshot document = future.get();
         if (document.exists()) {
-            System.out.println("account doesn't exist");
-        } else {
             user = document.toObject(User.class);
+            System.out.println(user.toString());
             if (user.getPassword().equals("password")){
                 System.out.println("correct password");
             }
+        } else {
+            System.out.println("No account associated with the username johndoe");
         }*/
 
     }

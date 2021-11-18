@@ -48,7 +48,7 @@ public class MainController {
     }
     
     // login page
-    /*@RequestMapping("/login")
+    @RequestMapping("/login")
     public String login(HttpServletRequest request, HttpServletResponse response) throws ExecutionException, InterruptedException, IOException {
         HttpSession session = request.getSession();
 
@@ -69,11 +69,11 @@ public class MainController {
         }
 
         return "login";
-    }*/
+    }
 
 
 
-    //sign up page
+    /*//sign up page
     @RequestMapping(value = "/signUp")
     public String signUp(HttpServletRequest request, HttpServletResponse response) throws ExecutionException, InterruptedException, IOException {
         HttpSession session = request.getSession();
@@ -95,7 +95,7 @@ public class MainController {
         }
 
         return "loginView/login";
-    }
+    }*/
 
 
 //

@@ -22,7 +22,7 @@ public class MainService {
     @RequestMapping(value = "/signUp")
     public void signUp(HttpServletRequest request, HttpServletResponse response, HttpSession session, Firestore db) throws ExecutionException, InterruptedException {
         // HTML 폼에서 username으로 전달된 값을 가지고 옴
-        String nickname = request.getParameter("nickname");
+        String username = request.getParameter("username");
         String firstname = request.getParameter("firstname");
         String lastname = request.getParameter("lastname");
         String password = request.getParameter("password");
@@ -32,9 +32,9 @@ public class MainService {
         // Add document data  with id "alovelace" using a hashmap
         Map<String, Object> data = new HashMap<>();
 
-        // nickname이 null 이 아닌 경우 세션에 값을 저장
-        if(nickname != null) {
-            data.put("nickname", nickname);
+        // username이 null 이 아닌 경우 세션에 값을 저장
+        if(username != null) {
+            data.put("username", username);
         }
 
         // firstname이 null 이 아닌 경우 세션에 값을 저장
@@ -66,7 +66,7 @@ public class MainService {
     }
 
     @RequestMapping(value = "/login")
-    public boolean login(HttpServletRequest request, HttpServletResponse response, HttpSession session, Firestore db) throws ExecutionException, InterruptedException {
+    public void login(HttpServletRequest request, HttpServletResponse response, HttpSession session, Firestore db) throws ExecutionException, InterruptedException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
@@ -79,13 +79,13 @@ public class MainService {
         User user = null;
         DocumentSnapshot document = future.get();
         if (document.exists()) {
-            return false;
+            System.out.println("username doesn't exist");
         } else {
             user = document.toObject(User.class);
             if (user.getPassword().equals(password)){
-                return true;
-            }
+                System.out.println("right password");
+            } else
+                System.out.println("wrong password");
         }
-        return false;
     }
 }
