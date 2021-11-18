@@ -47,6 +47,8 @@ public class MainController {
         return mv;
     }
 
+
+
     //sign up page
     @RequestMapping(value = "/signUp")
     public String signUp(HttpServletRequest request, HttpServletResponse response) throws ExecutionException, InterruptedException, IOException {

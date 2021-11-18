@@ -5,15 +5,17 @@ public class User {
     private String fname;
     private String lname;
     private String username;
+    private String password;
 
     public User() {
     }
 
-    public User(String email, String fname, String lname, String username) {
+    public User(String email, String fname, String lname, String username, String password) {
         this.email = email;
         this.fname = fname;
         this.lname = lname;
         this.username = username;
+        this.password = password;
     }
 
     public String getEmail() {
@@ -48,6 +50,14 @@ public class User {
         this.username = username;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -55,6 +65,7 @@ public class User {
                 ", fname='" + fname + '\'' +
                 ", lname='" + lname + '\'' +
                 ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }
