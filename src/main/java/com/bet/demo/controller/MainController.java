@@ -38,7 +38,7 @@ public class MainController {
 //        return "redirect:/login";
     }
 
-    // login page
+
     @RequestMapping("/login")
     public ModelAndView test() throws Exception{
         ModelAndView mv = new ModelAndView();
@@ -46,6 +46,30 @@ public class MainController {
         mv.addObject("userName", "Jihyun");
         return mv;
     }
+    
+    // login page
+    /*@RequestMapping("/login")
+    public String login(HttpServletRequest request, HttpServletResponse response) throws ExecutionException, InterruptedException, IOException {
+        HttpSession session = request.getSession();
+
+        //***I MOVED THE FIREBASE INIT HERE - NEED TO FIND A WAY TO MAKE IT GLOBAL BUT STILL WORK***
+        InputStream serviceAccount = new FileInputStream("src/main/resources/serviceAccountKey.json");
+        GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
+        FirebaseOptions options = new FirebaseOptions.Builder()
+                .setCredentials(credentials)
+                .build();
+        FirebaseApp.initializeApp(options);
+        Firestore db = FirestoreClient.getFirestore();
+        //***END***
+
+        mainService.login(request, response, session, db);
+
+        if(session != null) {
+            session.invalidate();
+        }
+
+        return "login";
+    }*/
 
 
 

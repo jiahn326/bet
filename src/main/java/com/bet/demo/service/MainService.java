@@ -1,7 +1,9 @@
 package com.bet.demo.service;
 
+import com.bet.demo.data.User;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.WriteResult;
 import org.springframework.stereotype.Service;
@@ -61,5 +63,29 @@ public class MainService {
         // result.get() blocks on response
         System.out.println("Update time : " + result.get().getUpdateTime());
 
+    }
+
+    @RequestMapping(value = "/login")
+    public boolean login(HttpServletRequest request, HttpServletResponse response, HttpSession session, Firestore db) throws ExecutionException, InterruptedException {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+
+        DocumentReference docRef = db.collection("users").document(username);
+        // asynchronously retrieve the document
+        ApiFuture<DocumentSnapshot> future = docRef.get();
+        // ...
+        // future.get() blocks on response
+
+        User user = null;
+        DocumentSnapshot document = future.get();
+        if (document.exists()) {
+            return false;
+        } else {
+            user = document.toObject(User.class);
+            if (user.getPassword().equals(password)){
+                return true;
+            }
+        }
+        return false;
     }
 }

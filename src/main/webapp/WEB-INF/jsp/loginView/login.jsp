@@ -52,7 +52,7 @@
 
                         <!-- User email -->
                         <div class="form-group form-group-feedback form-group-feedback-left">
-                            <input type="email" value="${userEmail}" class="form-control" name="userEmail" placeholder="User Email">
+                            <input type="username" value="${username}" class="form-control" name="username" placeholder="Username">
                             <div class="form-control-feedback" >
                                 <i class="icon-user text-muted"></i>
                             </div>
