@@ -34,18 +34,18 @@ public class MainController {
     // main page(home page)
     @RequestMapping("/openBet")
     public String openBet(){
-        return "content";
-//        return "redirect:/login";
+        /*return "content";*/
+        return "loginView/login";
     }
 
 
-    @RequestMapping("/login")
+/*    @RequestMapping("/login")
     public ModelAndView test() throws Exception{
         ModelAndView mv = new ModelAndView();
         mv.setViewName("loginView/login");
         mv.addObject("userName", "Jihyun");
         return mv;
-    }
+    }*/
     
     // login page
     @RequestMapping("/login")
@@ -68,7 +68,7 @@ public class MainController {
             session.invalidate();
         }
 
-        return "login";
+        return "content";
     }
 
 
