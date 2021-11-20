@@ -52,6 +52,7 @@ public class MainController {
     public String login(HttpServletRequest request, HttpServletResponse response) throws ExecutionException, InterruptedException, IOException {
         HttpSession session = request.getSession();
 
+        //FirebaseApp.getInstance().delete();
         //***I MOVED THE FIREBASE INIT HERE - NEED TO FIND A WAY TO MAKE IT GLOBAL BUT STILL WORK***
         InputStream serviceAccount = new FileInputStream("src/main/resources/serviceAccountKey.json");
         GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
@@ -62,13 +63,18 @@ public class MainController {
         Firestore db = FirestoreClient.getFirestore();
         //***END***
 
-        mainService.login(request, response, session, db);
+        String page = "";
+        if (mainService.login(request, response, session, db)){
+            page = "content";
+        } else{
+            page = "loginView/login";
+        }
 
         if(session != null) {
             session.invalidate();
         }
 
-        return "content";
+        return page;
     }
 
 

@@ -66,7 +66,7 @@ public class MainService {
     }
 
     @RequestMapping(value = "/login")
-    public void login(HttpServletRequest request, HttpServletResponse response, HttpSession session, Firestore db) throws ExecutionException, InterruptedException {
+    public boolean login(HttpServletRequest request, HttpServletResponse response, HttpSession session, Firestore db) throws ExecutionException, InterruptedException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
@@ -79,13 +79,13 @@ public class MainService {
         User user = null;
         DocumentSnapshot document = future.get();
         if (document.exists()) {
-            System.out.println("username doesn't exist");
-        } else {
             user = document.toObject(User.class);
-            if (user.getPassword().equals(password)){
-                System.out.println("right password");
+            if (user.getPassword().equals(password)) {
+                return true;
             } else
-                System.out.println("wrong password");
+                return false;
+        } else {
+            return false;
         }
     }
 }
