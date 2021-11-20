@@ -62,7 +62,7 @@
 
                         <!-- User password -->
                         <div class="form-group form-group-feedback form-group-feedback-left">
-                            <input type="password" class="form-control" name="userPwd" id="userPwd" placeholder="Password">
+                            <input type="password" value="${password}" class="form-control" name="password" placeholder="Password">
                             <div class="form-control-feedback">
                                 <i class="icon-lock2 text-muted"></i>
                             </div>

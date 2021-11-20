@@ -80,6 +80,8 @@ public class MainService {
         DocumentSnapshot document = future.get();
         if (document.exists()) {
             user = document.toObject(User.class);
+            System.out.println(user.getPassword());
+            System.out.println(password);
             if (user.getPassword().equals(password)) {
                 return true;
             } else
