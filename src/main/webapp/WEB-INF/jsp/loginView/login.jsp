@@ -41,7 +41,7 @@
         <div class="content d-flex justify-content-center align-items-center">
 
             <!-- Login form -->
-            <form class="login-form">
+            <form id = "login" action = "login" class="login-form">
                 <div class="card mb-0">
                     <div class="card-body">
                         <div class="text-center mb-3">
@@ -52,7 +52,7 @@
 
                         <!-- User email -->
                         <div class="form-group form-group-feedback form-group-feedback-left">
-                            <input type="email" value="${userEmail}" class="form-control" name="userEmail" placeholder="User Email">
+                            <input type="username" value="${username}" class="form-control" name="username" placeholder="Username">
                             <div class="form-control-feedback" >
                                 <i class="icon-user text-muted"></i>
                             </div>
@@ -62,7 +62,7 @@
 
                         <!-- User password -->
                         <div class="form-group form-group-feedback form-group-feedback-left">
-                            <input type="password" class="form-control" name="userPwd" id="userPwd" placeholder="Password">
+                            <input type="password" value="${password}" class="form-control" name="password" placeholder="Password">
                             <div class="form-control-feedback">
                                 <i class="icon-lock2 text-muted"></i>
                             </div>

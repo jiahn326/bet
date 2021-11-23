@@ -2,18 +2,20 @@ package com.bet.demo.data;
 
 public class User {
     private String email;
-    private String fname;
-    private String lname;
+    private String firstname;
+    private String lastname;
     private String username;
+    private String password;
 
     public User() {
     }
 
-    public User(String email, String fname, String lname, String username) {
+    public User(String email, String firstname, String lastname, String username, String password) {
         this.email = email;
-        this.fname = fname;
-        this.lname = lname;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.username = username;
+        this.password = password;
     }
 
     public String getEmail() {
@@ -24,20 +26,20 @@ public class User {
         this.email = email;
     }
 
-    public String getFname() {
-        return fname;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFname(String fname) {
-        this.fname = fname;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getLname() {
-        return lname;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLname(String lname) {
-        this.lname = lname;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getUsername() {
@@ -48,13 +50,22 @@ public class User {
         this.username = username;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "email='" + email + '\'' +
-                ", fname='" + fname + '\'' +
-                ", lname='" + lname + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
                 ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }
