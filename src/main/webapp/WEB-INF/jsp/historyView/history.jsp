@@ -17,6 +17,9 @@
     <script src="${pageContext.request.contextPath}/js/table/pageListBox.js"></script>
     <script src="${pageContext.request.contextPath}/js/table/dataTable.js"></script>
     <script src="${pageContext.request.contextPath}/js/history/history.js"></script>
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/tables/datatables/datatables.min.js"></script>
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/forms/selects/select2.min.js"></script>
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_pages/datatables_basic.js"></script>
 
     <title>History</title>
 
@@ -111,6 +114,10 @@
                 <!-- search 'All' -->
                 <select class="form-control font-size-xs" aria-hidden="true" style="width: 150px; margin-left: 10px;" name="searchType" id="searchType">
                     <option value="all">All</option>
+<%--                    <option value="date">Date</option>--%>
+                    <option value="description">Description</option>
+                    <option value="type">Type</option>
+                    <option value="category">Category</option>
                 </select>
                 <!-- /search 'All' -->
 
@@ -129,19 +136,30 @@
             <!-- /Drop box Start -->
 
             <!-- History table -->
-            <table class="table-bordered-0 table-sm datatable-pagination table-striped table-hover" id="historyTable" style="font-size: 12px">
+            <table class="table-bordered-0 table-sm datatable-pagination table-striped table-hover" id="historyTable" style="font-size: 15px">
                 <thead>
                 <tr style="background-color: #4DB6AC; color: white">
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Type</th>
+                    <th>Category</th>
+                    <th class="text-center">Actions</th>
                 </tr>
                 </thead>
+                <tbody>
+                <tr>
+                    <td>11/23/2021</td>
+                    <td>Testing</td>
+                    <td>testing</td>
+                    <td><span class="badge badge-light">Saving</span></td>
+                    <td class="text-center">
+                        <div class="list-icons">
+                            <a href="#" class="badge badge-flat border-primary text-primary-600 badge-icon"><i class="icon-search4"></i></a>
+                            <a href="#" class="badge badge-flat border-danger text-danger-600 badge-icon"><i class="icon-trash"></i></a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
             </table>
             <!-- /History table -->
         </div>
