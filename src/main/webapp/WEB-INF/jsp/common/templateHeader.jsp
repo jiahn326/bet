@@ -4,7 +4,7 @@
 
 <style>
 .navbar-brand img {
-	height: 37px;
+	height: 500px;
 	display: block;
 }
 </style>
@@ -13,7 +13,7 @@
 <div class="navbar navbar-expand-md navbar-dark">
     <div class="navbar-brand">
         <a href="#" class="d-inline-block">
-            <img src="${pageContext.request.contextPath}/template/global_assets/images/logo_light.png" alt="">
+            <img src="${pageContext.request.contextPath}/images/BET_LOGO_IMG_TEXT.png" alt="">
         </a>
     </div>
 
