@@ -63,10 +63,8 @@ public class MainController {
         String page = "";
         if (mainService.login(request, response, session, db)){
             page = "content";
-            System.out.println("correct password");
         } else{
             page = "loginView/login";
-            System.out.println("wrong password");
         }
 
         if(session != null) {
