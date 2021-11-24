@@ -74,6 +74,10 @@ public class User {
         return this.entries;
     }
 
+    public boolean isEntryEmpty(){
+        return this.entries.isEmpty();
+    }
+
     private void addAnExpense(Entry entry){
         this.expenses.add(entry);
     }

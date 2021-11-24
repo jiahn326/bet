@@ -1,5 +1,6 @@
 package com.bet.demo.controller;
 
+import com.bet.demo.data.Entry;
 import com.bet.demo.data.User;
 import com.bet.demo.service.MainService;
 import com.google.auth.oauth2.GoogleCredentials;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,12 +21,15 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @Controller
 public class MainController {
 
     Firestore db = null;
+    User user = null;
 
     @Autowired
     private MainService mainService;
@@ -62,6 +67,9 @@ public class MainController {
 
         String page = "";
         if (mainService.login(request, response, session, db)){
+            this.user = mainService.getUser();
+            System.out.println(this.user.toString());
+            //System.out.println(this.user.getEntry().toString());
             page = "content";
         } else{
             page = "loginView/login";
@@ -84,20 +92,14 @@ public class MainController {
         this.db = FirestoreClient.getFirestore();
     }
 
-    /*//sign up page
+    //sign up page
     @RequestMapping(value = "/signUp")
     public String signUp(HttpServletRequest request, HttpServletResponse response) throws ExecutionException, InterruptedException, IOException {
         HttpSession session = request.getSession();
 
-        //***I MOVED THE FIREBASE INIT HERE - NEED TO FIND A WAY TO MAKE IT GLOBAL BUT STILL WORK***
-        InputStream serviceAccount = new FileInputStream("src/main/resources/serviceAccountKey.json");
-        GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
-        FirebaseOptions options = new FirebaseOptions.Builder()
-                .setCredentials(credentials)
-                .build();
-        FirebaseApp.initializeApp(options);
-        Firestore db = FirestoreClient.getFirestore();
-        //***END***
+        if (db == null){
+            initializeFirebase();
+        }
 
         mainService.signUp(request, response, session, db);
 
@@ -106,7 +108,26 @@ public class MainController {
         }
 
         return "loginView/login";
-    }*/
+    }
+
+    @RequestMapping("historyView/history")
+    public String history(HttpServletRequest request){
+        System.out.println("슈우벌");
+        HttpSession session = request.getSession();
+
+        List<Entry> entryList = new ArrayList<>();
+        if (user != null && !user.isEntryEmpty()){
+            entryList = user.getEntry();
+            System.out.println(entryList.get(1).toString());
+            request.setAttribute("entryList", entryList);
+        }
+
+        if(session != null) {
+            session.invalidate();
+        }
+
+        return "content";
+    }
 
 
 //

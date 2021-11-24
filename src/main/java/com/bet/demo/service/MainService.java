@@ -1,17 +1,16 @@
 package com.bet.demo.service;
 
+import com.bet.demo.data.Entry;
 import com.bet.demo.data.User;
 import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.DocumentSnapshot;
-import com.google.cloud.firestore.Firestore;
-import com.google.cloud.firestore.WriteResult;
+import com.google.cloud.firestore.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,8 +19,7 @@ import java.util.concurrent.ExecutionException;
 @Service
 public class MainService {
 
-    User user = null;
-
+    private User user = new User();
 
     @RequestMapping(value = "/signUp")
     public void signUp(HttpServletRequest request, HttpServletResponse response, HttpSession session, Firestore db) throws ExecutionException, InterruptedException {
@@ -83,7 +81,8 @@ public class MainService {
         DocumentSnapshot document = future.get();
         if (document.exists()) {
             this.user = document.toObject(User.class);
-            if (user.getPassword().equals(password)) {
+            if (this.user.getPassword().equals(password)) {
+                this.loadEntriesToUser(username, db);
                 return true;
             } else
                 return false;
@@ -92,11 +91,20 @@ public class MainService {
         }
     }
 
-    public List getEntryList(){
-        if (user != null && user.getEntry() != null){
-            return user.getEntry();
-        }
+    public User getUser(){
+        return this.user;
+    }
 
-        return null;
+    private void loadEntriesToUser(String username, Firestore db) throws ExecutionException, InterruptedException {
+        List<Entry> list = new ArrayList<>();
+        ApiFuture<QuerySnapshot> entryFuture = db.collection("entry").whereEqualTo("user",username).get();
+        List<QueryDocumentSnapshot> documents = entryFuture.get().getDocuments();
+        System.out.println(documents.size());
+        for (QueryDocumentSnapshot document : documents) {
+            Entry entry = document.toObject(Entry.class);
+            user.addAnEntry(entry);
+            System.out.println(entry.toString());
+            list.add(entry);
+        }
     }
 }
