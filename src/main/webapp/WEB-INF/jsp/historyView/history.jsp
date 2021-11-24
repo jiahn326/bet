@@ -124,9 +124,9 @@
                 <!-- search input -->
                 <div class="col-lg-1" style="margin-left: -5px;">
                     <div class="input-group" style="width: 400px;">
-                        <input type="text" class="form-control border-right-0 font-size-xs" placeholder="" name="keyword" id="keyword">
+                        <input type="text" class="form-control border-right-0 font-size-xs" placeholder="Search..." name="keyword" id="keyword">
                         <span class="input-group-append">
-										<button class="btn border font-size-xs" type="button" onclick="searchDomain();" id="searchButton"><i class="icon-search4"></i></button>
+										<button class="btn border font-size-xs" type="button" onclick="searchHistory();" id="searchButton"><i class="icon-search4"></i></button>
 									</span>
                     </div>
                 </div>
@@ -136,7 +136,7 @@
             <!-- /Drop box Start -->
 
             <!-- History table -->
-            <table class="table-bordered-0 table-sm datatable-pagination table-striped table-hover" id="historyTable" style="font-size: 15px">
+            <table class="table-bordered-0 table-sm datatable-pagination table-striped table-hover" id="historyTable" style="font-size: 12px">
                 <thead>
                 <tr style="background-color: #4DB6AC; color: white">
                     <th>Date</th>

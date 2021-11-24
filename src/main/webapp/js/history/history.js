@@ -2,41 +2,287 @@
 var replaceChar = /[~!@\#$%^&*\()\-=+_'\;<>0-9\/.\`:\"\\,\[\]?|{}]/gi;
 var replaceNotFullKorean = /[ㄱ-ㅎㅏ-ㅣ]/gi;
 
+// ready for the page open
 $(document).ready(function () {
-
     categorySelect();   // reset search SelectBox
     searchList();       // list of History
 
+});
+
+// $('html').click(function(e) {
+//
+//     if($("#modal2").hasClass("show") === true) {
+//         document.getElementById("modal").style.zIndex = 1040;
+//     } else {
+//         document.getElementById("modal").style.zIndex = 1050;
+//     }
+//
+// });
+
+//
+
+$(window).on('load', function() {
     $("#keyword").keydown(function(key) {
         if (key.keyCode == 13) {
             $("#searchButton").trigger('click');
         }
-
     });
 
-    $("#domainTypeNm").on("focusout", function() {
-        var x = $(this).val();
-        if (x.length > 0) {
-            if (x.match(replaceChar) || x.match(replaceNotFullKorean)) {
-                x = x.replace(replaceChar, "").replace(replaceNotFullKorean, "");
+    $('div.modal-body').find('#wordNm').change(function(){
+        $('div.modal-body').find('#wordNm').removeClass('valid');
+    });
+    $('div.modal-body').find('#wordEngNm').change(function(){
+        $('div.modal-body').find('#wordEngNm').removeClass('valid');
+    });
+    $('div.modal-body').find('#wordAbbr').change(function(){
+        $('div.modal-body').find('#wordAbbr').removeClass('valid');
+    });
+
+    /*
+
+    $('#modalTable1').dataTable( {
+        "createdRow": function( row, data, dataIndex){
+                if( data.fatalExist == "T"){
+                    $(row).addClass('redClass');
+                }
             }
-            $(this).val(x);
-        }
-    }).on("keyup", function() {
-        $(this).val($(this).val().replace(replaceChar, ""));
     });
+    */
+
 });
 
-$('html').click(function(e) {
+//검색 SelectBox 초기화
+function categorySelect() {
+    $.ajax({
+        url : contextPath +"/word/searchType",
+        contentType : "application/json",
+        type : "GET",
+        success : function(data){
+            for(var i = 0; i < data.length; i++) {
+                if(data[i].columnName == 'WORD_NM') {
+                    var option  = $("<option>");
+                    $(option).val('wordNm').text('단어명');
+                    $("#searchType").append($(option));
+                }
 
-    if($("#modal2").hasClass("show") === true) {
-        document.getElementById("modal").style.zIndex = 1040;
+                if(data[i].columnName == 'WORD_ABBR') {
+                    var option  = $("<option>");
+                    $(option).val('wordAbbr').text('단어 영문 약어명');
+                    $("#searchType").append($(option));
+                }
+
+                if(data[i].columnName == 'WORD_ENG_NM') {
+                    var option  = $("<option>");
+                    $(option).val('wordEngNm').text('단어 영문명');
+                    $("#searchType").append($(option));
+                }
+
+                if(data[i].columnName == 'WORD_DSCRPT') {
+                    var option  = $("<option>");
+                    $(option).val('wordDscrpt').text('단어 설명');
+                    $("#searchType").append($(option));
+                }
+
+                if(data[i].columnName == 'SYNM_LIST') {
+                    var option  = $("<option>");
+                    $(option).val('synmList').text('이음동의어');
+                    $("#searchType").append($(option));
+                }
+            }
+        }
+    });
+}
+
+// call History list
+function callList(searchType, keyword, orderNumber) {
+    // let order = 'asc';
+    //
+    // if(orderNumber == undefined) {
+    //     orderNumber = 1;
+    // }
+    //
+    // if (orderNumber == 1){
+    //     order = 'asc';
+    // } else {
+    //     order = 'desc';
+    // }
+    //
+    // //Sorting 하기 위한 컬럼들 서버로 가지고감
+    // var columns = ['WORD_SEQ','WORD_NM','WORD_ABBR','WORD_ENG_NM', 'WORD_DSCRPT', 'SYNM_LIST'];
+    //
+    // var param = {
+    //     "searchType" : searchType,
+    //     "keyword" : keyword
+    // }
+    //
+    // //sAjaxSource 를 사용하면 기본적인 DataTable에 사용되는 옵션들을 객체로 가지고 감.
+    // $("#wordTable").DataTable({
+    //     processing: true,
+    //     serverSide: true,
+    //     responsive: true,
+    //     autoWidth: true,
+    //     sAjaxSource : contextPath + '/word/list?columns='+columns +'&keyword=' + keyword + '&searchType=' + searchType,
+    //     sServerMethod: "POST",
+    //     "drawCallback": function (settings, json) {
+    //         //$('[data-toggle="tooltip"]').tooltip('update');
+    //         $('[data-toggle="popover"]').popover('update');
+    //     },
+    //     columns: [
+    //         { data: 'wordSeq', width: "10%"},
+    //         { data: 'wordNm' },
+    //         { data: 'wordAbbr' },
+    //         { data: 'wordEngNm' },
+    //         { data: 'summaryWordDscrpt' }, //summaryWordDscrpt
+    //         { data: 'synmList' }
+    //     ],
+    //     columnDefs: [
+    //         { targets:[0], title: 'ID' },
+    //         { targets:[1], title: '단어명' },
+    //         { targets:[2], title: '단어 영문 약어명' },
+    //         { targets:[3], title: '단어 영문명' },
+    //         { targets:[4], title: '단어 설명' },
+    //         { targets:[5], title: '이음동의어' }
+    //     ],
+    //     // order: [[orderNumber, 'asc']]
+    //     order: [[orderNumber, order]],
+    //
+    //     createdRow: function (row, data, dataIndex) {
+    //         // $(row).find('td:eq(4)').attr('data-toggle', "tooltip");
+    //
+    //         //$(row).find('td:eq(4)').attr('title', data["wordSeq"]);
+    //         $(row).find('td:eq(4)').attr('data-container', 'body');
+    //         $(row).find('td:eq(4)').attr('data-content', data["wordDscrpt"]);
+    //         // $(row).find('td:eq(4)').attr('data-placement', "bottom");
+    //         $(row).find('td:eq(4)').attr('data-toggle', "popover");
+    //         $(row).find('td:eq(4)').attr('data-trigger', "hover");
+    //     }
+    // });
+
+    $('#historyTable tbody').on('dblclick', 'tr', function () {
+
+        let table = $("#historyTable").DataTable();
+
+        var rowData = table.row( this ).data();
+
+        if(rowData != undefined) {
+            $("#newButton").click();
+            openModal('update', rowData.wordSeq);
+        }
+    });
+
+    $("#searchType").change(function () {
+        $("#keyword").focus();
+    });
+
+    let dataTableHeight = document.getElementsByClassName('dataTables_scrollBody')[0];
+    dataTableHeight.style.minHeight = '580px';
+}
+
+// after press search button
+function searchHistory() {
+
+    let searchType = $("#searchType").val();
+    let keyword = $("#keyword").val();
+    let dataTable = $("#historyTable").DataTable();
+
+    if(keyword == '') {
+        if($("#searchType").val() == 'all') {
+            dataTable.clear().destroy();
+            searchList();
+        } else {
+            alertMessage("Warning!","Please enter input.","warning");
+            return false;
+        };
     } else {
-        document.getElementById("modal").style.zIndex = 1050;
+        dataTable.clear().destroy();
+        searchList(searchType, keyword);
     }
+}
 
-});
+// open Modal (ADD)
+function openModal(type) {
+    clearFormData();
 
+    //add = add, edit = edit, detail = detail :)
+
+    if(type == 'add') {
+        // 신규등록 모달 진입 => stage0 보여줌
+        $("#modal #saveButton").show();
+        $("#modal #updateButton").hide();
+        $("#modal #deleteButton").hide();
+        $('#modal #nmDuplCheck').show();
+
+        $('div.stage').css('display', 'none');
+
+        $('#stage0Helper').show();
+        $('#stage2Helper').show();
+
+        $('#wordEngNm').addClass('input-short');
+        $('#wordAbbr').addClass('input-short');
+
+        //$("div.modal-body").children().css('display', 'flex');	// 개발중 : 진입시 모두 보이게
+        //$("div.modal-footer").css('display', 'none');
+
+        $("#modal .modal-title").html('단어 신규 등록');
+
+        // 비활성화
+        $("#wordNm").attr('readonly', false);
+        $("#wordEngNm").attr('readonly', false);
+        $("#wordAbbr").attr('readonly', false);
+
+    } else if (type == 'update'){
+
+        $('div.modal-body').children().show();
+
+        // 등록 프로세스 관련 구역 및 버튼 hide
+        $('div #stage0').find('button').hide();
+        $('#stage0Helper').hide();
+        $('div #stage2').find('button').hide();
+        $('#stage2Helper').hide();
+        $('div.insertWord').hide();
+
+        //버튼 관리
+        $("#modal #deleteButton").show();
+        $("#modal #updateButton").show();
+        $("#modal #saveButton").hide();
+        $("#modal .modal-title").html('단어 상세보기');
+        $("#insert_form input[name=wordSeq]").val(wordSeq);
+
+        // 비활성화
+        $("#wordNm").attr('readonly', true).addClass('valid');
+        $("#wordEngNm").attr('readonly', true).addClass('valid');
+        $("#wordAbbr").attr('readonly', true).addClass('valid');
+
+        // 인풋 길이
+        $('#wordEngNm').removeClass('input-short');
+        $('#wordAbbr').removeClass('input-short');
+
+        let sendData = {
+            "wordSeq" : wordSeq
+        }
+
+        $.ajax({
+            url : contextPath +"/word/select",
+            contentType : "application/json",
+            type : "GET",
+            data : sendData,
+            async : false,
+            success : function(data){
+                $("#insert_form #wordSeq").val(data.wordSeq);
+                $("#insert_form #wordNm").val(data.wordNm);
+                $("#insert_form #wordAbbr").val(data.wordAbbr);
+                $("#insert_form #wordEngNm").val(data.wordEngNm);
+                if(data.wordDscrpt != null) {
+                    $("#insert_form #wordDscrpt").val(data.wordDscrpt.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n'));
+                }
+                $("#insert_form #synmList").val(data.synmList);
+            }
+        });
+    }
+}
+
+
+/* Template */
 //데이터 타입 선택 시 데이터 길이 및 소수점 길이 설정
 function readOnlyOption(dataType) {
     if(dataType == '') {
@@ -262,26 +508,7 @@ function searchList2() {
 
 }
 
-//검색 버튼 클릭 이벤트
-function searchDomain() {
 
-    let searchType = $("#searchType").val();
-    let keyword = $("#keyword").val();
-    let dataTable = $("#historyTable").DataTable();
-
-    if(keyword == '') {
-        if($("#searchType").val() == 'all') {
-            dataTable.clear().destroy();
-            searchList();
-        } else {
-            alertMessage("경고!","검색할 키워드를 입력해주세요.","warning");
-            return false;
-        };
-    } else {
-        dataTable.clear().destroy();
-        searchList(searchType, keyword);
-    }
-}
 
 // reset Search input
 function resetSearch() {
@@ -294,3 +521,4 @@ function resetSearch() {
     searchList();
 
 }
+/* /Template */

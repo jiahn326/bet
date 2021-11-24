@@ -4,7 +4,7 @@
 
 <style>
 .navbar-brand img {
-	height: 500px;
+	height: 25px;
 	display: block;
 }
 </style>
