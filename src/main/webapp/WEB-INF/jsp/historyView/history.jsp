@@ -141,13 +141,21 @@
                 <tr style="background-color: #4DB6AC; color: white">
                     <th>Date</th>
                     <th>Description</th>
-                    <th>Type</th>
+                    <th>Transaction</th>
                     <th>Category</th>
                     <th class="text-center">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
+                    <c:forEach items="${entryList}" var="entryList" varStatus="status">
+                        <tr>
+                            <td>${entryList.dateTime}</td>
+                            <td>${entryList.description}</td>
+                            <td>${entryList.transaction}</td>
+                            <td>${entryList.category}</td>
+                        </tr>
+                    </c:forEach>
                     <td>11/23/2021</td>
                     <td>Testing</td>
                     <td>testing</td>
@@ -159,6 +167,11 @@
                         </div>
                     </td>
                 </tr>
+                <%--<ul class="list-group">
+                <c:forEach var="entry" items="${entryList}">
+                    <li class="list-group-item list-group-item-action">${entry}</li>
+                </c:forEach>
+                </ul--%>>
                 </tbody>
             </table>
             <!-- /History table -->

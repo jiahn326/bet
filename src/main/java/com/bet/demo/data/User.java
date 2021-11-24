@@ -1,11 +1,19 @@
 package com.bet.demo.data;
 
+import com.google.cloud.firestore.QueryDocumentSnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
     private String email;
     private String firstname;
     private String lastname;
     private String username;
     private String password;
+    private List<Entry> entries = new ArrayList<>();
+    private List<Entry> expenses = new ArrayList<>();
+    private List<Entry> income =new ArrayList<>();
 
     public User() {
     }
@@ -56,6 +64,48 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void addAnEntry(Entry entry){
+        this.entries.add(entry);
+    }
+
+    public List getEntry(){
+        return this.entries;
+    }
+
+    public boolean isEntryEmpty(){
+        return this.entries.isEmpty();
+    }
+
+    private void addAnExpense(Entry entry){
+        this.expenses.add(entry);
+    }
+
+    private void addAnIncome(Entry entry){
+        this.income.add(entry);
+    }
+
+    private void sortEntries(){
+        for (Entry entry: entries) {
+            if(entry.getTransaction().equals("expense")){
+                addAnExpense(entry);
+            } else if (entry.getTransaction().equals("income")){
+                addAnIncome(entry);
+            }
+        }
+    }
+
+    public int noOfEntry(){
+        return this.entries.size();
+    }
+
+    public int noOfExpense(){
+        return this.expenses.size();
+    }
+
+    public int noOfIncome(){
+        return this.income.size();
     }
 
     @Override
