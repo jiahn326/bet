@@ -13,11 +13,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 @Service
 public class MainService {
+
+    User user = null;
+
 
     @RequestMapping(value = "/signUp")
     public void signUp(HttpServletRequest request, HttpServletResponse response, HttpSession session, Firestore db) throws ExecutionException, InterruptedException {
@@ -76,10 +80,9 @@ public class MainService {
         // ...
         // future.get() blocks on response
 
-        User user = null;
         DocumentSnapshot document = future.get();
         if (document.exists()) {
-            user = document.toObject(User.class);
+            this.user = document.toObject(User.class);
             if (user.getPassword().equals(password)) {
                 return true;
             } else
@@ -87,5 +90,13 @@ public class MainService {
         } else {
             return false;
         }
+    }
+
+    public List getEntryList(){
+        if (user != null && user.getEntry() != null){
+            return user.getEntry();
+        }
+
+        return null;
     }
 }

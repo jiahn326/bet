@@ -75,8 +75,6 @@ public class MainController {
     }
 
     private void initializeFirebase() throws IOException {
-        //FirebaseApp.getInstance().delete();
-        //***I MOVED THE FIREBASE INIT HERE - NEED TO FIND A WAY TO MAKE IT GLOBAL BUT STILL WORK***
         InputStream serviceAccount = new FileInputStream("src/main/resources/serviceAccountKey.json");
         GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
         FirebaseOptions options = new FirebaseOptions.Builder()
@@ -84,10 +82,7 @@ public class MainController {
                 .build();
         FirebaseApp.initializeApp(options);
         this.db = FirestoreClient.getFirestore();
-        //***END***
     }
-
-
 
     /*//sign up page
     @RequestMapping(value = "/signUp")

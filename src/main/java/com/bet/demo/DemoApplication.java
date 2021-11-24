@@ -1,11 +1,10 @@
 package com.bet.demo;
 
+import com.bet.demo.data.Entry;
 import com.bet.demo.data.User;
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.DocumentSnapshot;
-import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.*;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
@@ -13,6 +12,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
@@ -31,23 +32,32 @@ public class DemoApplication {
 
         Firestore db = FirestoreClient.getFirestore();
 
-        DocumentReference docRef = db.collection("users").document("admin");
-        // asynchronously retrieve the document
-        ApiFuture<DocumentSnapshot> future = docRef.get();
-        // ...
-        // future.get() blocks on response
+        DocumentReference docRef = db.collection("users").document("johndoe");
+        ApiFuture<DocumentSnapshot> userFuture = docRef.get();
 
         User user = null;
-        DocumentSnapshot document = future.get();
-        if (document.exists()) {
-            user = document.toObject(User.class);
+        DocumentSnapshot userDocument = userFuture.get();
+        if (userDocument.exists()) {
+            user = userDocument.toObject(User.class);
             System.out.println(user.toString());
             if (user.getPassword().equals("password")){
                 System.out.println("correct password");
             }
         } else {
             System.out.println("No account associated with the username johndoe");
-        }*/
+        }
 
+        List<Entry> list = new ArrayList<>();
+        ApiFuture<QuerySnapshot> entryFuture = db.collection("entry").whereEqualTo("user","johndoe").get();
+        List<QueryDocumentSnapshot> documents = entryFuture.get().getDocuments();
+        System.out.println(documents.size());
+        for (QueryDocumentSnapshot document : documents) {
+            Entry entry = document.toObject(Entry.class);
+            user.addAnEntry(entry);
+            System.out.println(entry.toString());
+            list.add(entry);
+        }
+        System.out.println("no of expense " + user.noOfExpense());
+        System.out.println("no of income " + user.noOfIncome());*/
     }
 }
