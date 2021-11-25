@@ -199,85 +199,67 @@ function searchHistory() {
     }
 }
 
-// open Modal (ADD)
+// open Modal (add, edit, detail)
 function openModal(type) {
     clearFormData();
 
-    //add = add, edit = edit, detail = detail :)
+    //add = add, update = edit, detail = detail :)
 
     if(type == 'add') {
-        // 신규등록 모달 진입 => stage0 보여줌
+        // show 'ADD' modal
         $("#modal #saveButton").show();
         $("#modal #updateButton").hide();
-        $("#modal #deleteButton").hide();
-        $('#modal #nmDuplCheck').show();
 
-        $('div.stage').css('display', 'none');
-
-        $('#stage0Helper').show();
-        $('#stage2Helper').show();
-
-        $('#wordEngNm').addClass('input-short');
-        $('#wordAbbr').addClass('input-short');
-
-        //$("div.modal-body").children().css('display', 'flex');	// 개발중 : 진입시 모두 보이게
-        //$("div.modal-footer").css('display', 'none');
-
-        $("#modal .modal-title").html('단어 신규 등록');
-
-        // 비활성화
+        // read only?
         $("#wordNm").attr('readonly', false);
         $("#wordEngNm").attr('readonly', false);
         $("#wordAbbr").attr('readonly', false);
 
-    } else if (type == 'update'){
+    } else if (type == 'edit'){
+        // show 'EDIT' modal
+        $("#modal #saveButton").show();
+        $("#modal #updateButton").hide();
 
-        $('div.modal-body').children().show();
+        // // 등록 프로세스 관련 구역 및 버튼 hide
+        // $('div #stage0').find('button').hide();
+        // $('#stage0Helper').hide();
+        // $('div #stage2').find('button').hide();
+        // $('#stage2Helper').hide();
+        // $('div.insertWord').hide();
+        //
+        // //버튼 관리
+        // $("#modal #deleteButton").show();
+        // $("#modal #updateButton").show();
+        // $("#modal #saveButton").hide();
+        // $("#modal .modal-title").html('단어 상세보기');
+        // $("#insert_form input[name=wordSeq]").val(wordSeq);
+        //
+        // // 비활성화
+        // $("#wordNm").attr('readonly', true).addClass('valid');
+        // $("#wordEngNm").attr('readonly', true).addClass('valid');
+        // $("#wordAbbr").attr('readonly', true).addClass('valid');
+        //
+        // // 인풋 길이
+        // $('#wordEngNm').removeClass('input-short');
+        // $('#wordAbbr').removeClass('input-short');
 
-        // 등록 프로세스 관련 구역 및 버튼 hide
-        $('div #stage0').find('button').hide();
-        $('#stage0Helper').hide();
-        $('div #stage2').find('button').hide();
-        $('#stage2Helper').hide();
-        $('div.insertWord').hide();
+    } else if (type == 'detail'){
+        // show 'EDIT' modal
 
-        //버튼 관리
-        $("#modal #deleteButton").show();
-        $("#modal #updateButton").show();
         $("#modal #saveButton").hide();
-        $("#modal .modal-title").html('단어 상세보기');
-        $("#insert_form input[name=wordSeq]").val(wordSeq);
+        $("#modal #updateButton").show();
+
+        // $('div.stage').css('display', 'none');
+        //
+        // $('#wordEngNm').addClass('input-short');
+        // $('#wordAbbr').addClass('input-short');
+
+        // $("#modal .modal-title").html('단어 신규 등록');
 
         // 비활성화
-        $("#wordNm").attr('readonly', true).addClass('valid');
-        $("#wordEngNm").attr('readonly', true).addClass('valid');
-        $("#wordAbbr").attr('readonly', true).addClass('valid');
-
-        // 인풋 길이
-        $('#wordEngNm').removeClass('input-short');
-        $('#wordAbbr').removeClass('input-short');
-
-        let sendData = {
-            "wordSeq" : wordSeq
-        }
-
-        $.ajax({
-            url : contextPath +"/word/select",
-            contentType : "application/json",
-            type : "GET",
-            data : sendData,
-            async : false,
-            success : function(data){
-                $("#insert_form #wordSeq").val(data.wordSeq);
-                $("#insert_form #wordNm").val(data.wordNm);
-                $("#insert_form #wordAbbr").val(data.wordAbbr);
-                $("#insert_form #wordEngNm").val(data.wordEngNm);
-                if(data.wordDscrpt != null) {
-                    $("#insert_form #wordDscrpt").val(data.wordDscrpt.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n'));
-                }
-                $("#insert_form #synmList").val(data.synmList);
-            }
-        });
+        $("#wordNm").attr('readonly', true);
+        $("#wordEngNm").attr('readonly', true);
+        $("#wordAbbr").attr('readonly', true);
     }
 }
 

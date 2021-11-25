@@ -13,7 +13,7 @@
 <div class="navbar navbar-expand-md navbar-dark">
     <div class="navbar-brand">
         <a href="#" class="d-inline-block">
-            <img src="${pageContext.request.contextPath}/images/BET_LOGO_IMG_TEXT.png" alt="">
+            <img src="${pageContext.request.contextPath}/images/BET_LOGO_IMG_TEXT.png" alt="" style="height: 25px">
         </a>
     </div>
 

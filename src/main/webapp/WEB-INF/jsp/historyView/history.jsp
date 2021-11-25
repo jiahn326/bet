@@ -13,6 +13,8 @@
     <script>
         var contextPath = "${pageContext.request.contextPath}";
     </script>
+
+    <!-- Table -->
     <script src="${pageContext.request.contextPath}/js/table/inputPage.js"></script>
     <script src="${pageContext.request.contextPath}/js/table/pageListBox.js"></script>
     <script src="${pageContext.request.contextPath}/js/table/dataTable.js"></script>
@@ -20,6 +22,11 @@
     <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/tables/datatables/datatables.min.js"></script>
     <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/forms/selects/select2.min.js"></script>
     <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_pages/datatables_basic.js"></script>
+
+    <!-- Modal -->
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/notifications/bootbox.min.js"></script>
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/forms/selects/select2.min.js"></script>
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_pages/components_modals.js"></script>
 
     <title>History</title>
 
@@ -131,12 +138,14 @@
                     </div>
                 </div>
                 <!-- /search input -->
-                <button class="btn btn-outline bg-slate-600 text-slate-600 border-slate-600 font-size-xs" type="button" data-toggle="modal" data-target="#modal" id="newButton" onclick="openModal('add');" style="margin-left: auto; margin-right: 30px;">New</button>
+                <button class="btn btn-outline bg-slate-600 text-slate-600 border-slate-600 font-size-xs" type="button" data-toggle="modal" data-target="#modal" id="newButton" onclick="openModal('add');" style="margin-left: auto; margin-right: 50px;">
+                    New
+                </button>
             </div>
             <!-- /Drop box Start -->
 
             <!-- History table -->
-            <table class="table-bordered-0 table-sm datatable-pagination table-striped table-hover" id="historyTable" style="font-size: 12px">
+            <table class="table-bordered-0 table-sm datatable-pagination table-striped table-hover" style="font-size: 12px">
                 <thead>
                 <tr style="background-color: #4DB6AC; color: white">
                     <th>Date</th>
@@ -175,6 +184,70 @@
                 </tbody>
             </table>
             <!-- /History table -->
+
+            <!-- Modal Start -->
+            <div id="modal" class="modal fade" tabindex="-1" style="display: none; height: 1000px;" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <!-- Modal header -->
+                        <div class="modal-header">
+                            <h3 class="modal-title"><strong>Add History</strong></h3>
+                            <button type="button" class="close" data-dismiss="modal" style="color: black">×</button>
+                        </div>
+                        <!-- /Modal header -->
+
+                        <!-- Modal content -->
+                        <form action="#" class="form-horizontal" id="insert_form">
+<%--                            <input type="hidden" id="wordSeq" name="wordSeq">--%>
+                            <div class="modal-body">
+                                <!-- Date -->
+                                <div class="form-group row" id="date">
+                                    <label class="col-form-label col-sm-3">Date</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="dateInput" placeholder="MM/DD/YYYY" class="form-control">
+                                    </div>
+                                </div>
+                                <!-- /Date -->
+                                <!-- Description -->
+                                <div class="form-group row" id="description">
+                                    <label class="col-form-label col-sm-3">Description</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="descriptionInput" placeholder="Write description" class="form-control">
+                                    </div>
+                                </div>
+                                <!-- /Description -->
+                                <!-- Transaction -->
+                                <div class="form-group row" id="transaction">
+                                    <label class="col-form-label col-sm-3">Transaction</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="transcationInput" placeholder="Write Transaction" class="form-control">
+                                    </div>
+                                </div>
+                                <!-- /Transaction -->
+                                <!-- Category -->
+                                <div class="form-group row" id="category">
+                                    <label class="col-form-label col-sm-3">Category</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="categoryInput" placeholder="Write Category" class="form-control">
+                                    </div>
+                                </div>
+                                <!-- /Category -->
+                            </div>
+                        </form>
+                        <!-- /Modal content -->
+
+                        <!-- Button -->
+                        <div class="modal-footer">
+                            <button type="button" id="saveButton" class="btn bg-teal" onclick="saveConfirm();">Save</button>
+                            <button type="button" id="updateButton" class="btn bg-teal" onclick="updateConfirm();">Edit</button>
+<%--                            <button type="button" id="deleteButton" class="btn btn-danger" onclick="deleteConfirm();"></button>--%>
+                            <button type="button" id="cancelButton" class="btn btn-outline" data-dismiss="modal">Close</button>
+                        </div>
+                        <!-- /Button -->
+                    </div>
+                </div>
+            </div>
+            <!-- /Modal End -->
         </div>
     </div>
 </div>
