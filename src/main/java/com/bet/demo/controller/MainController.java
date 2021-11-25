@@ -10,10 +10,14 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -110,26 +114,6 @@ public class MainController {
         return "loginView/login";
     }
 
-    @RequestMapping("historyView/history")
-    public String history(HttpServletRequest request){
-        System.out.println("슈우벌");
-        HttpSession session = request.getSession();
-
-        List<Entry> entryList = new ArrayList<>();
-        if (user != null && !user.isEntryEmpty()){
-            entryList = user.getEntry();
-            System.out.println(entryList.get(1).toString());
-            request.setAttribute("entryList", entryList);
-        }
-
-        if(session != null) {
-            session.invalidate();
-        }
-
-        return "content";
-    }
-
-
 //
 //    // logout page --> return to login page
 //    @RequestMapping(value = "/logout")
@@ -142,4 +126,51 @@ public class MainController {
 //
 //        return "loginView/login";
 //    }
+
+
+
+
+    /* page info */
+
+    @RequestMapping("/history/info")
+    public String history(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("supersuper");
+        HttpSession session = request.getSession();
+
+        if (db == null){
+            initializeFirebase();
+        }
+
+        List<Entry> entryList = new ArrayList<>();
+        if (user != null && !user.isEntryEmpty()){
+            entryList = user.getEntry();
+            System.out.println(entryList.get(1).toString());
+            System.out.println("supersuper");
+            request.setAttribute("entryList", entryList);
+        }
+        System.out.println("supersuper");
+
+        if(session != null) {
+            session.invalidate();
+        }
+
+        return "historyView/history";
+    }
+
+    @RequestMapping("/chart/info")
+    public String chart(){
+        return "chartView/chart";
+    }
+
+    @RequestMapping("/calendar/info")
+    public String calendar(){
+        return "calendarView/calendar";
+    }
+
+    @RequestMapping("/budget/info")
+    public String budget(){
+        return "budgetView/budget";
+    }
+
+
 }
