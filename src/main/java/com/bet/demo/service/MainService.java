@@ -91,6 +91,37 @@ public class MainService {
         }
     }
 
+    /*public List search(HttpServletRequest request, HttpServletResponse response){
+        String searchType = request.getParameter("searchType");
+        String keyword = request.getParameter("keyword");
+
+        List<Entry> entryList = user.getEntry();
+        List<Entry> searchList = new ArrayList<>();
+
+        for (Entry entry : entryList) {
+            switch (searchType){
+                case "category":
+                    if (entry.getCategory().contains(keyword))
+                        searchList.add(entry);
+                    break;
+                case "description":
+                    if (entry.getDescription().contains(keyword))
+                        searchList.add(entry);
+                    break;
+                case "transaction":
+                    if (entry.getTransaction().contains(keyword))
+                        searchList.add(entry);
+                    break;
+                case "all":
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return searchList;
+    }*/
+
     public User getUser(){
         return this.user;
     }

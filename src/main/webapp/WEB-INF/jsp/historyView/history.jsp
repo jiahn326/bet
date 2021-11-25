@@ -123,7 +123,7 @@
                     <option value="all">All</option>
 <%--                    <option value="date">Date</option>--%>
                     <option value="description">Description</option>
-                    <option value="type">Type</option>
+                    <option value="transaction">Transaction</option>
                     <option value="category">Category</option>
                 </select>
                 <!-- /search 'All' -->
@@ -149,6 +149,7 @@
                 <thead>
                 <tr style="background-color: #4DB6AC; color: white">
                     <th>Date</th>
+                    <th>Amount</th>
                     <th>Description</th>
                     <th>Transaction</th>
                     <th>Category</th>
@@ -160,12 +161,23 @@
                     <c:forEach items="${entryList}" var="entry" varStatus="status">
                         <tr>
                             <td>${entry.dateTime}</td>
+                            <td>
+                                <fmt:setLocale value = "en_US"/>
+                                <fmt:formatNumber value = "${entry.amount}" type = "currency"/>
+                            </td>
                             <td>${entry.description}</td>
                             <td>${entry.transaction}</td>
                             <td>${entry.category}</td>
+                            <td class="text-center">
+                                <div class="list-icons">
+                                    <a href="#" class="badge badge-flat border-primary text-primary-600 badge-icon"><i class="icon-search4"></i></a>
+                                    <a href="#" class="badge badge-flat border-danger text-danger-600 badge-icon"><i class="icon-trash"></i></a>
+                                </div>
+                            </td>
                         </tr>
                     </c:forEach>
                     <td>11/23/2021</td>
+                    <td>0.00</td>>
                     <td>Testing</td>
                     <td>testing</td>
                     <td><span class="badge badge-light">Saving</span></td>
