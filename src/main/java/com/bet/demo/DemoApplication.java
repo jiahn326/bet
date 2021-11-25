@@ -14,7 +14,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 @SpringBootApplication
@@ -54,10 +53,23 @@ public class DemoApplication {
         for (QueryDocumentSnapshot document : documents) {
             Entry entry = document.toObject(Entry.class);
             user.addAnEntry(entry);
-            System.out.println(entry.toString());
-            list.add(entry);
         }
-        System.out.println("no of expense " + user.noOfExpense());
-        System.out.println("no of income " + user.noOfIncome());*/
+
+        list = user.getEntry();
+
+        List<Entry> categoryList = new ArrayList<>();
+
+        String searchType = "category";
+        String keyword = "savings";
+        for (Entry entry : list) {
+            switch (searchType){
+                case "category":
+                    if (entry.getCategory().contains(keyword)){
+                        categoryList.add(entry);
+                    }
+            }
+        }
+        System.out.println(categoryList.toString());
+*/
     }
 }

@@ -116,7 +116,7 @@
                     <option value="all">All</option>
 <%--                    <option value="date">Date</option>--%>
                     <option value="description">Description</option>
-                    <option value="type">Type</option>
+                    <option value="transaction">Transaction</option>
                     <option value="category">Category</option>
                 </select>
                 <!-- /search 'All' -->
@@ -155,10 +155,16 @@
                             <td>
                                 <fmt:setLocale value = "en_US"/>
                                 <fmt:formatNumber value = "${entry.amount}" type = "currency"/>
-                            </td>>
+                            </td>
                             <td>${entry.description}</td>
                             <td>${entry.transaction}</td>
                             <td>${entry.category}</td>
+                            <td class="text-center">
+                                <div class="list-icons">
+                                    <a href="#" class="badge badge-flat border-primary text-primary-600 badge-icon"><i class="icon-search4"></i></a>
+                                    <a href="#" class="badge badge-flat border-danger text-danger-600 badge-icon"><i class="icon-trash"></i></a>
+                                </div>
+                            </td>
                         </tr>
                     </c:forEach>
                     <td>11/23/2021</td>

@@ -14,6 +14,9 @@ public class User {
     private List<Entry> entries = new ArrayList<>();
     private List<Entry> expenses = new ArrayList<>();
     private List<Entry> income =new ArrayList<>();
+    private List<Entry> savings = new ArrayList<>();
+    private List<Entry> needs = new ArrayList<>();
+    private List<Entry> wants = new ArrayList<>();
 
     public User() {
     }
@@ -106,6 +109,44 @@ public class User {
 
     public int noOfIncome(){
         return this.income.size();
+    }
+
+    private void sortSpendings(){
+        this.wants = new ArrayList<>();
+        this.needs = new ArrayList<>();
+        this.savings = new ArrayList<>();
+
+        for (Entry entry: this.entries) {
+            String category = entry.getCategory();
+            switch (category){
+                case "wants":
+                    this.wants.add(entry);
+                    break;
+                case "needs":
+                    this.needs.add(entry);
+                    break;
+                case "savings":
+                    this.savings.add(entry);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    public List getWants(){
+        this.sortEntries();
+        return this.wants;
+    }
+
+    public List getNeeds(){
+        this.sortEntries();
+        return this.needs;
+    }
+
+    public List getSavings(){
+        this.sortEntries();
+        return this.savings;
     }
 
     @Override

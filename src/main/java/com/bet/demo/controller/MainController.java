@@ -34,6 +34,7 @@ public class MainController {
 
     Firestore db = null;
     User user = null;
+    List<Entry> entryList = new ArrayList<>();
 
     @Autowired
     private MainService mainService;
@@ -86,16 +87,6 @@ public class MainController {
         return page;
     }
 
-    private void initializeFirebase() throws IOException {
-        InputStream serviceAccount = new FileInputStream("src/main/resources/serviceAccountKey.json");
-        GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
-        FirebaseOptions options = new FirebaseOptions.Builder()
-                .setCredentials(credentials)
-                .build();
-        FirebaseApp.initializeApp(options);
-        this.db = FirestoreClient.getFirestore();
-    }
-
     //sign up page
     @RequestMapping(value = "/signUp")
     public String signUp(HttpServletRequest request, HttpServletResponse response) throws ExecutionException, InterruptedException, IOException {
@@ -137,18 +128,23 @@ public class MainController {
         //System.out.println("supersuper");
         HttpSession session = request.getSession();
 
-        if (db == null){
+        /*if (db == null){
             initializeFirebase();
-        }
+        }*/
 
-        List<Entry> entryList = new ArrayList<>();
         if (user != null && !user.isEntryEmpty()){
-            entryList = user.getEntry();
+            this.entryList = user.getEntry();
             //System.out.println(entryList.get(1).toString());
             //System.out.println("supersuper");
             request.setAttribute("entryList", entryList);
         }
         //System.out.println("supersuper");
+
+        /*List<Entry> searchList = new ArrayList<>();
+        if (!mainService.search(request, response).isEmpty()){
+            searchList = mainService.search(request,response);
+            request.setAttribute("entryList", searchList);
+        }*/
 
         if(session != null) {
             session.invalidate();
@@ -172,5 +168,14 @@ public class MainController {
         return "budgetView/budget";
     }
 
+    private void initializeFirebase() throws IOException {
+        InputStream serviceAccount = new FileInputStream("src/main/resources/serviceAccountKey.json");
+        GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
+        FirebaseOptions options = new FirebaseOptions.Builder()
+                .setCredentials(credentials)
+                .build();
+        FirebaseApp.initializeApp(options);
+        this.db = FirestoreClient.getFirestore();
+    }
 
 }
