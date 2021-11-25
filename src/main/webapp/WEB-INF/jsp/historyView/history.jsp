@@ -140,6 +140,7 @@
                 <thead>
                 <tr style="background-color: #4DB6AC; color: white">
                     <th>Date</th>
+                    <th>Amount</th>
                     <th>Description</th>
                     <th>Transaction</th>
                     <th>Category</th>
@@ -151,12 +152,14 @@
                     <c:forEach items="${entryList}" var="entry" varStatus="status">
                         <tr>
                             <td>${entry.dateTime}</td>
+                            <td>${entry.amount}</td>>
                             <td>${entry.description}</td>
                             <td>${entry.transaction}</td>
                             <td>${entry.category}</td>
                         </tr>
                     </c:forEach>
                     <td>11/23/2021</td>
+                    <td>0.00</td>>
                     <td>Testing</td>
                     <td>testing</td>
                     <td><span class="badge badge-light">Saving</span></td>
