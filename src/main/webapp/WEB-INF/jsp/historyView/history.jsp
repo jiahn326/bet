@@ -157,12 +157,12 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <c:forEach items="${entryList}" var="entryList" varStatus="status">
+                    <c:forEach items="${entryList}" var="entry" varStatus="status">
                         <tr>
-                            <td>${entryList.dateTime}</td>
-                            <td>${entryList.description}</td>
-                            <td>${entryList.transaction}</td>
-                            <td>${entryList.category}</td>
+                            <td>${entry.dateTime}</td>
+                            <td>${entry.description}</td>
+                            <td>${entry.transaction}</td>
+                            <td>${entry.category}</td>
                         </tr>
                     </c:forEach>
                     <td>11/23/2021</td>
