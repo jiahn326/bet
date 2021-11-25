@@ -152,7 +152,10 @@
                     <c:forEach items="${entryList}" var="entry" varStatus="status">
                         <tr>
                             <td>${entry.dateTime}</td>
-                            <td>${entry.amount}</td>>
+                            <td>
+                                <fmt:setLocale value = "en_US"/>
+                                <fmt:formatNumber value = "${entry.amount}" type = "currency"/>
+                            </td>>
                             <td>${entry.description}</td>
                             <td>${entry.transaction}</td>
                             <td>${entry.category}</td>

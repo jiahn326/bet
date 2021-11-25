@@ -72,7 +72,7 @@ public class MainController {
         String page = "";
         if (mainService.login(request, response, session, db)){
             this.user = mainService.getUser();
-            System.out.println(this.user.toString());
+            //System.out.println(this.user.toString());
             //System.out.println(this.user.getEntry().toString());
             page = "content";
         } else{
@@ -134,7 +134,7 @@ public class MainController {
 
     @RequestMapping("/history/info")
     public String history(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("supersuper");
+        //System.out.println("supersuper");
         HttpSession session = request.getSession();
 
         if (db == null){
@@ -144,11 +144,11 @@ public class MainController {
         List<Entry> entryList = new ArrayList<>();
         if (user != null && !user.isEntryEmpty()){
             entryList = user.getEntry();
-            System.out.println(entryList.get(1).toString());
-            System.out.println("supersuper");
+            //System.out.println(entryList.get(1).toString());
+            //System.out.println("supersuper");
             request.setAttribute("entryList", entryList);
         }
-        System.out.println("supersuper");
+        //System.out.println("supersuper");
 
         if(session != null) {
             session.invalidate();
