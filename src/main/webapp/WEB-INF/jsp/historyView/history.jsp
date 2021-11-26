@@ -132,8 +132,8 @@
                     <div class="input-group" style="width: 400px;">
                         <input type="text" class="form-control border-right-0 font-size-xs" placeholder="Search..." name="keyword" id="keyword">
                         <span class="input-group-append">
-										<button class="btn border font-size-xs" type="button" onclick="searchHistory();" id="searchButton"><i class="icon-search4"></i></button>
-									</span>
+                            <button class="btn border font-size-xs" type="submit" name="searchButton" id="searchButton"><i class="icon-search4"></i></button>
+                        </span>
                     </div>
                 </div>
                 <!-- /search input -->
@@ -148,8 +148,8 @@
                 <thead>
                 <tr style="background-color: #4DB6AC; color: white">
                     <th>Date</th>
-                    <th>Amount</th>
                     <th>Description</th>
+                    <th>Amount</th>
                     <th>Transaction</th>
                     <th>Category</th>
                     <th class="text-center">Actions</th>
@@ -160,13 +160,13 @@
                     <c:forEach items="${entryList}" var="entry" varStatus="status">
                         <tr>
                             <td>${entry.dateTime}</td>
+                            <td>${entry.description}</td>
                             <td>
                                 <fmt:setLocale value = "en_US"/>
                                 <fmt:formatNumber value = "${entry.amount}" type = "currency"/>
                             </td>
-                            <td>${entry.description}</td>
                             <td>${entry.transaction}</td>
-                            <td>${entry.category}</td>
+                            <td><span class="badge badge-light">${entry.category}</span></td>
                             <td class="text-center">
                                 <div class="list-icons">
                                     <button type="button" class="btn btn-outline bg-primary text-primary-800 btn-icon ml-2" data-toggle="modal" data-target="#modal" id="detailButton" onclick="openModal('detail');" ><i class="icon-search4"></i></button>
