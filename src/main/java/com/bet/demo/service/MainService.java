@@ -91,12 +91,16 @@ public class MainService {
         }
     }
 
-    /*public List search(HttpServletRequest request, HttpServletResponse response){
+    public List searchHistory(HttpServletRequest request, HttpServletResponse response){
         String searchType = request.getParameter("searchType");
         String keyword = request.getParameter("keyword");
 
         List<Entry> entryList = user.getEntry();
         List<Entry> searchList = new ArrayList<>();
+
+        if (searchType == null || keyword == null){
+            return entryList;
+        }
 
         for (Entry entry : entryList) {
             switch (searchType){
@@ -113,14 +117,14 @@ public class MainService {
                         searchList.add(entry);
                     break;
                 case "all":
-                    break;
+                    return entryList;
                 default:
                     break;
             }
         }
 
         return searchList;
-    }*/
+    }
 
     public User getUser(){
         return this.user;

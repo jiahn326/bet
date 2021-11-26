@@ -74,6 +74,7 @@ public class User {
     }
 
     public List getEntry(){
+        this.sortEntriesByDate();
         return this.entries;
     }
 
@@ -89,7 +90,7 @@ public class User {
         this.income.add(entry);
     }
 
-    private void sortEntries(){
+    private void splitEntries(){
         for (Entry entry: entries) {
             if(entry.getTransaction().equals("expense")){
                 addAnExpense(entry);
@@ -135,18 +136,22 @@ public class User {
     }
 
     public List getWants(){
-        this.sortEntries();
+        this.splitEntries();
         return this.wants;
     }
 
     public List getNeeds(){
-        this.sortEntries();
+        this.splitEntries();
         return this.needs;
     }
 
     public List getSavings(){
-        this.sortEntries();
+        this.splitEntries();
         return this.savings;
+    }
+
+    private void sortEntriesByDate(){
+        this.entries.sort(new DateSorter());
     }
 
     @Override

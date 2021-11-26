@@ -73,6 +73,7 @@ public class MainController {
         String page = "";
         if (mainService.login(request, response, session, db)){
             this.user = mainService.getUser();
+            this.entryList = user.getEntry();
             //System.out.println(this.user.toString());
             //System.out.println(this.user.getEntry().toString());
             page = "content";
@@ -128,16 +129,25 @@ public class MainController {
         //System.out.println("supersuper");
         HttpSession session = request.getSession();
 
+        System.out.println(request.getParameter("searchType"));
+
         /*if (db == null){
             initializeFirebase();
         }*/
 
+        /*if (request.getParameter("searchButton") != null){
+            System.out.println("btn clicked");
+            this.entryList = mainService.searchHistory(request,response);
+            return "historyView/history";
+        } else */
         if (user != null && !user.isEntryEmpty()){
             this.entryList = user.getEntry();
             //System.out.println(entryList.get(1).toString());
             //System.out.println("supersuper");
-            request.setAttribute("entryList", entryList);
         }
+
+        request.setAttribute("entryList", entryList);
+
         //System.out.println("supersuper");
 
         /*List<Entry> searchList = new ArrayList<>();
