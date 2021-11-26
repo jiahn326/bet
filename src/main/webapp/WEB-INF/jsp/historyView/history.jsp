@@ -121,7 +121,6 @@
                 <!-- search 'All' -->
                 <select class="form-control font-size-xs" aria-hidden="true" style="width: 150px; margin-left: 10px;" name="searchType" id="searchType">
                     <option value="all">All</option>
-<%--                    <option value="date">Date</option>--%>
                     <option value="description">Description</option>
                     <option value="transaction">Transaction</option>
                     <option value="category">Category</option>
@@ -170,29 +169,20 @@
                             <td>${entry.category}</td>
                             <td class="text-center">
                                 <div class="list-icons">
-                                    <a href="#" class="badge badge-flat border-primary text-primary-600 badge-icon"><i class="icon-search4"></i></a>
-                                    <a href="#" class="badge badge-flat border-danger text-danger-600 badge-icon"><i class="icon-trash"></i></a>
+                                    <button type="button" class="btn btn-outline bg-primary text-primary-800 btn-icon ml-2" data-toggle="modal" data-target="#modal" id="detailButton" onclick="openModal('detail');" ><i class="icon-search4"></i></button>
+                                    <button type="button" class="btn btn-outline bg-danger text-danger-800 btn-icon ml-2" data-toggle="modal" data-target="#modal" id="detailButton" onclick="openModal('detail');" ><i class="icon-trash"></i></button>
+<%--                                    <a href="#" class="badge badge-flat border-primary text-primary-600 badge-icon" data-toggle="modal" data-target="#modal" id="detailButton" onclick="openModal('detail');" ><i class="icon-search4"></i></a>--%>
+<%--                                    <a href="#" class="badge badge-flat border-danger text-danger-600 badge-icon"><i class="icon-trash"></i></a>--%>
                                 </div>
                             </td>
                         </tr>
                     </c:forEach>
-                    <td>11/23/2021</td>
-                    <td>0.00</td>>
-                    <td>Testing</td>
-                    <td>testing</td>
-                    <td><span class="badge badge-light">Saving</span></td>
-                    <td class="text-center">
-                        <div class="list-icons">
-                            <a href="#" class="badge badge-flat border-primary text-primary-600 badge-icon"><i class="icon-search4"></i></a>
-                            <a href="#" class="badge badge-flat border-danger text-danger-600 badge-icon"><i class="icon-trash"></i></a>
-                        </div>
-                    </td>
                 </tr>
                 <%--<ul class="list-group">
                 <c:forEach var="entry" items="${entryList}">
                     <li class="list-group-item list-group-item-action">${entry}</li>
                 </c:forEach>
-                </ul--%>>
+                </ul--%>
                 </tbody>
             </table>
             <!-- /History table -->
@@ -220,6 +210,14 @@
                                     </div>
                                 </div>
                                 <!-- /Date -->
+                                <!-- Amount -->
+                                <div class="form-group row" id="amount">
+                                    <label class="col-form-label col-sm-3">Description</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="amountInput" placeholder="Write description" class="form-control">
+                                    </div>
+                                </div>
+                                <!-- /Amount -->
                                 <!-- Description -->
                                 <div class="form-group row" id="description">
                                     <label class="col-form-label col-sm-3">Description</label>
@@ -231,18 +229,51 @@
                                 <!-- Transaction -->
                                 <div class="form-group row" id="transaction">
                                     <label class="col-form-label col-sm-3">Transaction</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" name="transcationInput" placeholder="Write Transaction" class="form-control">
-                                    </div>
+<%--                                    <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Transaction</button>--%>
+                                    <select class="form-control font-size-xs" style="width: 150px; margin-left: 10px;" aria-hidden="true" name="transactionInput">
+                                        <option value="none">Select...</option>
+                                        <option value="expense">Expense</option>
+                                        <option value="investments">Investments</option>
+                                        <option value="income">Income</option>
+                                        <option value="savings">Saving</option>
+                                    </select>
                                 </div>
+<%--                                <div class="btn-group" id="transaction">--%>
+<%--                                    <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Select transaction</button>--%>
+<%--                                    <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-73px, 36px, 0px);">--%>
+<%--                                        <a href="#" class="dropdown-item"> Action</a>--%>
+<%--                                        <a href="#" class="dropdown-item"> Another action</a>--%>
+<%--                                        <a href="#" class="dropdown-item"> One more action</a>--%>
+<%--                                        <div class="dropdown-divider"></div>--%>
+<%--                                        <a href="#" class="dropdown-item"><i class="icon-gear"></i> Separated line</a>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+
+
+<%--                                <div class="form-group row" id="transaction">--%>
+<%--                                    <label class="col-form-label col-sm-3">Transaction</label>--%>
+<%--                                    <div class="col-sm-9">--%>
+<%--                                        <input type="text" name="transcationInput" placeholder="Write Transaction" class="form-control">--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
                                 <!-- /Transaction -->
+
                                 <!-- Category -->
                                 <div class="form-group row" id="category">
                                     <label class="col-form-label col-sm-3">Category</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" name="categoryInput" placeholder="Write Category" class="form-control">
-                                    </div>
+                                    <select class="form-control font-size-xs" aria-hidden="true" style="width: 150px; margin-left: 10px;" name="categoryInput">
+                                        <option value="none">Select...</option>
+                                        <option value="wants">Wants</option>
+                                        <option value="needs">Needs</option>
+                                        <option value="savings">Saving</option>
+                                    </select>
                                 </div>
+<%--                                <div class="form-group row" id="category">--%>
+<%--                                    <label class="col-form-label col-sm-3">Category</label>--%>
+<%--                                    <div class="col-sm-9">--%>
+<%--                                        <input type="text" name="categoryInput" placeholder="Write Category" class="form-control">--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
                                 <!-- /Category -->
                             </div>
                         </form>
@@ -252,7 +283,6 @@
                         <div class="modal-footer">
                             <button type="button" id="saveButton" class="btn bg-teal" onclick="saveConfirm();">Save</button>
                             <button type="button" id="updateButton" class="btn bg-teal" onclick="updateConfirm();">Edit</button>
-<%--                            <button type="button" id="deleteButton" class="btn btn-danger" onclick="deleteConfirm();"></button>--%>
                             <button type="button" id="cancelButton" class="btn btn-outline" data-dismiss="modal">Close</button>
                         </div>
                         <!-- /Button -->

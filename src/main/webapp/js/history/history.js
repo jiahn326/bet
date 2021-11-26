@@ -217,8 +217,8 @@ function openModal(type) {
 
     } else if (type == 'edit'){
         // show 'EDIT' modal
-        $("#modal #saveButton").show();
-        $("#modal #updateButton").hide();
+        $("#modal #saveButton").hide();
+        $("#modal #updateButton").show();
 
         // // 등록 프로세스 관련 구역 및 버튼 hide
         // $('div #stage0').find('button').hide();
@@ -257,9 +257,11 @@ function openModal(type) {
         // $("#modal .modal-title").html('단어 신규 등록');
 
         // 비활성화
-        $("#wordNm").attr('readonly', true);
-        $("#wordEngNm").attr('readonly', true);
-        $("#wordAbbr").attr('readonly', true);
+        $("#dateInput").attr('readonly', true);
+        $("#descriptionInput").attr('readonly', true);
+        $("#amountInput").attr('readonly', true);
+        $("#transactionInput").attr('readonly', true);
+        $("#transactionInput").attr('readonly', true);
     }
 }
 
