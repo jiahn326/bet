@@ -95,69 +95,6 @@ function categorySelect() {
 
 // call History list
 function callList(searchType, keyword, orderNumber) {
-    // let order = 'asc';
-    //
-    // if(orderNumber == undefined) {
-    //     orderNumber = 1;
-    // }
-    //
-    // if (orderNumber == 1){
-    //     order = 'asc';
-    // } else {
-    //     order = 'desc';
-    // }
-    //
-    // //Sorting 하기 위한 컬럼들 서버로 가지고감
-    // var columns = ['WORD_SEQ','WORD_NM','WORD_ABBR','WORD_ENG_NM', 'WORD_DSCRPT', 'SYNM_LIST'];
-    //
-    // var param = {
-    //     "searchType" : searchType,
-    //     "keyword" : keyword
-    // }
-    //
-    // //sAjaxSource 를 사용하면 기본적인 DataTable에 사용되는 옵션들을 객체로 가지고 감.
-    // $("#wordTable").DataTable({
-    //     processing: true,
-    //     serverSide: true,
-    //     responsive: true,
-    //     autoWidth: true,
-    //     sAjaxSource : contextPath + '/word/list?columns='+columns +'&keyword=' + keyword + '&searchType=' + searchType,
-    //     sServerMethod: "POST",
-    //     "drawCallback": function (settings, json) {
-    //         //$('[data-toggle="tooltip"]').tooltip('update');
-    //         $('[data-toggle="popover"]').popover('update');
-    //     },
-    //     columns: [
-    //         { data: 'wordSeq', width: "10%"},
-    //         { data: 'wordNm' },
-    //         { data: 'wordAbbr' },
-    //         { data: 'wordEngNm' },
-    //         { data: 'summaryWordDscrpt' }, //summaryWordDscrpt
-    //         { data: 'synmList' }
-    //     ],
-    //     columnDefs: [
-    //         { targets:[0], title: 'ID' },
-    //         { targets:[1], title: '단어명' },
-    //         { targets:[2], title: '단어 영문 약어명' },
-    //         { targets:[3], title: '단어 영문명' },
-    //         { targets:[4], title: '단어 설명' },
-    //         { targets:[5], title: '이음동의어' }
-    //     ],
-    //     // order: [[orderNumber, 'asc']]
-    //     order: [[orderNumber, order]],
-    //
-    //     createdRow: function (row, data, dataIndex) {
-    //         // $(row).find('td:eq(4)').attr('data-toggle', "tooltip");
-    //
-    //         //$(row).find('td:eq(4)').attr('title', data["wordSeq"]);
-    //         $(row).find('td:eq(4)').attr('data-container', 'body');
-    //         $(row).find('td:eq(4)').attr('data-content', data["wordDscrpt"]);
-    //         // $(row).find('td:eq(4)').attr('data-placement', "bottom");
-    //         $(row).find('td:eq(4)').attr('data-toggle', "popover");
-    //         $(row).find('td:eq(4)').attr('data-trigger', "hover");
-    //     }
-    // });
-
     $('#historyTable tbody').on('dblclick', 'tr', function () {
 
         let table = $("#historyTable").DataTable();
@@ -206,9 +143,12 @@ function openModal(type) {
     //add = add, update = edit, detail = detail :)
 
     if(type == 'add') {
+
         // show 'ADD' modal
         $("#modal #saveButton").show();
         $("#modal #updateButton").hide();
+
+        $("#modal .modal-title").html('Add History');
 
         // read only?
         $("#wordNm").attr('readonly', false);
@@ -231,7 +171,7 @@ function openModal(type) {
         // $("#modal #deleteButton").show();
         // $("#modal #updateButton").show();
         // $("#modal #saveButton").hide();
-        // $("#modal .modal-title").html('단어 상세보기');
+        $("#modal .modal-title").html('Edit History');
         // $("#insert_form input[name=wordSeq]").val(wordSeq);
         //
         // // 비활성화
@@ -254,7 +194,7 @@ function openModal(type) {
         // $('#wordEngNm').addClass('input-short');
         // $('#wordAbbr').addClass('input-short');
 
-        // $("#modal .modal-title").html('단어 신규 등록');
+        $("#modal .modal-title").html('History Detail');
 
         // 비활성화
         $("#dateInput").attr('readonly', true);
@@ -264,6 +204,40 @@ function openModal(type) {
         $("#transactionInput").attr('readonly', true);
     }
 }
+
+// add function - when save button clicked
+function saveConfirm(){
+    // //상세 내용 입력칸에서 엔터값 br로 변경
+    // $("#wordDscrpt").val($("#wordDscrpt").val().replace(/(?:\r\n|\r|\n)/g, '<br>'));
+
+    let sendData = {
+        "wordNm" : $("#wordNm").val().trim(),
+        "wordAbbr" : $("#wordAbbr").val(),
+        "wordEngNm" : $("#wordEngNm").val(),
+        "synmList" : $("#synmList").val(),
+        "wordDscrpt" : $("#wordDscrpt").val()
+    };
+    let dataTable = $("#wordTable").DataTable();
+
+    $.ajax({
+        url : contextPath +"/word/insert",
+        contentType : "application/json",
+        type : "POST",
+        data : JSON.stringify(sendData),
+        success : function(data){
+            if(data==1) {
+                alertMessage("성공!","단어 등록 신청이 완료되었습니다.","success");
+                $("#cancelButton").click();
+                dataTable.destroy();
+                searchList('','',0);
+            } else {
+                alertMessage("경고!","실패하였습니다. 관리자에게 문의해주세요.","danger");
+                $("#cancelButton").click();
+            }
+        }
+    });
+}
+
 
 
 /* Template */
