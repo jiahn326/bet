@@ -114,14 +114,21 @@
 <body>
 <!-- Table area Start-->
 <div class="content-wrapper">
+    <!-- Page header -->
+    <div class="page-header page-header-light">
+        <div class="page-header-content header-elements-md-inline">
+            <div class="page-title d-flex">
+                <h5><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">History</span></h5>
+                <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+            </div>
+        </div>
+    </div>
+    <!-- /page header -->
+
     <div class="content">
         <div class="card">
             <!-- card header -->
             <div class="card-header header-elements-inline font-size-base">
-                <!-- title of the page -->
-                <h5 class="card-title font-size-lg"><strong>History</strong></h5>
-                <!-- /title of the page -->
-
                 <!-- reload the search input -->
                 <div class="header-elements">
                     <div class="list-icons">
