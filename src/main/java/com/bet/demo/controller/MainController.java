@@ -158,7 +158,8 @@ public class MainController {
         return "historyView/history";
     }
 
-    @RequestMapping(value = "create")
+//    @RequestMapping(value = "create")
+    @RequestMapping("/history/add")
     public String create(HttpServletRequest request) throws ExecutionException, InterruptedException {
         HttpSession session = request.getSession();
         System.out.println("supersuper");
