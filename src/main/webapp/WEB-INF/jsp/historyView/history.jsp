@@ -199,22 +199,22 @@
                         <!-- /Modal header -->
 
                         <!-- Modal content -->
-                        <form action="#" class="form-horizontal" id="insert_form">
+                        <form action="${pageContext.request.contextPath}/create" class="form-horizontal" id="create">
 <%--                            <input type="hidden" id="wordSeq" name="wordSeq">--%>
                             <div class="modal-body">
                                 <!-- Date -->
                                 <div class="form-group row" id="date">
                                     <label class="col-form-label col-sm-3">Date</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="dateInput" placeholder="MM/DD/YYYY" class="form-control">
+                                        <input type="text" name="dateTime" placeholder="MM/DD/YYYY" class="form-control">
                                     </div>
                                 </div>
                                 <!-- /Date -->
                                 <!-- Amount -->
                                 <div class="form-group row" id="amount">
-                                    <label class="col-form-label col-sm-3">Description</label>
+                                    <label class="col-form-label col-sm-3">Amount</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="amountInput" placeholder="Write description" class="form-control">
+                                        <input type="text" name="amount" placeholder="Write amount (ex. 420)" class="form-control">
                                     </div>
                                 </div>
                                 <!-- /Amount -->
@@ -222,7 +222,7 @@
                                 <div class="form-group row" id="description">
                                     <label class="col-form-label col-sm-3">Description</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="descriptionInput" placeholder="Write description" class="form-control">
+                                        <input type="text" name="description" placeholder="Write description" class="form-control">
                                     </div>
                                 </div>
                                 <!-- /Description -->
@@ -230,7 +230,7 @@
                                 <div class="form-group row" id="transaction">
                                     <label class="col-form-label col-sm-3">Transaction</label>
 <%--                                    <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Transaction</button>--%>
-                                    <select class="form-control font-size-xs" style="width: 150px; margin-left: 10px;" aria-hidden="true" name="transactionInput">
+                                    <select class="form-control font-size-xs" style="width: 150px; margin-left: 10px;" aria-hidden="true" name="transaction">
                                         <option value="none">Select...</option>
                                         <option value="expense">Expense</option>
                                         <option value="investments">Investments</option>
@@ -261,7 +261,7 @@
                                 <!-- Category -->
                                 <div class="form-group row" id="category">
                                     <label class="col-form-label col-sm-3">Category</label>
-                                    <select class="form-control font-size-xs" aria-hidden="true" style="width: 150px; margin-left: 10px;" name="categoryInput">
+                                    <select class="form-control font-size-xs" aria-hidden="true" style="width: 150px; margin-left: 10px;" name="category">
                                         <option value="none">Select...</option>
                                         <option value="wants">Wants</option>
                                         <option value="needs">Needs</option>
@@ -281,7 +281,7 @@
 
                         <!-- Button -->
                         <div class="modal-footer">
-                            <button type="button" id="saveButton" class="btn bg-teal" onclick="saveConfirm();">Save</button>
+                            <button type="submit" id="saveButton" class="btn bg-teal" onclick="saveConfirm();">Save</button>
                             <button type="button" id="updateButton" class="btn bg-teal" onclick="updateConfirm();">Edit</button>
                             <button type="button" id="cancelButton" class="btn btn-outline" data-dismiss="modal">Close</button>
                         </div>

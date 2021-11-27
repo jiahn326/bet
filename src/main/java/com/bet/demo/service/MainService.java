@@ -30,7 +30,7 @@ public class MainService {
         String password = request.getParameter("password");
         String email = request.getParameter("email");
 
-        DocumentReference docRef = db.collection("users").document("test1"); //***need to find a unique string to replace childpath***
+        DocumentReference docRef = db.collection("users").document(username); //***need to find a unique string to replace childpath***
         // Add document data  with id "alovelace" using a hashmap
         Map<String, Object> data = new HashMap<>();
 

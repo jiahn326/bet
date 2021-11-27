@@ -3,8 +3,11 @@ package com.bet.demo.controller;
 import com.bet.demo.data.Entry;
 import com.bet.demo.data.User;
 import com.bet.demo.service.MainService;
+import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
@@ -26,7 +29,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 @Controller
@@ -151,6 +156,63 @@ public class MainController {
         }
 
         return "historyView/history";
+    }
+
+    @RequestMapping(value = "create")
+    public String create(HttpServletRequest request) throws ExecutionException, InterruptedException {
+        HttpSession session = request.getSession();
+        System.out.println("supersuper");
+
+        if (user != null){
+            // HTML 폼에서 username으로 전달된 값을 가지고 옴
+            String amount = request.getParameter("amount");
+            String category = request.getParameter("category");
+            String dateTime = request.getParameter("dateTime");
+            String description = request.getParameter("description");
+            String transaction = request.getParameter("transaction");
+            String username = request.getParameter(user.getUsername());
+
+            DocumentReference docRef = db.collection("entry").document(dateTime); //***need to find a unique string to replace childpath***
+            // Add document data  with id "alovelace" using a hashmap
+            Map<String, Object> data = new HashMap<>();
+
+            // amount이 null 이 아닌 경우 세션에 값을 저장
+            if(amount != null) {
+                data.put("amount", amount);
+            }
+
+            // category이 null 이 아닌 경우 세션에 값을 저장
+            if(category != null) {
+                data.put("category", category);
+            }
+
+            // dateTime이 null 이 아닌 경우 세션에 값을 저장
+            if(dateTime != null) {
+                data.put("dateTime", dateTime);
+            }
+
+            // description이 null 이 아닌 경우 세션에 값을 저장
+            if(description != null) {
+                data.put("description", description);
+            }
+
+            // transaction이 null 이 아닌 경우 세션에 값을 저장
+            if(transaction != null) {
+                data.put("transaction", transaction);
+            }
+
+            // username이 null 이 아닌 경우 세션에 값을 저장
+            if(username != null) {
+                data.put("username", username);
+            }
+
+            //asynchronously write data
+            ApiFuture<WriteResult> result = docRef.set(data);
+            // ...
+            // result.get() blocks on response
+            System.out.println("Update time : " + result.get().getUpdateTime());
+        }
+        return "redirect:/history/info";
     }
 
     @RequestMapping("/chart/info")
