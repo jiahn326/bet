@@ -208,8 +208,6 @@ function openModal(type) {
 
 // add function - when save button clicked
 function saveConfirm(){
-    $("#saveButton").click(function() {
-
         let sendData = {
             "dateTime": $("#dateTime").val(),
             "amount": $("#amount").val(),
@@ -241,7 +239,6 @@ function saveConfirm(){
                 // $("#cancelButton").click();
             }
         });
-    });
 }
 
 
