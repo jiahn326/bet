@@ -156,59 +156,59 @@ public class MainController {
 
         //******----adding to db----- (req parameter works - reference for ma boi jangkun - i'll leave it here for reference)*******
 
-        // HTML 폼에서 username으로 전달된 값을 가지고 옴
-        String amount = request.getParameter("amount");
-        String category = request.getParameter("category");
-        String dateTime = request.getParameter("dateTime");
-        String description = request.getParameter("description");
-        String transaction = request.getParameter("transaction");
-        String username = user.getUsername();
-
-        if (user != null){
-            if (dateTime != null) {
-                DocumentReference docRef = db.collection("entry").document(dateTime); //***need to find a unique string to replace childpath***
-                // Add document data  with id "alovelace" using a hashmap
-                Map<String, Object> data = new HashMap<>();
-
-                // amount이 null 이 아닌 경우 세션에 값을 저장
-                if(amount != null) {
-                    data.put("amount", amount);
-                }
-
-                // category이 null 이 아닌 경우 세션에 값을 저장
-                if(category != null) {
-                    data.put("category", category);
-                }
-
-                // dateTime이 null 이 아닌 경우 세션에 값을 저장
-                if(dateTime != null) {
-                    data.put("dateTime", dateTime);
-                }
-
-                // description이 null 이 아닌 경우 세션에 값을 저장
-                if(description != null) {
-                    data.put("description", description);
-                }
-
-                // transaction이 null 이 아닌 경우 세션에 값을 저장
-                if(transaction != null) {
-                    data.put("transaction", transaction);
-                }
-
-                // username이 null 이 아닌 경우 세션에 값을 저장
-                if(username != null) {
-                    data.put("user", username);
-                }
-
-                //asynchronously write data
-                ApiFuture<WriteResult> result = docRef.set(data);
-                // ...
-                // result.get() blocks on response
-                System.out.println("Update time : " + result.get().getUpdateTime());
-
-                return "historyView/history";
-            }
-        }
+//        // HTML 폼에서 username으로 전달된 값을 가지고 옴
+//        String amount = request.getParameter("amount");
+//        String category = request.getParameter("category");
+//        String dateTime = request.getParameter("dateTime");
+//        String description = request.getParameter("description");
+//        String transaction = request.getParameter("transaction");
+//        String username = user.getUsername();
+//
+//        if (user != null){
+//            if (dateTime != null) {
+//                DocumentReference docRef = db.collection("entry").document(dateTime); //***need to find a unique string to replace childpath***
+//                // Add document data  with id "alovelace" using a hashmap
+//                Map<String, Object> data = new HashMap<>();
+//
+//                // amount이 null 이 아닌 경우 세션에 값을 저장
+//                if(amount != null) {
+//                    data.put("amount", amount);
+//                }
+//
+//                // category이 null 이 아닌 경우 세션에 값을 저장
+//                if(category != null) {
+//                    data.put("category", category);
+//                }
+//
+//                // dateTime이 null 이 아닌 경우 세션에 값을 저장
+//                if(dateTime != null) {
+//                    data.put("dateTime", dateTime);
+//                }
+//
+//                // description이 null 이 아닌 경우 세션에 값을 저장
+//                if(description != null) {
+//                    data.put("description", description);
+//                }
+//
+//                // transaction이 null 이 아닌 경우 세션에 값을 저장
+//                if(transaction != null) {
+//                    data.put("transaction", transaction);
+//                }
+//
+//                // username이 null 이 아닌 경우 세션에 값을 저장
+//                if(username != null) {
+//                    data.put("user", username);
+//                }
+//
+//                //asynchronously write data
+//                ApiFuture<WriteResult> result = docRef.set(data);
+//                // ...
+//                // result.get() blocks on response
+//                System.out.println("Update time : " + result.get().getUpdateTime());
+//
+//                return "historyView/history";
+//            }
+//        }
 
 
         return "historyView/history";
