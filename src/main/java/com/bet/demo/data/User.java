@@ -81,6 +81,10 @@ public class User {
         return this.entries.isEmpty();
     }
 
+    public void makeEntryEmpty(){
+        this.entries.clear();
+    }
+
     private void addAnExpense(Entry entry){
         this.expenses.add(entry);
     }
