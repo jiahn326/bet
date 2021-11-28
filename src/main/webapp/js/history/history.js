@@ -4,8 +4,8 @@ var replaceNotFullKorean = /[ㄱ-ㅎㅏ-ㅣ]/gi;
 
 // ready for the page open
 $(document).ready(function () {
-    // categorySelect();   // reset search SelectBox
-    // searchList();       // list of History
+    //categorySelect();        // reset search SelectBox
+    callHistoryList();       // list of History
 
 });
 
@@ -51,65 +51,70 @@ $(window).on('load', function() {
 
 });
 
-//검색 SelectBox 초기화
-function categorySelect() {
-    $.ajax({
-        url : contextPath +"/word/searchType",
-        contentType : "application/json",
-        type : "GET",
-        success : function(data){
-            for(var i = 0; i < data.length; i++) {
-                if(data[i].columnName == 'WORD_NM') {
-                    var option  = $("<option>");
-                    $(option).val('wordNm').text('단어명');
-                    $("#searchType").append($(option));
-                }
-
-                if(data[i].columnName == 'WORD_ABBR') {
-                    var option  = $("<option>");
-                    $(option).val('wordAbbr').text('단어 영문 약어명');
-                    $("#searchType").append($(option));
-                }
-
-                if(data[i].columnName == 'WORD_ENG_NM') {
-                    var option  = $("<option>");
-                    $(option).val('wordEngNm').text('단어 영문명');
-                    $("#searchType").append($(option));
-                }
-
-                if(data[i].columnName == 'WORD_DSCRPT') {
-                    var option  = $("<option>");
-                    $(option).val('wordDscrpt').text('단어 설명');
-                    $("#searchType").append($(option));
-                }
-
-                if(data[i].columnName == 'SYNM_LIST') {
-                    var option  = $("<option>");
-                    $(option).val('synmList').text('이음동의어');
-                    $("#searchType").append($(option));
-                }
-            }
-        }
-    });
+// reset Search input
+function resetSearch() {
+    location.reload();
 }
 
+//검색 SelectBox 초기화
+// function categorySelect() {
+//     $.ajax({
+//         url : contextPath +"/word/searchType",
+//         contentType : "application/json",
+//         type : "GET",
+//         success : function(data){
+//             for(var i = 0; i < data.length; i++) {
+//                 if(data[i].columnName == 'WORD_NM') {
+//                     var option  = $("<option>");
+//                     $(option).val('wordNm').text('단어명');
+//                     $("#searchType").append($(option));
+//                 }
+//
+//                 if(data[i].columnName == 'WORD_ABBR') {
+//                     var option  = $("<option>");
+//                     $(option).val('wordAbbr').text('단어 영문 약어명');
+//                     $("#searchType").append($(option));
+//                 }
+//
+//                 if(data[i].columnName == 'WORD_ENG_NM') {
+//                     var option  = $("<option>");
+//                     $(option).val('wordEngNm').text('단어 영문명');
+//                     $("#searchType").append($(option));
+//                 }
+//
+//                 if(data[i].columnName == 'WORD_DSCRPT') {
+//                     var option  = $("<option>");
+//                     $(option).val('wordDscrpt').text('단어 설명');
+//                     $("#searchType").append($(option));
+//                 }
+//
+//                 if(data[i].columnName == 'SYNM_LIST') {
+//                     var option  = $("<option>");
+//                     $(option).val('synmList').text('이음동의어');
+//                     $("#searchType").append($(option));
+//                 }
+//             }
+//         }
+//     });
+// }
+
 // call History list
-function callList(searchType, keyword, orderNumber) {
+function callHistoryList(searchType, keyword, orderNumber) {
     $('#historyTable tbody').on('dblclick', 'tr', function () {
 
         let table = $("#historyTable").DataTable();
 
         var rowData = table.row( this ).data();
 
-        if(rowData != undefined) {
+        if(rowData !== undefined) {
             $("#newButton").click();
             openModal('update', rowData.wordSeq);
         }
     });
 
-    $("#searchType").change(function () {
-        $("#keyword").focus();
-    });
+    // $("#searchType").change(function () {
+    //     $("#keyword").focus();
+    // });
 
     let dataTableHeight = document.getElementsByClassName('dataTables_scrollBody')[0];
     dataTableHeight.style.minHeight = '580px';
@@ -125,14 +130,13 @@ function searchHistory() {
     if(keyword == '') {
         if($("#searchType").val() == 'all') {
             dataTable.clear().destroy();
-            searchList();
+            callHistoryList();
         } else {
             alertMessage("Warning!","Please enter input.","warning");
             return false;
         };
     } else {
-        dataTable.clear().destroy();
-        searchList(searchType, keyword);
+        resetSearch();
     }
 }
 
@@ -215,7 +219,7 @@ function saveConfirm(){
             "transaction": $("#transaction").val(),
             "category": $("#category").val()
         };
-        // let dataTable = $("#historyTable").DataTable();
+        let dataTable = $("#historyTable").DataTable();
 
         $.ajax({
             url: contextPath + "/history/add",
@@ -223,25 +227,22 @@ function saveConfirm(){
             type: "POST",
             data: JSON.stringify(sendData),
             success: function () {
-
-                alert("저장 성공!");
-                location.href = "/history/info";
-
                 // alertMessage("성공!","단어 등록 신청이 완료되었습니다.","success");
-                // $("#cancelButton").click();
-                // dataTable.destroy();
-                // searchList('','',0);
-
+                $("#cancelButton").click();
+                dataTable.destroy();
+                resetSearch();
+                // callHistoryList('','',0);
             },
             error: function () {
                 alert("failed")
-                location.href = "/history/info";
 
                 // alertMessage("경고!","실패하였습니다. 관리자에게 문의해주세요.","danger");
                 // $("#cancelButton").click();
             }
         });
 }
+
+
 
 
 

@@ -131,15 +131,21 @@ public class MainController {
     /* page info */
 
     @RequestMapping("/history/info")
-    public String history(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String history(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ExecutionException, InterruptedException {
         //System.out.println("supersuper");
         HttpSession session = request.getSession();
 
-        /*if (db == null){
+        this.entryList = null; //reset
+
+        mainService.reloadEntries(user, db); // refresh
+
+        if (db == null){
             initializeFirebase();
-        }*/
+        }
+
 
         if (user != null && !user.isEntryEmpty()){
+
             this.entryList = user.getEntry();
             //System.out.println(entryList.get(1).toString());
             //System.out.println("supersuper");
@@ -165,6 +171,12 @@ public class MainController {
     @ResponseBody
     public String create(@RequestBody Entry entryVO) throws ExecutionException, InterruptedException {
         try {
+
+            if (db == null){
+                initializeFirebase();
+            }
+
+
             double amount = entryVO.getAmount();
             String category = entryVO.getCategory();
             String dateTime = entryVO.getDateTime();
@@ -201,7 +213,7 @@ public class MainController {
 
             // username이 null 이 아닌 경우 세션에 값을 저장
             if(username != null) {
-                data.put("username", username);
+                data.put("user", username);
             }
 
             //asynchronously write data
@@ -210,11 +222,20 @@ public class MainController {
             // result.get() blocks on response
             System.out.println("Update time : " + result.get().getUpdateTime());
 
+            //user.addAnEntry(entryVO);
+            //mainService.loadEntriesToUser(user.getUsername(), db);
+
         } catch(Exception e) {
-            throw e;
+            System.out.println("error occurred");
         }
 
         return "redirect:/history/info";
+    }
+
+    @RequestMapping("/history/searchType")
+    @ResponseBody
+    public String searchType(){
+        return "hi";
     }
 
     @RequestMapping("/chart/info")

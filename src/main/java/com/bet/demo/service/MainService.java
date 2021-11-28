@@ -126,7 +126,13 @@ public class MainService {
         return this.user;
     }
 
-    private void loadEntriesToUser(String username, Firestore db) throws ExecutionException, InterruptedException {
+    // delete user entries
+    public void reloadEntries(User user, Firestore db) throws ExecutionException, InterruptedException {
+        user.makeEntryEmpty();
+        loadEntriesToUser(user.getUsername(), db);
+    }
+
+    public void loadEntriesToUser(String username, Firestore db) throws ExecutionException, InterruptedException {
         List<Entry> list = new ArrayList<>();
         ApiFuture<QuerySnapshot> entryFuture = db.collection("entry").whereEqualTo("user",username).get();
         List<QueryDocumentSnapshot> documents = entryFuture.get().getDocuments();
