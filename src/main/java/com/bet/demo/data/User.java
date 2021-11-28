@@ -154,6 +154,46 @@ public class User {
         this.entries.sort(new DateSorter());
     }
 
+    public double getCurrentBalance(){
+        this.splitEntries();
+        double income = 0.0;
+        double expense = 0.0;
+        for (Entry entry: this.expenses) {
+            expense += entry.getAmount();
+        }
+        for (Entry entry: this.income){
+            income+= entry.getAmount();
+        }
+        return income-expense;
+    }
+
+    public double getTotalWants(){
+        this.sortSpendings();
+        double total = 0.0;
+        for (Entry entry: this.wants){
+            total += entry.getAmount();
+        }
+        return total;
+    }
+
+    public double getTotalNeeds(){
+        this.sortSpendings();
+        double total = 0.0;
+        for (Entry entry: this.needs){
+            total += entry.getAmount();
+        }
+        return total;
+    }
+
+    public double getTotalSavings(){
+        this.sortSpendings();
+        double total =0.0;
+        for (Entry entry: this.savings){
+            total += entry.getAmount();
+        }
+        return total;
+    }
+
     @Override
     public String toString() {
         return "User{" +

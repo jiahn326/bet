@@ -77,7 +77,7 @@ public class MainController {
         String page = "";
         if (mainService.login(request, response, session, db)){
             this.user = mainService.getUser();
-            //this.entryList = user.getEntry();
+            this.entryList = user.getEntry();
             //System.out.println(this.user.toString());
             //System.out.println(this.user.getEntry().toString());
             page = "content";
@@ -140,11 +140,8 @@ public class MainController {
         System.out.println(request.toString());
 
         if (user != null && !user.isEntryEmpty() && this.entryList.isEmpty()){
-            System.out.println("hello");
             this.entryList = user.getEntry();
         }
-
-        System.out.println("change");
 
         System.out.println(this.entryList.toString());
 
@@ -157,7 +154,25 @@ public class MainController {
         return "historyView/history";
     }
 
-    @RequestMapping(value = "/history/search", method = RequestMethod.POST)
+    @RequestMapping("/searchHistory")
+    public String search(HttpServletRequest request, HttpServletResponse response){
+        String entryType = request.getParameter("entryType");
+        String keyword = request.getParameter("keyword");
+
+        System.out.println(request.toString());
+
+        System.out.println(entryType + " " + keyword);
+
+        this.entryList = mainService.searchHistory("category", "wants");
+        System.out.println(this.entryList.toString());
+
+        request.setAttribute("entryList", this.entryList);
+
+        return "historyView/history";
+
+    }
+
+    @RequestMapping(value = "/history/search")
     @ResponseBody
     public String searchHistory(@RequestBody Search search, HttpServletRequest request) throws ServletException, IOException {
 
@@ -175,7 +190,7 @@ public class MainController {
 
         request.setAttribute("entryList", this.entryList);
 
-        return "content";
+        return "historyView/history";
     }
 
     @RequestMapping("/chart/info")
