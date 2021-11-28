@@ -225,7 +225,7 @@ function saveConfirm(){
             success: function () {
 
                 alert("저장 성공!");
-                location.href = "/historyView/history";
+                location.href = "/history/info";
 
                 // alertMessage("성공!","단어 등록 신청이 완료되었습니다.","success");
                 // $("#cancelButton").click();
@@ -235,6 +235,8 @@ function saveConfirm(){
             },
             error: function () {
                 alert("failed")
+                location.href = "/history/info";
+
                 // alertMessage("경고!","실패하였습니다. 관리자에게 문의해주세요.","danger");
                 // $("#cancelButton").click();
             }

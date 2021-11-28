@@ -232,7 +232,11 @@
                                 </div>
                                 <!-- /Date -->
                                 <!-- Amount -->
+<<<<<<< HEAD
                                 <div class="form-group row" >
+=======
+                                <div class="form-group row">
+>>>>>>> Jiahn
                                     <label class="col-form-label col-sm-3">Amount</label>
                                     <div class="col-sm-9">
                                         <input type="text" id="amount" name="amount" placeholder="Write amount (ex. 420)" class="form-control">
@@ -240,7 +244,11 @@
                                 </div>
                                 <!-- /Amount -->
                                 <!-- Description -->
+<<<<<<< HEAD
                                 <div class="form-group row" >
+=======
+                                <div class="form-group row">
+>>>>>>> Jiahn
                                     <label class="col-form-label col-sm-3">Description</label>
                                     <div class="col-sm-9">
                                         <input type="text" id="description" name="description" placeholder="Write description" class="form-control">
@@ -248,7 +256,11 @@
                                 </div>
                                 <!-- /Description -->
                                 <!-- Transaction -->
+<<<<<<< HEAD
                                 <div class="form-group row" >
+=======
+                                <div class="form-group row">
+>>>>>>> Jiahn
                                     <label class="col-form-label col-sm-3">Transaction</label>
 <%--                                    <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Transaction</button>--%>
                                     <select class="form-control font-size-xs" style="width: 150px; margin-left: 10px;" aria-hidden="true" id="transaction" name="transaction">
@@ -264,7 +276,11 @@
                                 <!-- Category -->
                                 <div class="form-group row">
                                     <label class="col-form-label col-sm-3">Category</label>
+<<<<<<< HEAD
                                     <select class="form-control font-size-xs" aria-hidden="true" style="width: 150px; margin-left: 10px;"  id="category" name="category">
+=======
+                                    <select class="form-control font-size-xs" aria-hidden="true" style="width: 150px; margin-left: 10px;" id="category" name="category">
+>>>>>>> Jiahn
                                         <option value="none">Select...</option>
                                         <option value="wants">Wants</option>
                                         <option value="needs">Needs</option>
