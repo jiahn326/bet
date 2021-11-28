@@ -119,7 +119,7 @@
             <!-- Drop box Start -->
             <div class="form-group row font-size-xs" style="margin-left: 10px;">
                 <!-- search 'All' -->
-                <select class="form-control font-size-xs" aria-hidden="true" style="width: 150px; margin-left: 10px;" name="searchtype">
+                <select class="form-control font-size-xs" aria-hidden="true" style="width: 150px; margin-left: 10px;" name="entryType" id="entryType">
                     <option value="all">All</option>
                     <option value="description">Description</option>
                     <option value="transaction">Transaction</option>
@@ -130,9 +130,9 @@
                 <!-- search input -->
                 <div class="col-lg-1" style="margin-left: -5px;">
                     <div class="input-group" style="width: 400px;">
-                        <input type="text" class="form-control border-right-0 font-size-xs" placeholder="Search..." name="userInput">
+                        <input type="text" class="form-control border-right-0 font-size-xs" placeholder="Search..." name="keyword" id="keyword">
                         <span class="input-group-append">
-                            <button class="btn border font-size-xs" type="button" value = "searchButton" onclick="location.href='/searchHistory'"><i class="icon-search4"></i></button>
+                            <button class="btn border font-size-xs" type="button" value = "searchButton" onclick="searchHistory()"><i class="icon-search4"></i></button>
                         </span>
                     </div>
                 </div>

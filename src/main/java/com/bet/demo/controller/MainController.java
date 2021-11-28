@@ -1,6 +1,7 @@
 package com.bet.demo.controller;
 
 import com.bet.demo.data.Entry;
+import com.bet.demo.data.Search;
 import com.bet.demo.data.User;
 import com.bet.demo.service.MainService;
 import com.google.auth.oauth2.GoogleCredentials;
@@ -10,9 +11,7 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.RequestDispatcher;
@@ -38,7 +37,8 @@ public class MainController {
     Firestore db = null;
     User user = null;
     List<Entry> entryList = new ArrayList<>();
-
+    HttpServletRequest request;
+    HttpServletResponse response;
     @Autowired
     private MainService mainService;
 
@@ -67,6 +67,8 @@ public class MainController {
     @RequestMapping("/login")
     public String login(HttpServletRequest request, HttpServletResponse response) throws ExecutionException, InterruptedException, IOException {
         HttpSession session = request.getSession();
+        this.request = request;
+        this.response = response;
 
         if (db == null){
             initializeFirebase();
@@ -75,7 +77,7 @@ public class MainController {
         String page = "";
         if (mainService.login(request, response, session, db)){
             this.user = mainService.getUser();
-            this.entryList = user.getEntry();
+            //this.entryList = user.getEntry();
             //System.out.println(this.user.toString());
             //System.out.println(this.user.getEntry().toString());
             page = "content";
@@ -94,6 +96,8 @@ public class MainController {
     @RequestMapping(value = "/signUp")
     public String signUp(HttpServletRequest request, HttpServletResponse response) throws ExecutionException, InterruptedException, IOException {
         HttpSession session = request.getSession();
+        this.request = request;
+        this.response = response;
 
         if (db == null){
             initializeFirebase();
@@ -130,13 +134,21 @@ public class MainController {
     public String history(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //System.out.println("supersuper");
         HttpSession session = request.getSession();
+        this.request = request;
+        this.response = response;
 
         System.out.println(request.toString());
 
-        if (user != null && !user.isEntryEmpty()){
+        if (user != null && !user.isEntryEmpty() && this.entryList.isEmpty()){
+            System.out.println("hello");
             this.entryList = user.getEntry();
-            request.setAttribute("entryList", this.entryList);
         }
+
+        System.out.println("change");
+
+        System.out.println(this.entryList.toString());
+
+        request.setAttribute("entryList", this.entryList);
 
         if(session != null) {
             session.invalidate();
@@ -145,29 +157,25 @@ public class MainController {
         return "historyView/history";
     }
 
-    @RequestMapping(value = "/searchHistory")
-    public String searchHistory(HttpServletRequest request, HttpServletResponse response){
-        HttpSession session = request.getSession();
+    @RequestMapping(value = "/history/search", method = RequestMethod.POST)
+    @ResponseBody
+    public String searchHistory(@RequestBody Search search, HttpServletRequest request) throws ServletException, IOException {
 
         System.out.println("button clicked");
 
-        request.setAttribute("keyword", "hello");
-
-        String entryType = request.getParameter("searchtype");
-        String keyword = request.getParameter("userInput");
+        String entryType = search.getEntryType();
+        String keyword = search.getKeyword();
 
         System.out.println(request.toString());
 
         System.out.println(entryType + " " + keyword);
 
-        this.entryList = mainService.searchHistory("transaction","expense");
+        this.entryList = mainService.searchHistory(entryType, keyword);
+        System.out.println(this.entryList.toString());
+
         request.setAttribute("entryList", this.entryList);
 
-        if(session != null) {
-            session.invalidate();
-        }
-
-        return "historyView/history";
+        return "content";
     }
 
     @RequestMapping("/chart/info")

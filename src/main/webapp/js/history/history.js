@@ -181,22 +181,30 @@ function callList(searchType, keyword, orderNumber) {
 // after press search button
 function searchHistory() {
 
-    let searchType = $("#searchType").val();
-    let keyword = $("#keyword").val();
+    let search = {
+        "entryType": $("#entryType").val(),
+        "keyword": $("#keyword").val(),
+    };
     let dataTable = $("#historyTable").DataTable();
 
-    if(keyword == '') {
-        if($("#searchType").val() == 'all') {
-            dataTable.clear().destroy();
-            searchList();
-        } else {
-            alertMessage("Warning!","Please enter input.","warning");
-            return false;
-        };
-    } else {
-        dataTable.clear().destroy();
-        searchList(searchType, keyword);
-    }
+    $.ajax({
+        url: contextPath + "/history/search",
+        contentType: "application/json",
+        type: "POST",
+        data: JSON.stringify(search),
+        success: function () {
+            // alertMessage("성공!","단어 등록 신청이 완료되었습니다.","success");
+            /*dataTable.destroy();*/
+            resetSearch();
+            callHistoryList('','',0);
+        },
+        error: function () {
+            alert("failed")
+
+            // alertMessage("경고!","실패하였습니다. 관리자에게 문의해주세요.","danger");
+            // $("#cancelButton").click();
+        }
+    });
 }
 
 // open Modal (add, edit, detail)
