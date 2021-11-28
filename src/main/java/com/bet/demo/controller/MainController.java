@@ -14,7 +14,9 @@ import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.RequestDispatcher;
@@ -160,27 +162,22 @@ public class MainController {
 
 //    @RequestMapping(value = "create")
     @RequestMapping("/history/add")
-    public String create(HttpServletRequest request) throws ExecutionException, InterruptedException {
-        HttpSession session = request.getSession();
-        System.out.println("supersuper");
-
-        if (user != null){
-            // HTML 폼에서 username으로 전달된 값을 가지고 옴
-            String amount = request.getParameter("amount");
-            String category = request.getParameter("category");
-            String dateTime = request.getParameter("dateTime");
-            String description = request.getParameter("description");
-            String transaction = request.getParameter("transaction");
-            String username = request.getParameter(user.getUsername());
+    @ResponseBody
+    public String create(@RequestBody Entry entryVO) throws ExecutionException, InterruptedException {
+        try {
+            double amount = entryVO.getAmount();
+            String category = entryVO.getCategory();
+            String dateTime = entryVO.getDateTime();
+            String description = entryVO.getDescription();
+            String transaction = entryVO.getTransaction();
+            String username = user.getUsername();
 
             DocumentReference docRef = db.collection("entry").document(dateTime); //***need to find a unique string to replace childpath***
             // Add document data  with id "alovelace" using a hashmap
             Map<String, Object> data = new HashMap<>();
 
             // amount이 null 이 아닌 경우 세션에 값을 저장
-            if(amount != null) {
-                data.put("amount", amount);
-            }
+            data.put("amount", amount);
 
             // category이 null 이 아닌 경우 세션에 값을 저장
             if(category != null) {
@@ -212,7 +209,11 @@ public class MainController {
             // ...
             // result.get() blocks on response
             System.out.println("Update time : " + result.get().getUpdateTime());
+
+        } catch(Exception e) {
+            throw e;
         }
+
         return "redirect:/history/info";
     }
 

@@ -220,38 +220,38 @@
                         <!-- /Modal header -->
 
                         <!-- Modal content -->
-                        <form action="${pageContext.request.contextPath}/create" class="form-horizontal" id="create">
+                        <form action="/history/info" class="form-horizontal" id="create">
 <%--                            <input type="hidden" id="wordSeq" name="wordSeq">--%>
                             <div class="modal-body">
                                 <!-- Date -->
                                 <div class="form-group row">
                                     <label class="col-form-label col-sm-3">Date</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="dateTime" placeholder="MM/DD/YYYY" class="form-control">
+                                        <input type="text" id="dateTime" name="dateTime" placeholder="MM/DD/YYYY" class="form-control">
                                     </div>
                                 </div>
                                 <!-- /Date -->
                                 <!-- Amount -->
-                                <div class="form-group row" id="amount">
+                                <div class="form-group row">
                                     <label class="col-form-label col-sm-3">Amount</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="amount" placeholder="Write amount (ex. 420)" class="form-control">
+                                        <input type="text" id="amount" name="amount" placeholder="Write amount (ex. 420)" class="form-control">
                                     </div>
                                 </div>
                                 <!-- /Amount -->
                                 <!-- Description -->
-                                <div class="form-group row" id="description">
+                                <div class="form-group row">
                                     <label class="col-form-label col-sm-3">Description</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="description" placeholder="Write description" class="form-control">
+                                        <input type="text" id="description" name="description" placeholder="Write description" class="form-control">
                                     </div>
                                 </div>
                                 <!-- /Description -->
                                 <!-- Transaction -->
-                                <div class="form-group row" id="transaction">
+                                <div class="form-group row">
                                     <label class="col-form-label col-sm-3">Transaction</label>
 <%--                                    <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Transaction</button>--%>
-                                    <select class="form-control font-size-xs" style="width: 150px; margin-left: 10px;" aria-hidden="true" name="transaction">
+                                    <select class="form-control font-size-xs" style="width: 150px; margin-left: 10px;" aria-hidden="true" id="transaction" name="transaction">
                                         <option value="none">Select...</option>
                                         <option value="expense">Expense</option>
                                         <option value="investments">Investments</option>
@@ -262,9 +262,9 @@
                                 <!-- /Transaction -->
 
                                 <!-- Category -->
-                                <div class="form-group row" id="category">
+                                <div class="form-group row">
                                     <label class="col-form-label col-sm-3">Category</label>
-                                    <select class="form-control font-size-xs" aria-hidden="true" style="width: 150px; margin-left: 10px;" name="category">
+                                    <select class="form-control font-size-xs" aria-hidden="true" style="width: 150px; margin-left: 10px;" id="category" name="category">
                                         <option value="none">Select...</option>
                                         <option value="wants">Wants</option>
                                         <option value="needs">Needs</option>
