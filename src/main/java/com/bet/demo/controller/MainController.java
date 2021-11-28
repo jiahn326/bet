@@ -77,7 +77,7 @@ public class MainController {
         String page = "";
         if (mainService.login(request, response, session, db)){
             this.user = mainService.getUser();
-            this.entryList = user.getEntry();
+            //this.entryList = user.getEntry();
             //System.out.println(this.user.toString());
             //System.out.println(this.user.getEntry().toString());
             page = "content";
@@ -132,14 +132,14 @@ public class MainController {
 
     @RequestMapping("/history/info")
     public String history(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //System.out.println("supersuper");
+        System.out.println("supersuper");
         HttpSession session = request.getSession();
         this.request = request;
         this.response = response;
 
         System.out.println(request.toString());
 
-        if (user != null && !user.isEntryEmpty() && this.entryList.isEmpty()){
+        if (this.entryList.isEmpty()){
             this.entryList = user.getEntry();
         }
 
@@ -166,15 +166,13 @@ public class MainController {
         this.entryList = mainService.searchHistory("category", "wants");
         System.out.println(this.entryList.toString());
 
-        request.setAttribute("entryList", this.entryList);
-
-        return "historyView/history";
+        return "redirect:/history/info";
 
     }
 
-    @RequestMapping(value = "/history/search")
+    @RequestMapping("/history/search")
     @ResponseBody
-    public String searchHistory(@RequestBody Search search, HttpServletRequest request) throws ServletException, IOException {
+    public String searchHistory(@RequestBody Search search) throws ServletException, IOException {
 
         System.out.println("button clicked");
 
@@ -188,9 +186,7 @@ public class MainController {
         this.entryList = mainService.searchHistory(entryType, keyword);
         System.out.println(this.entryList.toString());
 
-        request.setAttribute("entryList", this.entryList);
-
-        return "historyView/history";
+        return "redirect:/history/info";
     }
 
     @RequestMapping("/chart/info")
