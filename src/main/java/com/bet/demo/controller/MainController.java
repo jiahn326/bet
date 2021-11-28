@@ -12,12 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -64,7 +67,6 @@ public class MainController {
     @RequestMapping("/login")
     public String login(HttpServletRequest request, HttpServletResponse response) throws ExecutionException, InterruptedException, IOException {
         HttpSession session = request.getSession();
-
 
         if (db == null){
             initializeFirebase();
@@ -129,32 +131,37 @@ public class MainController {
         //System.out.println("supersuper");
         HttpSession session = request.getSession();
 
-        System.out.println(request.getParameter("searchType"));
+        System.out.println(request.toString());
 
-        /*if (db == null){
-            initializeFirebase();
-        }*/
-
-        /*if (request.getParameter("searchButton") != null){
-            System.out.println("btn clicked");
-            this.entryList = mainService.searchHistory(request,response);
-            return "historyView/history";
-        } else */
         if (user != null && !user.isEntryEmpty()){
             this.entryList = user.getEntry();
-            //System.out.println(entryList.get(1).toString());
-            //System.out.println("supersuper");
+            request.setAttribute("entryList", this.entryList);
         }
 
-        request.setAttribute("entryList", entryList);
+        if(session != null) {
+            session.invalidate();
+        }
 
-        //System.out.println("supersuper");
+        return "historyView/history";
+    }
 
-        /*List<Entry> searchList = new ArrayList<>();
-        if (!mainService.search(request, response).isEmpty()){
-            searchList = mainService.search(request,response);
-            request.setAttribute("entryList", searchList);
-        }*/
+    @RequestMapping(value = "/searchHistory")
+    public String searchHistory(HttpServletRequest request, HttpServletResponse response){
+        HttpSession session = request.getSession();
+
+        System.out.println("button clicked");
+
+        request.setAttribute("keyword", "hello");
+
+        String entryType = request.getParameter("searchtype");
+        String keyword = request.getParameter("userInput");
+
+        System.out.println(request.toString());
+
+        System.out.println(entryType + " " + keyword);
+
+        this.entryList = mainService.searchHistory("transaction","expense");
+        request.setAttribute("entryList", this.entryList);
 
         if(session != null) {
             session.invalidate();
@@ -178,6 +185,7 @@ public class MainController {
         return "budgetView/budget";
     }
 
+    //sets up firebase and connects to the firestore database
     private void initializeFirebase() throws IOException {
         InputStream serviceAccount = new FileInputStream("src/main/resources/serviceAccountKey.json");
         GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
@@ -187,5 +195,4 @@ public class MainController {
         FirebaseApp.initializeApp(options);
         this.db = FirestoreClient.getFirestore();
     }
-
 }
