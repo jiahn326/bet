@@ -13,10 +13,7 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.RequestDispatcher;
@@ -131,7 +128,7 @@ public class MainController {
     /* page info */
 
     @RequestMapping("/history/info")
-    public String history(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String history(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ExecutionException, InterruptedException {
         //System.out.println("supersuper");
         HttpSession session = request.getSession();
 
@@ -157,65 +154,127 @@ public class MainController {
             session.invalidate();
         }
 
+        //******----adding to db----- (req parameter works - reference for ma boi jangkun - i'll leave it here for reference)*******
+
+        // HTML 폼에서 username으로 전달된 값을 가지고 옴
+        String amount = request.getParameter("amount");
+        String category = request.getParameter("category");
+        String dateTime = request.getParameter("dateTime");
+        String description = request.getParameter("description");
+        String transaction = request.getParameter("transaction");
+        String username = user.getUsername();
+
+        if (user != null){
+            if (dateTime != null) {
+                DocumentReference docRef = db.collection("entry").document(dateTime); //***need to find a unique string to replace childpath***
+                // Add document data  with id "alovelace" using a hashmap
+                Map<String, Object> data = new HashMap<>();
+
+                // amount이 null 이 아닌 경우 세션에 값을 저장
+                if(amount != null) {
+                    data.put("amount", amount);
+                }
+
+                // category이 null 이 아닌 경우 세션에 값을 저장
+                if(category != null) {
+                    data.put("category", category);
+                }
+
+                // dateTime이 null 이 아닌 경우 세션에 값을 저장
+                if(dateTime != null) {
+                    data.put("dateTime", dateTime);
+                }
+
+                // description이 null 이 아닌 경우 세션에 값을 저장
+                if(description != null) {
+                    data.put("description", description);
+                }
+
+                // transaction이 null 이 아닌 경우 세션에 값을 저장
+                if(transaction != null) {
+                    data.put("transaction", transaction);
+                }
+
+                // username이 null 이 아닌 경우 세션에 값을 저장
+                if(username != null) {
+                    data.put("user", username);
+                }
+
+                //asynchronously write data
+                ApiFuture<WriteResult> result = docRef.set(data);
+                // ...
+                // result.get() blocks on response
+                System.out.println("Update time : " + result.get().getUpdateTime());
+
+                return "historyView/history";
+            }
+        }
+
+
         return "historyView/history";
     }
 
-//    @RequestMapping(value = "create")
-    @RequestMapping("/history/add")
-    @ResponseBody
-    public String create(@RequestBody Entry entryVO) throws ExecutionException, InterruptedException {
-        try {
-            double amount = entryVO.getAmount();
-            String category = entryVO.getCategory();
-            String dateTime = entryVO.getDateTime();
-            String description = entryVO.getDescription();
-            String transaction = entryVO.getTransaction();
-            String username = user.getUsername();
-
-            DocumentReference docRef = db.collection("entry").document(dateTime); //***need to find a unique string to replace childpath***
-            // Add document data  with id "alovelace" using a hashmap
-            Map<String, Object> data = new HashMap<>();
-
-            // amount이 null 이 아닌 경우 세션에 값을 저장
-            data.put("amount", amount);
-
-            // category이 null 이 아닌 경우 세션에 값을 저장
-            if(category != null) {
-                data.put("category", category);
-            }
-
-            // dateTime이 null 이 아닌 경우 세션에 값을 저장
-            if(dateTime != null) {
-                data.put("dateTime", dateTime);
-            }
-
-            // description이 null 이 아닌 경우 세션에 값을 저장
-            if(description != null) {
-                data.put("description", description);
-            }
-
-            // transaction이 null 이 아닌 경우 세션에 값을 저장
-            if(transaction != null) {
-                data.put("transaction", transaction);
-            }
-
-            // username이 null 이 아닌 경우 세션에 값을 저장
-            if(username != null) {
-                data.put("username", username);
-            }
-
-            //asynchronously write data
-            ApiFuture<WriteResult> result = docRef.set(data);
-            // ...
-            // result.get() blocks on response
-            System.out.println("Update time : " + result.get().getUpdateTime());
-
-        } catch(Exception e) {
-            throw e;
-        }
-
-        return "redirect:/history/info";
-    }
+////    @RequestMapping(value = "create")
+//    @RequestMapping(value = "/history/add", method = RequestMethod.POST)
+//   // @PostMapping(value = "${pageContext.request.contextPath}/history/add")
+//
+//    public  @ResponseBody String create(HttpServletRequest request, HttpServletResponse response) throws ExecutionException, InterruptedException {
+//        HttpSession session = request.getSession();
+//        System.out.println("supersuper");
+//
+//        if (user != null){
+//            // HTML 폼에서 username으로 전달된 값을 가지고 옴
+//            String amount = request.getParameter("amount");
+//            String category = request.getParameter("category");
+//            String dateTime = request.getParameter("dateTime");
+//            String dateTimeParameter = dateTime;
+//            System.out.println("datetime="+dateTimeParameter);
+//            String description = request.getParameter("description");
+//            String transaction = request.getParameter("transaction");
+//            String username = request.getParameter(user.getUsername());
+//
+//            DocumentReference docRef = db.collection("entry").document(dateTimeParameter); //***need to find a unique string to replace childpath***
+//            // Add document data  with id "alovelace" using a hashmap
+//            Map<String, Object> data = new HashMap<>();
+//
+//            // amount이 null 이 아닌 경우 세션에 값을 저장
+//            if(amount != null) {
+//                data.put("amount", amount);
+//            }
+//
+//            // category이 null 이 아닌 경우 세션에 값을 저장
+//            if(category != null) {
+//                data.put("category", category);
+//            }
+//
+//            // dateTime이 null 이 아닌 경우 세션에 값을 저장
+//            if(dateTime != null) {
+//                data.put("dateTime", dateTime);
+//            }
+//
+//            // description이 null 이 아닌 경우 세션에 값을 저장
+//            if(description != null) {
+//                data.put("description", description);
+//            }
+//
+//            // transaction이 null 이 아닌 경우 세션에 값을 저장
+//            if(transaction != null) {
+//                data.put("transaction", transaction);
+//            }
+//
+//            // username이 null 이 아닌 경우 세션에 값을 저장
+//            if(username != null) {
+//                data.put("username", username);
+//            }
+//
+//            //asynchronously write data
+//            ApiFuture<WriteResult> result = docRef.set(data);
+//            // ...
+//            // result.get() blocks on response
+//            System.out.println("Update time : " + result.get().getUpdateTime());
+//        }
+//        return "redirect:/history/info";
+//    }
 
     @RequestMapping("/chart/info")
     public String chart(){
