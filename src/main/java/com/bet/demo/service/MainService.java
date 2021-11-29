@@ -7,6 +7,7 @@ import com.google.cloud.firestore.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,7 +22,6 @@ public class MainService {
 
     private User user = new User();
 
-    @RequestMapping(value = "/signUp")
     public void signUp(HttpServletRequest request, HttpServletResponse response, HttpSession session, Firestore db) throws ExecutionException, InterruptedException {
         // HTML 폼에서 username으로 전달된 값을 가지고 옴
         String username = request.getParameter("username");
@@ -67,10 +67,13 @@ public class MainService {
 
     }
 
-    @RequestMapping(value = "/login")
     public boolean login(HttpServletRequest request, HttpServletResponse response, HttpSession session, Firestore db) throws ExecutionException, InterruptedException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+
+        if (username == null || username.isEmpty()){
+            return false;
+        }
 
         DocumentReference docRef = db.collection("users").document(username);
         // asynchronously retrieve the document
@@ -91,12 +94,16 @@ public class MainService {
         }
     }
 
-    /*public List search(HttpServletRequest request, HttpServletResponse response){
-        String searchType = request.getParameter("searchType");
-        String keyword = request.getParameter("keyword");
+    public List searchHistory(String selectedType, String searchedWord){
+        String searchType = selectedType;
+        String keyword = searchedWord;
 
         List<Entry> entryList = user.getEntry();
         List<Entry> searchList = new ArrayList<>();
+
+        if (searchType == null || keyword == null){
+            return entryList;
+        }
 
         for (Entry entry : entryList) {
             switch (searchType){
@@ -113,14 +120,14 @@ public class MainService {
                         searchList.add(entry);
                     break;
                 case "all":
-                    break;
+                    return entryList;
                 default:
                     break;
             }
         }
 
         return searchList;
-    }*/
+    }
 
     public User getUser(){
         return this.user;

@@ -6,17 +6,19 @@ public class Entry {
     private String category;
     private String dateTime;
     private String description;
+    private int number;
     private String transaction;
     private String user;
 
     public Entry(){
     }
 
-    public Entry(double amount, String category, String dateTime, String description, String transaction, String user){
+    public Entry(double amount, String category, String dateTime, String description, int number, String transaction, String user){
         this.amount = amount;
         this.category = category;
         this.dateTime = dateTime;
         this.description = description;
+        this.number = number;
         this.transaction = transaction;
         this.user = user;
     }
@@ -49,6 +51,14 @@ public class Entry {
         return this.description;
     }
 
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
     public void setDescription(String description){
         this.description = description;
     }
@@ -75,6 +85,7 @@ public class Entry {
                 "amount='" + amount + '\'' +
                 ", category='" + category + '\'' +
                 ", date time='" + dateTime + '\'' +
+                ", number='" + number + '\'' +
                 ", transaction='" + transaction + '\'' +
                 ", user='" + user + '\'' +
                 '}';

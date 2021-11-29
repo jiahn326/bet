@@ -74,6 +74,7 @@ public class User {
     }
 
     public List getEntry(){
+        this.sortEntriesByDate();
         return this.entries;
     }
 
@@ -93,7 +94,7 @@ public class User {
         this.income.add(entry);
     }
 
-    private void sortEntries(){
+    private void splitEntries(){
         for (Entry entry: entries) {
             if(entry.getTransaction().equals("expense")){
                 addAnExpense(entry);
@@ -116,11 +117,12 @@ public class User {
     }
 
     private void sortSpendings(){
+        this.splitEntries();
         this.wants = new ArrayList<>();
         this.needs = new ArrayList<>();
         this.savings = new ArrayList<>();
 
-        for (Entry entry: this.entries) {
+        for (Entry entry: this.expenses) {
             String category = entry.getCategory();
             switch (category){
                 case "wants":
@@ -136,21 +138,68 @@ public class User {
                     break;
             }
         }
+        for (Entry entry: this.income){
+            this.savings.add(entry);
+        }
     }
 
     public List getWants(){
-        this.sortEntries();
+        this.splitEntries();
         return this.wants;
     }
 
     public List getNeeds(){
-        this.sortEntries();
+        this.splitEntries();
         return this.needs;
     }
 
     public List getSavings(){
-        this.sortEntries();
+        this.splitEntries();
         return this.savings;
+    }
+
+    private void sortEntriesByDate(){
+        this.entries.sort(new DateSorter());
+    }
+
+    public double getCurrentBalance(){
+        this.splitEntries();
+        double income = 0.0;
+        double expense = 0.0;
+        for (Entry entry: this.expenses) {
+            expense += entry.getAmount();
+        }
+        for (Entry entry: this.income){
+            income += entry.getAmount();
+        }
+        return income-expense;
+    }
+
+    public double getTotalWants(){
+        this.sortSpendings();
+        double total = 0.0;
+        for (Entry entry: this.wants){
+            total += entry.getAmount();
+        }
+        return total;
+    }
+
+    public double getTotalNeeds(){
+        this.sortSpendings();
+        double total = 0.0;
+        for (Entry entry: this.needs){
+            total += entry.getAmount();
+        }
+        return total;
+    }
+
+    public double getTotalSavings(){
+        this.sortSpendings();
+        double total =0.0;
+        for (Entry entry: this.savings){
+            total += entry.getAmount();
+        }
+        return total;
     }
 
     @Override

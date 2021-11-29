@@ -142,7 +142,7 @@
             <!-- Drop box Start -->
             <div class="form-group row font-size-xs" style="margin-left: 10px;">
                 <!-- search 'All' -->
-                <select class="form-control font-size-xs" aria-hidden="true" style="width: 150px; margin-left: 10px;" name="searchType" id="searchType">
+                <select class="form-control font-size-xs" aria-hidden="true" style="width: 150px; margin-left: 10px;" name="entryType" id="entryType">
                     <option value="all">All</option>
                     <option value="description">Description</option>
                     <option value="transaction">Transaction</option>
@@ -155,8 +155,8 @@
                     <div class="input-group" style="width: 400px;">
                         <input type="text" class="form-control border-right-0 font-size-xs" placeholder="Search..." name="keyword" id="keyword">
                         <span class="input-group-append">
-										<button class="btn border font-size-xs" type="button" onclick="searchHistory();" id="searchButton"><i class="icon-search4"></i></button>
-									</span>
+                            <button class="btn border font-size-xs" type="button" value = "searchButton" onclick="location.href='/searchHistory'"><i class="icon-search4"></i></button>
+                        </span>
                     </div>
                 </div>
                 <!-- /search input -->
@@ -176,10 +176,11 @@
                 <thead>
                 <tr style="background-color: #4DB6AC; color: white">
                     <th>Date</th>
-                    <th>Amount</th>
                     <th>Description</th>
+                    <th>Amount</th>
                     <th>Transaction</th>
                     <th>Category</th>
+                    <th>Entry ID</th>
                     <th class="text-center">Actions</th>
                 </tr>
                 </thead>
@@ -188,17 +189,18 @@
                     <c:forEach items="${entryList}" var="entry" varStatus="status">
                         <tr>
                             <td>${entry.dateTime}</td>
+                            <td>${entry.description}</td>
                             <td>
                                 <fmt:setLocale value = "en_US"/>
                                 <fmt:formatNumber value = "${entry.amount}" type = "currency"/>
                             </td>
-                            <td>${entry.description}</td>
                             <td>${entry.transaction}</td>
-                            <td>${entry.category}</td>
+                            <td><span class="badge badge-light">${entry.category}</span></td>
+                            <td>${entry.number}</td>
                             <td class="text-center">
                                 <div class="list-icons">
                                     <button type="button" class="btn btn-outline bg-primary text-primary-800 btn-icon ml-2" data-toggle="modal" data-target="#modal" id="detailButton" onclick="openModal('detail');" ><i class="icon-search4"></i></button>
-                                    <button type="button" class="btn btn-outline bg-danger text-danger-800 btn-icon ml-2" data-toggle="modal" data-target="#modal" id="deleteButton" onclick="openModal('detail');" ><i class="icon-trash"></i></button>
+                                    <button type="button" class="btn btn-outline bg-danger text-danger-800 btn-icon ml-2" data-toggle="modal" data-target="#modal" id="deleteButton" onclick="openModal('delete');" ><i class="icon-trash"></i></button>
                                 </div>
                             </td>
                         </tr>
@@ -228,6 +230,14 @@
                         <form action="/history/info" class="form-horizontal" id="insert_form">
 <%--                            <input type="hidden" id="wordSeq" name="wordSeq">--%>
                             <div class="modal-body">
+                                <!-- EntryID -->
+                                <div class="form-group row">
+                                    <label class="col-form-label col-sm-3">Entry ID</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" id="entryID" name="entryID" placeholder="Write Entry ID (ex. 2)" class="form-control">
+                                    </div>
+                                </div>
+                                <!-- /EntryID -->
                                 <!-- Date -->
                                 <div class="form-group row">
                                     <label class="col-form-label col-sm-3">Date</label>
@@ -259,9 +269,7 @@
                                     <select class="form-control font-size-xs" style="width: 150px; margin-left: 10px;" aria-hidden="true" id="transaction" name="transaction">
                                         <option value="none">Select...</option>
                                         <option value="expense">Expense</option>
-                                        <option value="investments">Investments</option>
                                         <option value="income">Income</option>
-                                        <option value="savings">Saving</option>
                                     </select>
                                 </div>
                                 <!-- /Transaction -->
@@ -285,6 +293,7 @@
                         <div class="modal-footer">
                             <button type="button" id="saveButton" class="btn bg-teal" onclick="saveConfirm();">Save</button>
                             <button type="button" id="updateButton" class="btn bg-teal" onclick="updateConfirm();">Edit</button>
+                            <button type="button" id="deleteEntry" class="btn bg-teal" onclick="deleteConfirm();">Delete</button>
                             <button type="button" id="cancelButton" class="btn btn-outline" data-dismiss="modal">Close</button>
                         </div>
                         <!-- /Button -->

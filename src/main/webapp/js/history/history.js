@@ -123,21 +123,28 @@ function callHistoryList(searchType, keyword, orderNumber) {
 // after press search button
 function searchHistory() {
 
-    let searchType = $("#searchType").val();
-    let keyword = $("#keyword").val();
-    let dataTable = $("#historyTable").DataTable();
+    let search = {
+        "entryType": $("#entryType").val(),
+        "keyword": $("#keyword").val(),
+    };
 
-    if(keyword == '') {
-        if($("#searchType").val() == 'all') {
-            dataTable.clear().destroy();
-            callHistoryList();
-        } else {
-            alertMessage("Warning!","Please enter input.","warning");
-            return false;
-        };
-    } else {
-        resetSearch();
-    }
+    $.ajax({
+        url: contextPath + "/history/search",
+        contentType: "application/json",
+        type: "POST",
+        data: JSON.stringify(search),
+        success: function () {
+            alertMessage("성공!","단어 등록 신청이 완료되었습니다.","success");
+            //resetSearch();
+            //callHistoryList('','',0);
+        },
+        error: function () {
+            alert("failed")
+
+            // alertMessage("경고!","실패하였습니다. 관리자에게 문의해주세요.","danger");
+            // $("#cancelButton").click();
+        }
+    });
 }
 
 // open Modal (add, edit, detail)
@@ -151,6 +158,7 @@ function openModal(type) {
         // show 'ADD' modal
         $("#modal #saveButton").show();
         $("#modal #updateButton").hide();
+        $("#modal #deleteEntry").hide();
 
         $("#modal .modal-title").html('Add History');
 
@@ -159,6 +167,7 @@ function openModal(type) {
         $("#wordEngNm").attr('readonly', false);
         $("#wordAbbr").attr('readonly', false);
 
+<<<<<<< HEAD
         // disable category options
         // if ($("#transaction option[value='expense']")){
         //     $("select option[value*='savings']").prop('disabled',true);
@@ -177,11 +186,15 @@ function openModal(type) {
         //     $("select option[value*='wants']").prop('disabled',true);
         //     $("select option[value*='needs']").prop('disabled',true);
         // }
+=======
+        $("#entryID").hide();
+>>>>>>> dev
 
     } else if (type == 'edit'){
         // show 'EDIT' modal
         $("#modal #saveButton").hide();
         $("#modal #updateButton").show();
+        $("#modal #deleteEntry").hide();
 
         // // 등록 프로세스 관련 구역 및 버튼 hide
         // $('div #stage0').find('button').hide();
@@ -211,6 +224,8 @@ function openModal(type) {
 
         $("#modal #saveButton").hide();
         $("#modal #updateButton").show();
+        $("#modal #deleteEntry").hide();
+
 
         // $('div.stage').css('display', 'none');
         //
@@ -219,12 +234,27 @@ function openModal(type) {
 
         $("#modal .modal-title").html('History Detail');
 
+        $("#entryID").show();
+
         // 비활성화
         $("#dateInput").attr('readonly', true);
         $("#descriptionInput").attr('readonly', true);
         $("#amountInput").attr('readonly', true);
         $("#transactionInput").attr('readonly', true);
-        $("#transactionInput").attr('readonly', true);
+        //$("#transactionInput").attr('readonly', true);
+    } else if (type == 'delete'){
+        $("#modal #saveButton").hide();
+        $("#modal #updateButton").hide();
+        $("#modal #deleteEntry").show();
+
+        $("#entryID").show();
+        $("#dateTime").hide();
+        $("#amount").hide();
+        $("#description").hide();
+        $("#transaction").hide();
+        $("#category").hide();
+
+
     }
 }
 
@@ -264,6 +294,7 @@ function saveConfirm(){
 // update function - when save button clicked
 function updateConfirm(){
     let sendData = {
+        "number": $("#entryID").val(),
         "dateTime": $("#dateTime").val(),
         "amount": $("#amount").val(),
         "description": $("#description").val(),
@@ -273,7 +304,7 @@ function updateConfirm(){
     let dataTable = $("#historyTable").DataTable();
 
     $.ajax({
-        url: contextPath + "/history/add",
+        url: contextPath + "/history/update",
         contentType: "application/json",
         type: "POST",
         data: JSON.stringify(sendData),
@@ -293,6 +324,32 @@ function updateConfirm(){
     });
 }
 
+function deleteConfirm(){
+    let sendData = {
+        "number": $("#entryID").val()
+    };
+    let dataTable = $("#historyTable").DataTable();
+
+    $.ajax({
+        url: contextPath + "/history/delete",
+        contentType: "application/json",
+        type: "POST",
+        data: JSON.stringify(sendData),
+        success: function () {
+            // alertMessage("성공!","단어 등록 신청이 완료되었습니다.","success");
+            $("#cancelButton").click();
+            dataTable.destroy();
+            resetSearch();
+            // callHistoryList('','',0);
+        },
+        error: function () {
+            alert("failed")
+
+            // alertMessage("경고!","실패하였습니다. 관리자에게 문의해주세요.","danger");
+            // $("#cancelButton").click();
+        }
+    });
+}
 
 /* Template */
 //데이터 타입 선택 시 데이터 길이 및 소수점 길이 설정
