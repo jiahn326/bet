@@ -104,6 +104,8 @@ public class User {
     }
 
     private void splitEntries(){
+        this.expenses = new ArrayList<>();
+        this.income = new ArrayList<>();
         for (Entry entry: entries) {
             if(entry.getTransaction().equals("expense")){
                 addAnExpense(entry);

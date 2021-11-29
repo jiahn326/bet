@@ -68,9 +68,9 @@
                                     <div class="text-center">
                                         <h5 class="mt-2 mb-3">Budget &nbsp;&nbsp; <button type="button" class="btn btn-outline bg-slate-600 text-slate-600 border-slate-600 btn-icon rounded-round"><i class="mi-settings"></i></button></h5>
                                         <ul class="pricing-table-list list-unstyled mb-3">
-                                            <li><strong>Needs</strong> (needs%) &nbsp;&nbsp; $(amount)</li>
-                                            <li><strong>Wants</strong> (wants%) &nbsp;&nbsp; $(amount)</li>
-                                            <li><strong>Savings</strong> (savings%) &nbsp;&nbsp; $(amount)</li>
+                                            <li><strong>Needs</strong> (${budgetNeeds}%) &nbsp;&nbsp; <fmt:setLocale value = "en_US"/><fmt:formatNumber value = "${totalNeeds}" type = "currency"/></li>
+                                            <li><strong>Wants</strong> (${budgetWants}%) &nbsp;&nbsp; <fmt:setLocale value = "en_US"/><fmt:formatNumber value = "${totalWants}" type = "currency"/></li>
+                                            <li><strong>Savings</strong> (${budgetSavings}%) &nbsp;&nbsp;<fmt:setLocale value = "en_US"/><fmt:formatNumber value = "${totalSavings}" type = "currency"/></li>
                                         </ul>
                                     </div>
                                 </div>
