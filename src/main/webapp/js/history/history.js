@@ -167,7 +167,6 @@ function openModal(type) {
         $("#wordEngNm").attr('readonly', false);
         $("#wordAbbr").attr('readonly', false);
 
-<<<<<<< HEAD
         // disable category options
         // if ($("#transaction option[value='expense']")){
         //     $("select option[value*='savings']").prop('disabled',true);
@@ -186,9 +185,7 @@ function openModal(type) {
         //     $("select option[value*='wants']").prop('disabled',true);
         //     $("select option[value*='needs']").prop('disabled',true);
         // }
-=======
         $("#entryID").hide();
->>>>>>> dev
 
     } else if (type == 'edit'){
         // show 'EDIT' modal
