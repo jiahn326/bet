@@ -15,15 +15,14 @@
     </script>
     <script src="${pageContext.request.contextPath}/template/assets/js/app.js"></script>
     <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/visualization/echarts/echarts.min.js"></script>
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/main/bootstrap.bundle.min.js"></script>
 
     <script src="${pageContext.request.contextPath}/js/budget/budget.js"></script>
 
     <!-- Pie chart -->
-    <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_charts/echarts/light/pies/pie_basic.js"></script>
+<%--    <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_charts/echarts/light/pies/pie_basic.js"></script>--%>
 
     <!-- Bar -->
-    <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_charts/echarts/light/bars/bars_basic.js"></script>
-    <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_charts/echarts/light/bars/bars_stacked.js"></script>
     <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_charts/echarts/light/bars/bars_stacked_clustered.js"></script>
 
     <title>Budget</title>
