@@ -199,7 +199,7 @@
                             <td>${entry.number}</td>
                             <td class="text-center">
                                 <div class="list-icons">
-                                    <button type="button" class="btn btn-outline bg-primary text-primary-800 btn-icon ml-2" data-toggle="modal" data-target="#modal" id="detailButton" onclick="openModal('detail');" ><i class="icon-search4"></i></button>
+                                    <button type="button" class="btn btn-outline bg-primary text-primary-800 btn-icon ml-2" data-toggle="modal" data-target="#modal" id="detailButton" onclick="openModal('detail', ${entry.number});" ><i class="icon-search4"></i></button>
                                     <button type="button" class="btn btn-outline bg-danger text-danger-800 btn-icon ml-2" data-toggle="modal" data-target="#modal" id="deleteButton" onclick="openModal('delete');" ><i class="icon-trash"></i></button>
                                 </div>
                             </td>

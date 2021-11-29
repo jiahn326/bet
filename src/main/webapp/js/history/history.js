@@ -148,7 +148,7 @@ function searchHistory() {
 }
 
 // open Modal (add, edit, detail)
-function openModal(type) {
+function openModal(type, num) {
     clearFormData();
 
     //add = add, update = edit, detail = detail :)
@@ -239,6 +239,30 @@ function openModal(type) {
         $("#amountInput").attr('readonly', true);
         $("#transactionInput").attr('readonly', true);
         //$("#transactionInput").attr('readonly', true);
+
+        let sendData = {
+            "number" : num
+        }
+        $.ajax({
+            url: contextPath + "/history/search",
+            contentType: "application/json",
+            type: "GET",
+            data: sendData,
+            success: function (data) {
+                $("#insert_form #dateTime").val(data.dateTime);
+                $("#insert_form #description").val(data.description);
+                $("#insert_form #amount").val(data.amount);
+                $("#insert_form #transaction").val(data.transaction);
+                $("#insert_form #category").val(data.category);
+            },
+            error: function () {
+                alert("failed")
+
+                // alertMessage("경고!","실패하였습니다. 관리자에게 문의해주세요.","danger");
+                // $("#cancelButton").click();
+            }
+        });
+
     } else if (type == 'delete'){
         $("#modal #saveButton").hide();
         $("#modal #updateButton").hide();
