@@ -185,7 +185,6 @@ function searchHistory() {
         "entryType": $("#entryType").val(),
         "keyword": $("#keyword").val(),
     };
-    let dataTable = $("#historyTable").DataTable();
 
     $.ajax({
         url: contextPath + "/history/search",
@@ -193,9 +192,8 @@ function searchHistory() {
         type: "POST",
         data: JSON.stringify(search),
         success: function () {
-            // alertMessage("성공!","단어 등록 신청이 완료되었습니다.","success");
-            dataTable.destroy();
-            resetSearch();
+            alertMessage("성공!","단어 등록 신청이 완료되었습니다.","success");
+            //resetSearch();
             //callHistoryList('','',0);
         },
         error: function () {

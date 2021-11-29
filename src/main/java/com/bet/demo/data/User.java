@@ -113,11 +113,12 @@ public class User {
     }
 
     private void sortSpendings(){
+        this.splitEntries();
         this.wants = new ArrayList<>();
         this.needs = new ArrayList<>();
         this.savings = new ArrayList<>();
 
-        for (Entry entry: this.entries) {
+        for (Entry entry: this.expenses) {
             String category = entry.getCategory();
             switch (category){
                 case "wants":
@@ -132,6 +133,9 @@ public class User {
                 default:
                     break;
             }
+        }
+        for (Entry entry: this.income){
+            this.savings.add(entry);
         }
     }
 
@@ -162,7 +166,7 @@ public class User {
             expense += entry.getAmount();
         }
         for (Entry entry: this.income){
-            income+= entry.getAmount();
+            income += entry.getAmount();
         }
         return income-expense;
     }

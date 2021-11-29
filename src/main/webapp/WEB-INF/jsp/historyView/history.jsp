@@ -132,7 +132,7 @@
                     <div class="input-group" style="width: 400px;">
                         <input type="text" class="form-control border-right-0 font-size-xs" placeholder="Search..." name="keyword" id="keyword">
                         <span class="input-group-append">
-                            <button class="btn border font-size-xs" type="button" value = "searchButton" onclick="searchHistory()"><i class="icon-search4"></i></button>
+                            <button class="btn border font-size-xs" type="button" value = "searchButton" onclick="location.href='/searchHistory'"><i class="icon-search4"></i></button>
                         </span>
                     </div>
                 </div>
@@ -233,9 +233,7 @@
                                     <select class="form-control font-size-xs" style="width: 150px; margin-left: 10px;" aria-hidden="true" name="transactionInput">
                                         <option value="none">Select...</option>
                                         <option value="expense">Expense</option>
-                                        <option value="investments">Investments</option>
                                         <option value="income">Income</option>
-                                        <option value="savings">Saving</option>
                                     </select>
                                 </div>
 <%--                                <div class="btn-group" id="transaction">--%>
