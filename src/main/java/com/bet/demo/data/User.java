@@ -17,6 +17,7 @@ public class User {
     private List<Entry> savings = new ArrayList<>();
     private List<Entry> needs = new ArrayList<>();
     private List<Entry> wants = new ArrayList<>();
+    private Budget budget;
 
     public User() {
     }
@@ -76,6 +77,14 @@ public class User {
     public List getEntry(){
         this.sortEntriesByDate();
         return this.entries;
+    }
+
+    public Budget getBudget() {
+        return budget;
+    }
+
+    public void setBudget(Budget budget) {
+        this.budget = budget;
     }
 
     public boolean isEntryEmpty(){
