@@ -135,6 +135,8 @@ function searchHistory() {
         data: JSON.stringify(search),
         success: function () {
             alertMessage("성공!","단어 등록 신청이 완료되었습니다.","success");
+            dataTable.destroy();
+            resetSearch();
             //resetSearch();
             //callHistoryList('','',0);
         },
