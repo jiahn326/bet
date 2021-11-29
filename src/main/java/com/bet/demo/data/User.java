@@ -149,23 +149,20 @@ public class User {
                     break;
             }
         }
-        for (Entry entry: this.income){
-            this.savings.add(entry);
-        }
     }
 
     public List getWants(){
-        this.splitEntries();
+        this.sortSpendings();
         return this.wants;
     }
 
     public List getNeeds(){
-        this.splitEntries();
+        this.sortSpendings();
         return this.needs;
     }
 
     public List getSavings(){
-        this.splitEntries();
+        this.sortSpendings();
         return this.savings;
     }
 
@@ -209,6 +206,24 @@ public class User {
         double total =0.0;
         for (Entry entry: this.savings){
             total += entry.getAmount();
+        }
+        return total;
+    }
+
+    public double getTotalExpense(){
+        this.splitEntries();
+        double total = 0.0;
+        for (Entry entry: this.expenses) {
+            total+=entry.getAmount();
+        }
+        return total;
+    }
+
+    public double getTotalIncome(){
+        this.splitEntries();
+        double total = 0.0;
+        for (Entry entry: this.income){
+            total+=entry.getAmount();
         }
         return total;
     }
