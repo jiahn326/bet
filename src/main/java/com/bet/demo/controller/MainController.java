@@ -404,14 +404,14 @@ public class MainController {
         return "redirect:/history/info";
     }
 
-    @RequestMapping("/history/delete")
+    @PostMapping("/history/delete")
     @ResponseBody
-    public String delete(@RequestBody Number number){
-        int entryID = number.getNumber();
+    public String delete(@RequestBody Entry entry) throws ExecutionException, InterruptedException{
+        int entryID = entry.getNumber();
         System.out.println("entryID = " + entryID);
         ApiFuture<WriteResult> writeResult = db.collection("entry").document(this.user.getUsername()+entryID).delete();
 
-        return "redirect:/history/info";
+        return "redirect:/content";
     }
 
 
