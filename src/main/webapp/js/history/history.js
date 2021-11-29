@@ -3,11 +3,11 @@ var replaceChar = /[~!@\#$%^&*\()\-=+_'\;<>0-9\/.\`:\"\\,\[\]?|{}]/gi;
 var replaceNotFullKorean = /[ㄱ-ㅎㅏ-ㅣ]/gi;
 
 // ready for the page open
-$(document).ready(function () {
-    //categorySelect();        // reset search SelectBox
-    callHistoryList();       // list of History
-
-});
+// $(document).ready(function () {
+//     //categorySelect();        // reset search SelectBox
+//     callHistoryList();       // list of History
+//
+// });
 
 // $('html').click(function(e) {
 //
@@ -21,40 +21,35 @@ $(document).ready(function () {
 
 //
 
-$(window).on('load', function() {
-    $("#keyword").keydown(function(key) {
-        if (key.keyCode == 13) {
-            $("#searchButton").trigger('click');
-        }
-    });
-
-    $('div.modal-body').find('#wordNm').change(function(){
-        $('div.modal-body').find('#wordNm').removeClass('valid');
-    });
-    $('div.modal-body').find('#wordEngNm').change(function(){
-        $('div.modal-body').find('#wordEngNm').removeClass('valid');
-    });
-    $('div.modal-body').find('#wordAbbr').change(function(){
-        $('div.modal-body').find('#wordAbbr').removeClass('valid');
-    });
-
-    /*
-
-    $('#modalTable1').dataTable( {
-        "createdRow": function( row, data, dataIndex){
-                if( data.fatalExist == "T"){
-                    $(row).addClass('redClass');
-                }
-            }
-    });
-    */
-
-});
-
-// reset Search input
-function resetSearch() {
-    location.reload();
-}
+// $(window).on('load', function() {
+//     $("#keyword").keydown(function(key) {
+//         if (key.keyCode == 13) {
+//             $("#searchButton").trigger('click');
+//         }
+//     });
+//
+//     $('div.modal-body').find('#wordNm').change(function(){
+//         $('div.modal-body').find('#wordNm').removeClass('valid');
+//     });
+//     $('div.modal-body').find('#wordEngNm').change(function(){
+//         $('div.modal-body').find('#wordEngNm').removeClass('valid');
+//     });
+//     $('div.modal-body').find('#wordAbbr').change(function(){
+//         $('div.modal-body').find('#wordAbbr').removeClass('valid');
+//     });
+//
+//     /*
+//
+//     $('#modalTable1').dataTable( {
+//         "createdRow": function( row, data, dataIndex){
+//                 if( data.fatalExist == "T"){
+//                     $(row).addClass('redClass');
+//                 }
+//             }
+//     });
+//     */
+//
+// });
 
 //검색 SelectBox 초기화
 // function categorySelect() {
@@ -108,7 +103,7 @@ function callHistoryList(searchType, keyword, orderNumber) {
 
         if(rowData !== undefined) {
             $("#newButton").click();
-            openModal('update', rowData.wordSeq);
+            openModal('update');
         }
     });
 
@@ -142,11 +137,15 @@ function searchHistory() {
 
 // open Modal (add, edit, detail)
 function openModal(type) {
-    // clearFormData();
+    clearFormData();
+
+    console.log("I'm IN!");
+    console.log(type);
 
     //add = add, update = edit, detail = detail :)
 
     if(type == 'add') {
+        console.log("ADD!");
 
         // show 'ADD' modal
         $("#modal #saveButton").show();
@@ -154,41 +153,43 @@ function openModal(type) {
 
         $("#modal .modal-title").html('Add History');
 
-        // read only?
-        $("#wordNm").attr('readonly', false);
-        $("#wordEngNm").attr('readonly', false);
-        $("#wordAbbr").attr('readonly', false);
-
-
     } else if (type == 'edit'){
+        console.log("EDIT!");
         // show 'EDIT' modal
         $("#modal #saveButton").hide();
         $("#modal #updateButton").show();
 
-        // // 등록 프로세스 관련 구역 및 버튼 hide
-        // $('div #stage0').find('button').hide();
-        // $('#stage0Helper').hide();
-        // $('div #stage2').find('button').hide();
-        // $('#stage2Helper').hide();
-        // $('div.insertWord').hide();
-        //
-        // //버튼 관리
-        // $("#modal #deleteButton").show();
-        // $("#modal #updateButton").show();
-        // $("#modal #saveButton").hide();
         $("#modal .modal-title").html('Edit History');
-        // $("#insert_form input[name=wordSeq]").val(wordSeq);
-        //
-        // // 비활성화
-        // $("#wordNm").attr('readonly', true).addClass('valid');
-        // $("#wordEngNm").attr('readonly', true).addClass('valid');
-        // $("#wordAbbr").attr('readonly', true).addClass('valid');
-        //
-        // // 인풋 길이
-        // $('#wordEngNm').removeClass('input-short');
-        // $('#wordAbbr').removeClass('input-short');
 
+        // $("#insert_form input[name=domainSeq]").val(domainSeq);
+        //
+        //
+        // let sendData = {
+        //     "domainSeq" : domainSeq
+        // }
+        //
+        // $.ajax({
+        //     url : contextPath +"/domain/select",
+        //     contentType : "application/json",
+        //     type : "GET",
+        //     data : sendData,
+        //     async : false,
+        //     success : function(data){
+        //         $("#insert_form input[name=domainTypeNm]").val(data.domainTypeNm);
+        //         $("#insert_form input[name=domainNm]").val(data.domainNm);
+        //         $("#insert_form #dataType").val(data.dataType);
+        //         $("#insert_form input[name=dataLen]").val(data.dataLen);
+        //         if(data.domainDscrpt != null) {
+        //             $("#insert_form #domainDscrpt").val(data.domainDscrpt.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n'));
+        //         }
+        //         $("#insert_form input[name=dcmlLen]").val(data.dcmlLen);
+        //         readOnlyOption(data.dataType);
+        //     }
+        //
+        // });
     } else if (type == 'detail'){
+        console.log("DETAIL!");
+
         // show 'EDIT' modal
 
         $("#modal #saveButton").hide();
@@ -242,8 +243,24 @@ function saveConfirm(){
         });
 }
 
+function destroyTable(){
+    let dataTable = $("#historyTable").DataTable();
+    dataTable.destroy();
+}
 
+//검색 초기화 아이콘 클릭 이벤트
+function resetSearch() {
+    $("#searchType").val('all');
+    $("#keyword").val('');
 
+    var dataTable = $("#historyTable").DataTable();
+    dataTable.destroy();
+    callHistoryList();
+}
+// reset Search input
+// function resetSearch() {
+//     location.reload();
+// }
 
 
 /* Template */
