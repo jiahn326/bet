@@ -135,6 +135,8 @@ function searchHistory() {
         data: JSON.stringify(search),
         success: function () {
             alertMessage("성공!","단어 등록 신청이 완료되었습니다.","success");
+            dataTable.destroy();
+            resetSearch();
             //resetSearch();
             //callHistoryList('','',0);
         },
@@ -148,8 +150,8 @@ function searchHistory() {
 }
 
 // open Modal (add, edit, detail)
-function openModal(type) {
-    // clearFormData();
+function openModal(type, num) {
+    clearFormData();
 
     //add = add, update = edit, detail = detail :)
 
@@ -167,7 +169,30 @@ function openModal(type) {
         $("#wordEngNm").attr('readonly', false);
         $("#wordAbbr").attr('readonly', false);
 
-        $("#entryID").hide();
+        // disable category options
+        // if ($("#transaction option[value='expense']")){
+        //     $("select option[value*='savings']").prop('disabled',true);
+        // } else if ($("#transaction option[value='savings']")){
+        //     $("select option[value*='wants']").prop('disabled',true);
+        //     $("select option[value*='needs']").prop('disabled',true);
+        // } else if ($("#transaction option[value='none']")){
+        //     $("select option[value*='savings']").prop('disabled',true);
+        //     $("select option[value*='wants']").prop('disabled',true);
+        //     $("select option[value*='needs']").prop('disabled',true);
+        //
+        //     // later
+        //
+        // } else {
+        //     $("select option[value*='savings']").prop('disabled',true);
+        //     $("select option[value*='wants']").prop('disabled',true);
+        //     $("select option[value*='needs']").prop('disabled',true);
+        // }
+      //  $("#entryID").hide();
+        $("#dateTime").show();
+        $("#amount").show();
+        $("#description").show();
+        $("#transaction").show();
+        $("#category").show();
 
     } else if (type == 'edit'){
         // show 'EDIT' modal
@@ -213,7 +238,12 @@ function openModal(type) {
 
         $("#modal .modal-title").html('History Detail');
 
-        $("#entryID").show();
+       // $("#entryID").hide();
+        $("#dateTime").show();
+        $("#amount").show();
+        $("#description").show();
+        $("#transaction").show();
+        $("#category").show();
 
         // 비활성화
         $("#dateInput").attr('readonly', true);
@@ -221,6 +251,32 @@ function openModal(type) {
         $("#amountInput").attr('readonly', true);
         $("#transactionInput").attr('readonly', true);
         //$("#transactionInput").attr('readonly', true);
+
+        let sendData = {
+            "number" : num
+        }
+
+        console.log(num);
+        $.ajax({
+            url: contextPath + "/history/detail",
+            contentType: "application/json",
+            type: "GET",
+            data: sendData,
+            success: function (data) {
+                // $("#insert_form #dateTime").val(data.dateTime);
+                // $("#insert_form #description").val(data.description);
+                // $("#insert_form #amount").val(data.amount);
+                // $("#insert_form #transaction").val(data.transaction);
+                // $("#insert_form #category").val(data.category);
+            },
+            error: function () {
+                alert("failed")
+
+                // alertMessage("경고!","실패하였습니다. 관리자에게 문의해주세요.","danger");
+                // $("#cancelButton").click();
+            }
+        });
+
     } else if (type == 'delete'){
         $("#modal #saveButton").hide();
         $("#modal #updateButton").hide();

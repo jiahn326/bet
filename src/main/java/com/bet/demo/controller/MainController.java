@@ -48,6 +48,7 @@ public class MainController {
     Firestore db = null;
     User user = null;
     List<Entry> entryList = new ArrayList<>();
+    Entry currentEntry_Update = new Entry();
     HttpServletRequest request;
     HttpServletResponse response;
     @Autowired
@@ -174,21 +175,21 @@ public class MainController {
         return "historyView/history";
     }
 
-    @RequestMapping("/searchHistory")
-    public String search(HttpServletRequest request, HttpServletResponse response){
-        String entryType = request.getParameter("entryType");
-        String keyword = request.getParameter("keyword");
-
-        System.out.println(request.toString());
-
-        System.out.println(entryType + " " + keyword);
-
-        this.entryList = mainService.searchHistory("category", "wants");
-        System.out.println(this.entryList.toString());
-
-        return "redirect:/history/info";
-
-    }
+//    @RequestMapping("/searchHistory")
+//    public String search(HttpServletRequest request, HttpServletResponse response){
+//        String entryType = request.getParameter("entryType");
+//        String keyword = request.getParameter("keyword");
+//
+//        System.out.println(request.toString());
+//
+//        System.out.println(entryType + " " + keyword);
+//
+//        this.entryList = mainService.searchHistory("category", "wants");
+//        System.out.println(this.entryList.toString());
+//
+//        return "redirect:/history/info";
+//
+//    }
 
     @RequestMapping("/history/search")
     @ResponseBody
@@ -277,6 +278,79 @@ public class MainController {
         return "redirect:/history/info";
     }
 
+    //    @RequestMapping(value = "create")
+    @GetMapping("/history/detail")
+    @ResponseBody
+    public String detail(Entry entryVO) throws ExecutionException, InterruptedException {
+        try {
+
+            if (db == null){
+                initializeFirebase();
+            }
+
+            int number = entryVO.getNumber();
+            currentEntry_Update.setNumber(number);
+
+            System.out.println(">>>>>>>>>>>>>>> number: " + number);
+//            double amount = entryVO.getAmount();
+//            String category = entryVO.getCategory();
+//            String dateTime = entryVO.getDateTime();
+//            String description = entryVO.getDescription();
+//            String transaction = entryVO.getTransaction();
+//            String username = user.getUsername();
+
+//            DocumentReference docRef = db.collection("entry").document(user.getUsername()+(user.getEntry().size()+1)); //***need to find a unique string to replace childpath***
+//            // Add document data  with id "alovelace" using a hashmap
+//            Map<String, Object> data = new HashMap<>();
+//
+//            // amount이 null 이 아닌 경우 세션에 값을 저장
+//            data.put("amount", amount);
+//
+//            // category이 null 이 아닌 경우 세션에 값을 저장
+//            if(category != null) {
+//                data.put("category", category);
+//            }
+//
+//            // dateTime이 null 이 아닌 경우 세션에 값을 저장
+//            if(dateTime != null) {
+//                data.put("dateTime", dateTime);
+//            }
+//
+//            // description이 null 이 아닌 경우 세션에 값을 저장
+//            if(description != null) {
+//                data.put("description", description);
+//            }
+//
+//            // transaction이 null 이 아닌 경우 세션에 값을 저장
+//            if(transaction != null) {
+//                data.put("transaction", transaction);
+//            }
+//
+//            // username이 null 이 아닌 경우 세션에 값을 저장
+//            if(username != null) {
+//                data.put("user", username);
+//            }
+//
+//            data.put("number", user.getEntry().size()+1);
+//
+//            //asynchronously write data
+//            ApiFuture<WriteResult> result = docRef.set(data);
+//            // ...
+//            // result.get() blocks on response
+//            System.out.println("Update time : " + result.get().getUpdateTime());
+
+            //user.addAnEntry(entryVO);
+            //mainService.loadEntriesToUser(user.getUsername(), db);
+
+        } catch(Exception e) {
+            System.out.println("error occurred");
+        }
+
+        return "redirect:/history/info";
+    }
+
+
+
     @RequestMapping("/history/update")
     @ResponseBody
     public String updateEntry(@RequestBody Entry entryVO) throws ExecutionException, InterruptedException {
@@ -286,7 +360,8 @@ public class MainController {
                 initializeFirebase();
             }
 
-            int number = entryVO.getNumber();
+            int number = currentEntry_Update.getNumber();
+            System.out.println("update number!="+number);
             double amount = entryVO.getAmount();
             String category = entryVO.getCategory();
             String dateTime = entryVO.getDateTime();
