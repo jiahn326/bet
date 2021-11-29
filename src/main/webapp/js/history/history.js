@@ -314,6 +314,7 @@ function saveConfirm(){
                 $("#cancelButton").click();
                 dataTable.destroy();
                 resetSearch();
+
                 // callHistoryList('','',0);
             },
             error: function () {
@@ -323,6 +324,9 @@ function saveConfirm(){
                 // $("#cancelButton").click();
             }
         });
+
+    location.reload();
+
 }
 
 
@@ -349,6 +353,8 @@ function updateConfirm(){
             dataTable.destroy();
             resetSearch();
             // callHistoryList('','',0);
+
+            $("#historyTable").refresh();
         },
         error: function () {
             alert("failed")
@@ -357,6 +363,9 @@ function updateConfirm(){
             // $("#cancelButton").click();
         }
     });
+
+    location.reload();
+
 }
 
 function deleteConfirm(){
@@ -384,6 +393,9 @@ function deleteConfirm(){
             // $("#cancelButton").click();
         }
     });
+
+    location.reload();
+
 }
 
 /* Template */
