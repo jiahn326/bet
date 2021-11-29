@@ -1,6 +1,7 @@
 package com.bet.demo.controller;
 
 import com.bet.demo.data.Entry;
+import com.bet.demo.data.Number;
 import com.bet.demo.data.Search;
 import com.bet.demo.data.User;
 import com.bet.demo.service.MainService;
@@ -313,36 +314,6 @@ public class MainController {
 
                     future = docRef.update("user", username);
 
-//
-//
-//                    // amount이 null 이 아닌 경우 세션에 값을 저장
-//                    data.put("amount", amount);
-//
-//                    // category이 null 이 아닌 경우 세션에 값을 저장
-//                    if(category != null) {
-//                        data.put("category", category);
-//                    }
-//
-//                    // dateTime이 null 이 아닌 경우 세션에 값을 저장
-//                    if(dateTime != null) {
-//                        data.put("dateTime", dateTime);
-//                    }
-//
-//                    // description이 null 이 아닌 경우 세션에 값을 저장
-//                    if(description != null) {
-//                        data.put("description", description);
-//                    }
-//
-//                    // transaction이 null 이 아닌 경우 세션에 값을 저장
-//                    if(transaction != null) {
-//                        data.put("transaction", transaction);
-//                    }
-//
-//                    // username이 null 이 아닌 경우 세션에 값을 저장
-//                    if(username != null) {
-//                        data.put("user", username);
-//                    }
-
                     WriteResult result = future.get();
                     System.out.println("Write result: " + result);
                 }
@@ -354,6 +325,16 @@ public class MainController {
         } catch(Exception e) {
             System.out.println("error occurred");
         }
+
+        return "redirect:/history/info";
+    }
+
+    @RequestMapping("/history/delete")
+    @ResponseBody
+    public String delete(@RequestBody Number number){
+        int entryID = number.getNumber();
+        System.out.println("entryID = " + entryID);
+        ApiFuture<WriteResult> writeResult = db.collection("entry").document(this.user.getUsername()+entryID).delete();
 
         return "redirect:/history/info";
     }

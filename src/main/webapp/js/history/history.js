@@ -158,6 +158,7 @@ function openModal(type) {
         // show 'ADD' modal
         $("#modal #saveButton").show();
         $("#modal #updateButton").hide();
+        $("#modal #deleteEntry").hide();
 
         $("#modal .modal-title").html('Add History');
 
@@ -172,6 +173,7 @@ function openModal(type) {
         // show 'EDIT' modal
         $("#modal #saveButton").hide();
         $("#modal #updateButton").show();
+        $("#modal #deleteEntry").hide();
 
         // // 등록 프로세스 관련 구역 및 버튼 hide
         // $('div #stage0').find('button').hide();
@@ -201,6 +203,8 @@ function openModal(type) {
 
         $("#modal #saveButton").hide();
         $("#modal #updateButton").show();
+        $("#modal #deleteEntry").hide();
+
 
         // $('div.stage').css('display', 'none');
         //
@@ -217,6 +221,19 @@ function openModal(type) {
         $("#amountInput").attr('readonly', true);
         $("#transactionInput").attr('readonly', true);
         //$("#transactionInput").attr('readonly', true);
+    } else if (type == 'delete'){
+        $("#modal #saveButton").hide();
+        $("#modal #updateButton").hide();
+        $("#modal #deleteEntry").show();
+
+        $("#entryID").show();
+        $("#dateTime").hide();
+        $("#amount").hide();
+        $("#description").hide();
+        $("#transaction").hide();
+        $("#category").hide();
+
+
     }
 }
 
@@ -286,6 +303,32 @@ function updateConfirm(){
     });
 }
 
+function deleteConfirm(){
+    let sendData = {
+        "number": $("#entryID").val()
+    };
+    let dataTable = $("#historyTable").DataTable();
+
+    $.ajax({
+        url: contextPath + "/history/delete",
+        contentType: "application/json",
+        type: "POST",
+        data: JSON.stringify(sendData),
+        success: function () {
+            // alertMessage("성공!","단어 등록 신청이 완료되었습니다.","success");
+            $("#cancelButton").click();
+            dataTable.destroy();
+            resetSearch();
+            // callHistoryList('','',0);
+        },
+        error: function () {
+            alert("failed")
+
+            // alertMessage("경고!","실패하였습니다. 관리자에게 문의해주세요.","danger");
+            // $("#cancelButton").click();
+        }
+    });
+}
 
 /* Template */
 //데이터 타입 선택 시 데이터 길이 및 소수점 길이 설정
