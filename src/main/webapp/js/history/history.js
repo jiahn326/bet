@@ -253,8 +253,10 @@ function openModal(type, num) {
         let sendData = {
             "number" : num
         }
+
+        console.log(num);
         $.ajax({
-            url: contextPath + "/history/search",
+            url: contextPath + "/history/detail",
             contentType: "application/json",
             type: "GET",
             data: sendData,
