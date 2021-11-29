@@ -13,11 +13,12 @@
     <script>
         var contextPath = "${pageContext.request.contextPath}";
     </script>
+    <script src="${pageContext.request.contextPath}/js/budget/budget.js"></script>
 
     <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/visualization/echarts/echarts.min.js"></script>
 
     <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_charts/echarts/light/bars/bars_stacked_clustered.js"></script>
-    <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_charts/echarts/light/pies/pie_basic.js"></script>
+<%--    <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_charts/echarts/light/pies/pie_basic.js"></script>--%>
 <%--    <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_charts/echarts/light/pies/pie_donut.js"></script>--%>
 
     <title>Budget</title>
@@ -58,7 +59,7 @@
                                 <!-- Pie chart -->
                                 <div class="col-sm-8">
                                     <div class="chart-container">
-                                        <div class="chart has-fixed-height" id="pie_basic"></div>
+                                        <div class="chart has-fixed-height" id="pie_basicc"></div>
                                     </div>
                                 </div>
                                 <!-- /Pie chart -->

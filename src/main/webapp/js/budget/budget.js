@@ -25,7 +25,7 @@ var EchartsPieBasicLight = function() {
         }
 
         // Define element
-        var pie_basic_element = document.getElementById('pie_basic');
+        var pie_basic_element = document.getElementById('pie_basicc');
 
 
         //
@@ -61,11 +61,10 @@ var EchartsPieBasicLight = function() {
 
                 // Add title
                 title: {
-                    text: 'Browser popularity',
-                    subtext: 'Open source information',
-                    left: 'center',
+                    text: 'Goals',
+                    left: 'left',
                     textStyle: {
-                        fontSize: 17,
+                        fontSize: 15,
                         fontWeight: 500
                     },
                     subtextStyle: {
@@ -90,7 +89,7 @@ var EchartsPieBasicLight = function() {
                     orient: 'vertical',
                     top: 'center',
                     left: 0,
-                    data: ['IE', 'Opera', 'Safari', 'Firefox', 'Chrome'],
+                    data: ['Wants', 'Needs', 'Savings'],
                     itemHeight: 8,
                     itemWidth: 8
                 },
@@ -108,11 +107,9 @@ var EchartsPieBasicLight = function() {
                         }
                     },
                     data: [
-                        {value: 335, name: 'IE'},
-                        {value: 310, name: 'Opera'},
-                        {value: 234, name: 'Safari'},
-                        {value: 135, name: 'Firefox'},
-                        {value: 1548, name: 'Chrome'}
+                        {value: 335, name: 'Wants'},
+                        {value: 310, name: 'Needs'},
+                        {value: 234, name: 'Savings'}
                     ]
                 }]
             });
