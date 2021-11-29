@@ -426,7 +426,28 @@ public class MainController {
     }
 
     @RequestMapping("/budget/info")
-    public String budget(){
+    public String budget(HttpServletRequest request, HttpServletResponse response){
+        double totalWants = this.user.getTotalWants();
+        double totalNeeds = this.user.getTotalNeeds();
+        double totalSavings = this.user.getTotalSavings();
+        double totalExpense = this.user.getTotalExpense();
+
+        int budgetWants = this.user.getBudget().getWants();
+        int budgetNeeds = this.user.getBudget().getNeeds();
+        int budgetSavings = this.user.getBudget().getSavings();
+
+        request.setAttribute("totalWants", totalWants);
+        request.setAttribute("totalNeeds", totalNeeds);
+        request.setAttribute("totalSavings", totalSavings);
+
+        request.setAttribute("budgetWants", budgetWants);
+        request.setAttribute("budgetNeeds", budgetNeeds);
+        request.setAttribute("budgetSavings", budgetSavings);
+
+        request.setAttribute("plannedWants", totalExpense * (budgetWants*1.0/100));
+        request.setAttribute("plannedNeeds", totalExpense * (budgetNeeds*1.0/100));
+        request.setAttribute("plannedSavings", totalExpense * (budgetSavings*1.0/100));
+
         return "budgetView/budget";
     }
 

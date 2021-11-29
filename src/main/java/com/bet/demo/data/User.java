@@ -17,6 +17,7 @@ public class User {
     private List<Entry> savings = new ArrayList<>();
     private List<Entry> needs = new ArrayList<>();
     private List<Entry> wants = new ArrayList<>();
+    private Budget budget;
 
     public User() {
     }
@@ -78,6 +79,14 @@ public class User {
         return this.entries;
     }
 
+    public Budget getBudget() {
+        return budget;
+    }
+
+    public void setBudget(Budget budget) {
+        this.budget = budget;
+    }
+
     public boolean isEntryEmpty(){
         return this.entries.isEmpty();
     }
@@ -95,6 +104,8 @@ public class User {
     }
 
     private void splitEntries(){
+        this.expenses = new ArrayList<>();
+        this.income = new ArrayList<>();
         for (Entry entry: entries) {
             if(entry.getTransaction().equals("expense")){
                 addAnExpense(entry);
@@ -138,23 +149,20 @@ public class User {
                     break;
             }
         }
-        for (Entry entry: this.income){
-            this.savings.add(entry);
-        }
     }
 
     public List getWants(){
-        this.splitEntries();
+        this.sortSpendings();
         return this.wants;
     }
 
     public List getNeeds(){
-        this.splitEntries();
+        this.sortSpendings();
         return this.needs;
     }
 
     public List getSavings(){
-        this.splitEntries();
+        this.sortSpendings();
         return this.savings;
     }
 
@@ -198,6 +206,24 @@ public class User {
         double total =0.0;
         for (Entry entry: this.savings){
             total += entry.getAmount();
+        }
+        return total;
+    }
+
+    public double getTotalExpense(){
+        this.splitEntries();
+        double total = 0.0;
+        for (Entry entry: this.expenses) {
+            total+=entry.getAmount();
+        }
+        return total;
+    }
+
+    public double getTotalIncome(){
+        this.splitEntries();
+        double total = 0.0;
+        for (Entry entry: this.income){
+            total+=entry.getAmount();
         }
         return total;
     }

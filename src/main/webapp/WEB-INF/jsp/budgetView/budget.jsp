@@ -74,9 +74,18 @@
                                     <div class="text-center">
                                         <h5 class="mt-2 mb-3">Budget &nbsp;&nbsp; <button type="button" class="btn btn-outline bg-slate-600 text-slate-600 border-slate-600 btn-icon rounded-round"><i class="mi-settings"></i></button></h5>
                                         <ul class="pricing-table-list list-unstyled mb-3">
-                                            <li><strong>Needs</strong> (needs%) &nbsp;&nbsp; $(amount)</li>
-                                            <li><strong>Wants</strong> (wants%) &nbsp;&nbsp; $(amount)</li>
-                                            <li><strong>Savings</strong> (savings%) &nbsp;&nbsp; $(amount)</li>
+                                            <li><strong>Needs</strong> (${budgetNeeds}%) &nbsp;&nbsp;
+                                                Current: <fmt:setLocale value = "en_US"/><fmt:formatNumber value = "${totalNeeds}" type = "currency"/>&nbsp;&nbsp;
+                                                Budget: <fmt:setLocale value = "en_US"/><fmt:formatNumber value = "${plannedNeeds}" type = "currency"/>
+                                            </li>
+                                            <li><strong>Wants</strong> (${budgetWants}%) &nbsp;&nbsp;
+                                                Current: <fmt:setLocale value = "en_US"/><fmt:formatNumber value = "${totalWants}" type = "currency"/>&nbsp;&nbsp;
+                                                Budget: <fmt:setLocale value = "en_US"/><fmt:formatNumber value = "${plannedWants}" type = "currency"/>
+                                            </li>
+                                            <li><strong>Savings</strong> (${budgetSavings}%) &nbsp;&nbsp;
+                                                Current: <fmt:setLocale value = "en_US"/><fmt:formatNumber value = "${totalSavings}" type = "currency"/>&nbsp;&nbsp;
+                                                Budget: <fmt:setLocale value = "en_US"/><fmt:formatNumber value = "${plannedSavings}" type = "currency"/>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>

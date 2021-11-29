@@ -1,5 +1,6 @@
 package com.bet.demo.service;
 
+import com.bet.demo.data.Budget;
 import com.bet.demo.data.Entry;
 import com.bet.demo.data.User;
 import com.google.api.core.ApiFuture;
@@ -31,7 +32,6 @@ public class MainService {
         String email = request.getParameter("email");
 
         DocumentReference docRef = db.collection("users").document(username); //***need to find a unique string to replace childpath***
-
         // Add document data  with id "alovelace" using a hashmap
         Map<String, Object> data = new HashMap<>();
 
@@ -87,6 +87,7 @@ public class MainService {
             this.user = document.toObject(User.class);
             if (this.user.getPassword().equals(password)) {
                 this.loadEntriesToUser(username, db);
+                this.loadBudgetToUser(username,db);
                 return true;
             } else
                 return false;
@@ -152,5 +153,27 @@ public class MainService {
             list.add(entry);
         }
     }
-}
 
+    public void loadBudgetToUser(String username, Firestore db) throws ExecutionException, InterruptedException {
+        DocumentReference docRef = db.collection("budget").document(username);
+        ApiFuture<DocumentSnapshot> future = docRef.get();
+        DocumentSnapshot document = future.get();
+
+        Budget budget = null;
+        if (document.exists()){
+            budget = document.toObject(Budget.class);
+            user.setBudget(budget);
+            System.out.println("budget:"+user.getBudget());
+        } else{
+            budget = new Budget(30,50,20);
+            user.setBudget(budget);
+            Map<String, Object> docData = new HashMap<>();
+            docData.put("needs", 50);
+            docData.put("wants", 30);
+            docData.put("savings", 20);
+            ApiFuture<WriteResult> result = db.collection("budget").document(username).set(docData);
+            System.out.println("Update time : " + future.get().getUpdateTime());
+            System.out.println("budget:"+user.getBudget());
+        }
+    }
+}
