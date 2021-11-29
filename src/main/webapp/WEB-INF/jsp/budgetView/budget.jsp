@@ -17,13 +17,14 @@
     <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/visualization/echarts/echarts.min.js"></script>
     <script src="${pageContext.request.contextPath}/template/global_assets/js/main/bootstrap.bundle.min.js"></script>
 
-    <script src="${pageContext.request.contextPath}/js/budget/budget.js"></script>
 
     <!-- Pie chart -->
+    <script src="${pageContext.request.contextPath}/js/budget/budget.js"></script>
 <%--    <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_charts/echarts/light/pies/pie_basic.js"></script>--%>
 
     <!-- Bar -->
-    <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_charts/echarts/light/bars/bars_stacked_clustered.js"></script>
+    <script src="${pageContext.request.contextPath}/js/budget/bars.js"></script>
+<%--    <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_charts/echarts/light/bars/bars_stacked_clustered.js"></script>--%>
 
     <title>Budget</title>
 
