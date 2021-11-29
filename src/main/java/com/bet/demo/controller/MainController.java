@@ -278,9 +278,9 @@ public class MainController {
     }
 
     //    @RequestMapping(value = "create")
-    @RequestMapping("/history/detail")
+    @GetMapping("/history/detail")
     @ResponseBody
-    public String detail(@RequestBody Entry entryVO) throws ExecutionException, InterruptedException {
+    public String detail(Entry entryVO) throws ExecutionException, InterruptedException {
         try {
 
             if (db == null){
@@ -288,7 +288,7 @@ public class MainController {
             }
 
             int number = entryVO.getNumber();
-            System.out.println("number!=" + number);
+            System.out.println(">>>>>>>>>>>>>>> number: " + number);
 //            double amount = entryVO.getAmount();
 //            String category = entryVO.getCategory();
 //            String dateTime = entryVO.getDateTime();
