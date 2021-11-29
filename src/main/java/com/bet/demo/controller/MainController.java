@@ -14,6 +14,7 @@ import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
+import org.apache.commons.math3.util.Precision;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -404,14 +405,14 @@ public class MainController {
         return "redirect:/history/info";
     }
 
-    @RequestMapping("/history/delete")
+    @PostMapping("/history/delete")
     @ResponseBody
-    public String delete(@RequestBody Number number){
-        int entryID = number.getNumber();
+    public String delete(@RequestBody Entry entry) throws ExecutionException, InterruptedException{
+        int entryID = entry.getNumber();
         System.out.println("entryID = " + entryID);
         ApiFuture<WriteResult> writeResult = db.collection("entry").document(this.user.getUsername()+entryID).delete();
 
-        return "redirect:/history/info";
+        return "redirect:/content";
     }
 
 
@@ -426,11 +427,10 @@ public class MainController {
     }
 
     @RequestMapping("/budget/info")
-    public String budget(HttpServletRequest request, HttpServletResponse response){
-        double totalWants = this.user.getTotalWants();
-        double totalNeeds = this.user.getTotalNeeds();
-        double totalSavings = this.user.getTotalSavings();
-        double totalExpense = this.user.getTotalExpense();
+    public String budget(HttpServletRequest request, HttpServletResponse response){    double totalWants = Precision.round(this.user.getTotalWants(), 2);
+        double totalNeeds = Precision.round(this.user.getTotalNeeds(),2);
+        double totalSavings = Precision.round(this.user.getTotalSavings(), 2);
+        double totalExpense = Precision.round(this.user.getTotalExpense(), 2);
 
         int budgetWants = this.user.getBudget().getWants();
         int budgetNeeds = this.user.getBudget().getNeeds();
@@ -444,9 +444,9 @@ public class MainController {
         request.setAttribute("budgetNeeds", budgetNeeds);
         request.setAttribute("budgetSavings", budgetSavings);
 
-        request.setAttribute("plannedWants", totalExpense * (budgetWants*1.0/100));
-        request.setAttribute("plannedNeeds", totalExpense * (budgetNeeds*1.0/100));
-        request.setAttribute("plannedSavings", totalExpense * (budgetSavings*1.0/100));
+        request.setAttribute("plannedWants", Precision.round(totalExpense * (budgetWants*1.0/100), 2));
+        request.setAttribute("plannedNeeds", Precision.round(totalExpense * (budgetNeeds*1.0/100), 2));
+        request.setAttribute("plannedSavings", Precision.round(totalExpense * (budgetSavings*1.0/100),2));
 
         return "budgetView/budget";
     }

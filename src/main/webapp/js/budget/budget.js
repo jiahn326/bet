@@ -10,6 +10,19 @@
 // Setup module
 // ------------------------------
 
+var currentSavings;
+var currentNeeds;
+var currentWants;
+var budgetSavings;
+var budgetNeeds;
+var budgetWants;
+
+function getValues(wants, needs, savings){
+    currentSavings = savings;
+    currentNeeds = needs;
+    currentWants = wants;
+}
+
 var EchartsPieBasicLight = function() {
     console.log('PIE_BASIC.JS FILE OPEN')
 
@@ -111,9 +124,9 @@ var EchartsPieBasicLight = function() {
                         }
                     },
                     data: [
-                        {value: 500, name: 'Wants'},
-                        {value: 300, name: 'Needs'},
-                        {value: 200, name: 'Savings'}
+                        {value: currentWants, name: 'Wants'},
+                        {value: currentNeeds, name: 'Needs'},
+                        {value: currentSavings, name: 'Savings'}
                     ]
                 }]
             });

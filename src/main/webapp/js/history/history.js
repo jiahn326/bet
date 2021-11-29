@@ -277,19 +277,46 @@ function openModal(type, num) {
             }
         });
 
-    } else if (type == 'delete'){
+    } else if (type == 'delete') {
         $("#modal #saveButton").hide();
         $("#modal #updateButton").hide();
-        $("#modal #deleteEntry").show();
+        $("#modal #deleteEntry").hide();
 
-        $("#entryID").show();
-        $("#dateTime").hide();
-        $("#amount").hide();
-        $("#description").hide();
-        $("#transaction").hide();
-        $("#category").hide();
+        // $("#entryID").show();
+        // $("#dateTime").hide();
+        // $("#amount").hide();
+        // $("#description").hide();
+        // $("#transaction").hide();
+        // $("#category").hide();
 
+        console.log(num)
 
+        let sendData = {
+            "number": num
+        };
+        let dataTable = $("#historyTable").DataTable();
+
+        $.ajax({
+            url: contextPath + "/history/delete",
+            contentType: "application/json",
+            type: "GET",
+            data: JSON.stringify(sendData),
+            success: function (data) {
+                // alertMessage("성공!","단어 등록 신청이 완료되었습니다.","success");
+                //alert("Entry has been successfully deleted.");
+                //$("#cancelButton").click();
+                //dataTable.destroy();
+                //resetSearch();
+
+                // callHistoryList('','',0);
+            },
+            error: function () {
+                alert("failed", num);
+
+                // alertMessage("경고!","실패하였습니다. 관리자에게 문의해주세요.","danger");
+                // $("#cancelButton").click();
+            }
+        });
     }
 }
 
@@ -368,9 +395,9 @@ function updateConfirm(){
 
 }
 
-function deleteConfirm(){
+function deleteConfirm(num){
     let sendData = {
-        "number": $("#entryID").val()
+        "number": num
     };
     let dataTable = $("#historyTable").DataTable();
 
@@ -381,13 +408,17 @@ function deleteConfirm(){
         data: JSON.stringify(sendData),
         success: function () {
             // alertMessage("성공!","단어 등록 신청이 완료되었습니다.","success");
-            $("#cancelButton").click();
-            dataTable.destroy();
-            resetSearch();
+            alert("Entry has been successfully deleted. Refresh the table to see your changes.");
+            //$("#cancelButton").click();
+           // dataTable.destroy();
+          //  resetSearch();
+
+            //dataTable.ajax.reload();
+            //window.location.reload();
             // callHistoryList('','',0);
         },
         error: function () {
-            alert("failed")
+            alert("failed");
 
             // alertMessage("경고!","실패하였습니다. 관리자에게 문의해주세요.","danger");
             // $("#cancelButton").click();

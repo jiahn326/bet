@@ -180,7 +180,7 @@
                     <th>Amount</th>
                     <th>Transaction</th>
                     <th>Category</th>
-                    <th>Entry ID</th>
+<%--                    <th>Entry ID</th>--%>
                     <th class="text-center">Actions</th>
                 </tr>
                 </thead>
@@ -196,11 +196,11 @@
                             </td>
                             <td>${entry.transaction}</td>
                             <td><span class="badge badge-light">${entry.category}</span></td>
-                            <td>${entry.number}</td>
+<%--                            <td>${entry.number}</td>--%>
                             <td class="text-center">
                                 <div class="list-icons">
                                     <button type="button" class="btn btn-outline bg-primary text-primary-800 btn-icon ml-2" data-toggle="modal" data-target="#modal" id="detailButton" onclick="openModal('detail', ${entry.number});" ><i class="icon-search4"></i></button>
-                                    <button type="button" class="btn btn-outline bg-danger text-danger-800 btn-icon ml-2" data-toggle="modal" data-target="#modal" id="deleteButton" onclick="openModal('delete');" ><i class="icon-trash"></i></button>
+                                    <button type="button" class="btn btn-outline bg-danger text-danger-800 btn-icon ml-2" id="deleteButton" onclick="deleteConfirm(${entry.number})" ><i class="icon-trash"></i></button>
                                 </div>
                             </td>
                         </tr>
@@ -293,7 +293,7 @@
                         <div class="modal-footer">
                             <button type="button" id="saveButton" class="btn bg-teal" onclick="saveConfirm();">Save</button>
                             <button type="button" id="updateButton" class="btn bg-teal" onclick="updateConfirm();">Edit</button>
-                            <button type="button" id="deleteEntry" class="btn bg-teal" onclick="deleteConfirm();">Delete</button>
+<%--                            <button type="button" id="deleteEntry" class="btn bg-teal" onclick="deleteConfirm();">Delete</button>--%>
                             <button type="button" id="cancelButton" class="btn btn-outline" data-dismiss="modal">Close</button>
                         </div>
                         <!-- /Button -->
