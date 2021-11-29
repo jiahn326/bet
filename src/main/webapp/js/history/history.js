@@ -142,7 +142,7 @@ function searchHistory() {
 
 // open Modal (add, edit, detail)
 function openModal(type) {
-    // clearFormData();
+    clearFormData();
 
     //add = add, update = edit, detail = detail :)
 
@@ -159,6 +159,24 @@ function openModal(type) {
         $("#wordEngNm").attr('readonly', false);
         $("#wordAbbr").attr('readonly', false);
 
+        // disable category options
+        // if ($("#transaction option[value='expense']")){
+        //     $("select option[value*='savings']").prop('disabled',true);
+        // } else if ($("#transaction option[value='savings']")){
+        //     $("select option[value*='wants']").prop('disabled',true);
+        //     $("select option[value*='needs']").prop('disabled',true);
+        // } else if ($("#transaction option[value='none']")){
+        //     $("select option[value*='savings']").prop('disabled',true);
+        //     $("select option[value*='wants']").prop('disabled',true);
+        //     $("select option[value*='needs']").prop('disabled',true);
+        //
+        //     // later
+        //
+        // } else {
+        //     $("select option[value*='savings']").prop('disabled',true);
+        //     $("select option[value*='wants']").prop('disabled',true);
+        //     $("select option[value*='needs']").prop('disabled',true);
+        // }
 
     } else if (type == 'edit'){
         // show 'EDIT' modal

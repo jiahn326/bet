@@ -171,22 +171,10 @@
             </div>
             <!-- /Drop box Start -->
 
-
-            <!-- Hover Table -->
-            <div class="card-header header-elements-inline">
-                <h5 class="card-title">Hover rows</h5>
-                <div class="header-elements">
-                    <div class="list-icons">
-                        <a class="list-icons-item" data-action="collapse"></a>
-                        <a class="list-icons-item" data-action="reload"></a>
-                        <a class="list-icons-item" data-action="remove"></a>
-                    </div>
-                </div>
-            </div>
-
-            <table class="table datatable-basic table-hover">
+            <!-- History table -->
+            <table class="table-bordered-0 table-sm datatable-pagination table-striped table-hover" style="font-size: 12px" id="historyTable">
                 <thead>
-                <tr>
+                <tr style="background-color: #4DB6AC; color: white">
                     <th>Date</th>
                     <th>Amount</th>
                     <th>Description</th>
@@ -216,51 +204,14 @@
                         </tr>
                     </c:forEach>
                 </tr>
+                <%--<ul class="list-group">
+                <c:forEach var="entry" items="${entryList}">
+                    <li class="list-group-item list-group-item-action">${entry}</li>
+                </c:forEach>
+                </ul--%>
                 </tbody>
             </table>
-            <!-- /Hover Table -->
-
-<%--            <!-- History table -->--%>
-<%--            <table class="table-bordered-0 table-sm datatable-pagination table-striped table-hover" style="font-size: 12px" id="historyTable">--%>
-<%--                <thead>--%>
-<%--                <tr style="background-color: #4DB6AC; color: white">--%>
-<%--                    <th>Date</th>--%>
-<%--                    <th>Amount</th>--%>
-<%--                    <th>Description</th>--%>
-<%--                    <th>Transaction</th>--%>
-<%--                    <th>Category</th>--%>
-<%--                    <th class="text-center">Actions</th>--%>
-<%--                </tr>--%>
-<%--                </thead>--%>
-<%--                <tbody>--%>
-<%--                <tr>--%>
-<%--                    <c:forEach items="${entryList}" var="entry" varStatus="status">--%>
-<%--                        <tr>--%>
-<%--                            <td>${entry.dateTime}</td>--%>
-<%--                            <td>--%>
-<%--                                <fmt:setLocale value = "en_US"/>--%>
-<%--                                <fmt:formatNumber value = "${entry.amount}" type = "currency"/>--%>
-<%--                            </td>--%>
-<%--                            <td>${entry.description}</td>--%>
-<%--                            <td>${entry.transaction}</td>--%>
-<%--                            <td>${entry.category}</td>--%>
-<%--                            <td class="text-center">--%>
-<%--                                <div class="list-icons">--%>
-<%--                                    <button type="button" class="btn btn-outline bg-primary text-primary-800 btn-icon ml-2" data-toggle="modal" data-target="#modal" id="detailButton" onclick="openModal('detail');" ><i class="icon-search4"></i></button>--%>
-<%--                                    <button type="button" class="btn btn-outline bg-danger text-danger-800 btn-icon ml-2" data-toggle="modal" data-target="#modal" id="deleteButton" onclick="openModal('detail');" ><i class="icon-trash"></i></button>--%>
-<%--                                </div>--%>
-<%--                            </td>--%>
-<%--                        </tr>--%>
-<%--                    </c:forEach>--%>
-<%--                </tr>--%>
-<%--                &lt;%&ndash;<ul class="list-group">--%>
-<%--                <c:forEach var="entry" items="${entryList}">--%>
-<%--                    <li class="list-group-item list-group-item-action">${entry}</li>--%>
-<%--                </c:forEach>--%>
-<%--                </ul&ndash;%&gt;--%>
-<%--                </tbody>--%>
-<%--            </table>--%>
-<%--            <!-- /History table -->--%>
+            <!-- /History table -->
 
             <!-- Modal Start -->
             <div id="modal" class="modal fade" tabindex="-1" style="display: none; height: 1000px;" aria-hidden="true">
@@ -274,7 +225,7 @@
                         <!-- /Modal header -->
 
                         <!-- Modal content -->
-                        <form action="/history/info" class="form-horizontal" id="create">
+                        <form action="/history/info" class="form-horizontal" id="insert_form">
 <%--                            <input type="hidden" id="wordSeq" name="wordSeq">--%>
                             <div class="modal-body">
                                 <!-- Date -->
