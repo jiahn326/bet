@@ -292,7 +292,7 @@
                         <!-- Button -->
                         <div class="modal-footer">
                             <button type="button" id="saveButton" class="btn bg-teal" onclick="saveConfirm();">Save</button>
-                            <button type="button" id="updateButton" class="btn bg-teal" onclick="updateConfirm();">Edit</button>
+                            <button type="button" id="updateButton" class="btn bg-teal" onclick="updateConfirm();">Edit Save</button>
 <%--                            <button type="button" id="deleteEntry" class="btn bg-teal" onclick="deleteConfirm();">Delete</button>--%>
                             <button type="button" id="cancelButton" class="btn btn-outline" data-dismiss="modal">Close</button>
                         </div>

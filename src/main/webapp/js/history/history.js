@@ -7,6 +7,9 @@ $(document).ready(function () {
     //categorySelect();        // reset search SelectBox
     callHistoryList();       // list of History
 
+    $('#updateButton').click(function() {
+        location.reload();
+    });
 });
 
 // $('html').click(function(e) {
@@ -194,35 +197,6 @@ function openModal(type, num) {
         $("#transaction").show();
         $("#category").show();
 
-    } else if (type == 'edit'){
-        // show 'EDIT' modal
-        $("#modal #saveButton").hide();
-        $("#modal #updateButton").show();
-        $("#modal #deleteEntry").hide();
-
-        // // 등록 프로세스 관련 구역 및 버튼 hide
-        // $('div #stage0').find('button').hide();
-        // $('#stage0Helper').hide();
-        // $('div #stage2').find('button').hide();
-        // $('#stage2Helper').hide();
-        // $('div.insertWord').hide();
-        //
-        // //버튼 관리
-        // $("#modal #deleteButton").show();
-        // $("#modal #updateButton").show();
-        // $("#modal #saveButton").hide();
-        $("#modal .modal-title").html('Edit History');
-        // $("#insert_form input[name=wordSeq]").val(wordSeq);
-        //
-        // // 비활성화
-        // $("#wordNm").attr('readonly', true).addClass('valid');
-        // $("#wordEngNm").attr('readonly', true).addClass('valid');
-        // $("#wordAbbr").attr('readonly', true).addClass('valid');
-        //
-        // // 인풋 길이
-        // $('#wordEngNm').removeClass('input-short');
-        // $('#wordAbbr').removeClass('input-short');
-
     } else if (type == 'detail'){
         // show 'DETAIL' modal
 
@@ -236,7 +210,7 @@ function openModal(type, num) {
         // $('#wordEngNm').addClass('input-short');
         // $('#wordAbbr').addClass('input-short');
 
-        $("#modal .modal-title").html('History Detail');
+        $("#modal .modal-title").html('Edit History');
 
        // $("#entryID").hide();
         $("#dateTime").show();
@@ -263,6 +237,7 @@ function openModal(type, num) {
             type: "GET",
             data: sendData,
             success: function (data) {
+                console.log(data);
                 // $("#insert_form #dateTime").val(data.dateTime);
                 // $("#insert_form #description").val(data.description);
                 // $("#insert_form #amount").val(data.amount);
@@ -311,7 +286,7 @@ function openModal(type, num) {
                 // callHistoryList('','',0);
             },
             error: function () {
-                alert("failed", num);
+                alert("failed");
 
                 // alertMessage("경고!","실패하였습니다. 관리자에게 문의해주세요.","danger");
                 // $("#cancelButton").click();
@@ -375,13 +350,13 @@ function updateConfirm(){
         type: "POST",
         data: JSON.stringify(sendData),
         success: function () {
+            resetSearch();
             // alertMessage("성공!","단어 등록 신청이 완료되었습니다.","success");
             $("#cancelButton").click();
             dataTable.destroy();
-            resetSearch();
             // callHistoryList('','',0);
 
-            $("#historyTable").refresh();
+            $("#historyTable").reload();
         },
         error: function () {
             alert("failed")
@@ -390,8 +365,6 @@ function updateConfirm(){
             // $("#cancelButton").click();
         }
     });
-
-    location.reload();
 
 }
 

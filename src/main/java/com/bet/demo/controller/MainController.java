@@ -395,8 +395,8 @@ public class MainController {
                 }
             }
 
-            //user.addAnEntry(entryVO);
-            //mainService.loadEntriesToUser(user.getUsername(), db);
+//            user.addAnEntry(entryVO);
+//            mainService.loadEntriesToUser(user.getUsername(), db);
 
         } catch(Exception e) {
             System.out.println("error occurred");
