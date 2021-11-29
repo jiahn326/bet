@@ -11,6 +11,7 @@
 // ------------------------------
 
 var EchartsBarsStackedClusteredLight = function() {
+    console.log('BARS_STACKED_CLUSTERED.JS FILE OPEN')
 
 
     //
@@ -66,8 +67,8 @@ var EchartsBarsStackedClusteredLight = function() {
                 // Add legend
                 legend: {
                     data: [
-                        'Version 1.7 - 2k data','Version 1.7 - 2w data','Version 1.7 - 20w data','',
-                        'Version 2.0 - 2k data','Version 2.0 - 2w data','Version 2.0 - 20w data'
+                        'Wants Goal','Needs Goal','Savings Goal','',
+                        'Wants Status','Needs Status','SavingsStatus'
                     ],
                     itemHeight: 2,
                     itemGap: 8,
@@ -117,7 +118,7 @@ var EchartsBarsStackedClusteredLight = function() {
                 yAxis: [
                     {
                         type: 'category',
-                        data: ['Line','Bar','Scatter','Pies'],
+                        data: ['Category'],
                         axisLabel: {
                             color: '#333'
                         },
@@ -146,14 +147,14 @@ var EchartsBarsStackedClusteredLight = function() {
                         axisLabel: {show:false},
                         splitArea: {show:false},
                         splitLine: {show:false},
-                        data: ['Line','Bar','Scatter','Pies']
+                        data: ['Category']
                     }
                 ],
 
                 // Add series
                 series: [
                     {
-                        name: 'Version 2.0 - 2k data',
+                        name: 'Wants Status',
                         type: 'bar',
                         z: 2,
                         yAxisIndex: 1,
@@ -171,10 +172,10 @@ var EchartsBarsStackedClusteredLight = function() {
                                 }
                             }
                         },
-                        data: [247, 187, 95, 175]
+                        data: [5000]
                     },
                     {
-                        name: 'Version 2.0 - 2w data',
+                        name: 'Needs Status',
                         type: 'bar',
                         z: 2,
                         yAxisIndex: 1,
@@ -192,10 +193,10 @@ var EchartsBarsStackedClusteredLight = function() {
                                 }
                             }
                         },
-                        data: [488, 415, 405, 340]
+                        data: [3000]
                     },
                     {
-                        name: 'Version 2.0 - 20w data',
+                        name: 'Savings Status',
                         type: 'bar',
                         z: 2,
                         yAxisIndex: 1,
@@ -213,10 +214,10 @@ var EchartsBarsStackedClusteredLight = function() {
                                 }
                             }
                         },
-                        data: [906, 911, 908, 778]
+                        data: [2000]
                     },
                     {
-                        name: 'Version 1.7 - 2k data',
+                        name: 'Wants Goal',
                         type: 'bar',
                         z: 1,
                         itemStyle: {
@@ -232,10 +233,10 @@ var EchartsBarsStackedClusteredLight = function() {
                                 }
                             }
                         },
-                        data: [680, 819, 564, 724]
+                        data: [3000]
                     },
                     {
-                        name: 'Version 1.7 - 2w data',
+                        name: 'Needs Goal',
                         type: 'bar',
                         z: 1,
                         itemStyle: {
@@ -251,10 +252,10 @@ var EchartsBarsStackedClusteredLight = function() {
                                 }
                             }
                         },
-                        data: [1212, 2035, 1620, 955]
+                        data: [1500]
                     },
                     {
-                        name: 'Version 1.7 - 20w data',
+                        name: 'Savings Goal',
                         type: 'bar',
                         z: 1,
                         itemStyle: {
@@ -270,7 +271,7 @@ var EchartsBarsStackedClusteredLight = function() {
                                 }
                             }
                         },
-                        data: [2200, 3000, 2500, 3000]
+                        data: [5000]
                     }
                 ]
             });

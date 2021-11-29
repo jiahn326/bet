@@ -19,6 +19,7 @@ var GooglePieRotate = function() {
 
     // Rotated pie
     var _googlePieRotate = function() {
+        console.log(google);
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Charts library is not loaded.');
             return;
@@ -55,12 +56,10 @@ var GooglePieRotate = function() {
 
             // Data
             var data = google.visualization.arrayToDataTable([
-                ['Task', 'Hours per Day'],
-                ['Work',     11],
-                ['Eat',      2],
-                ['Commute',  2],
-                ['Watch TV', 2],
-                ['Sleep',    7]
+                ['Goals', 'Manage Money'],
+                ['Wants',   50],
+                ['Needs',  30],
+                ['Savings',  20]
             ]);
 
             // Options

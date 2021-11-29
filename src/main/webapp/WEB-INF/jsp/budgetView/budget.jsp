@@ -13,21 +13,18 @@
     <script>
         var contextPath = "${pageContext.request.contextPath}";
     </script>
-
-    <script src="${pageContext.request.contextPath}/template/global_assets/js/main/bootstrap.bundle.min.js"></script>
-<%--    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>--%>
-<%--    <script type="text/javascript">--%>
-<%-- --%>
-<%--    </script>--%>
-    <script src="${pageContext.request.contextPath}/js/budget/charts_loader.js"></script>
+    <script src="${pageContext.request.contextPath}/template/assets/js/app.js"></script>
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/visualization/echarts/echarts.min.js"></script>
 
     <script src="${pageContext.request.contextPath}/js/budget/budget.js"></script>
 
-    <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/visualization/echarts/echarts.min.js"></script>
+    <!-- Pie chart -->
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_charts/echarts/light/pies/pie_basic.js"></script>
 
+    <!-- Bar -->
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_charts/echarts/light/bars/bars_basic.js"></script>
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_charts/echarts/light/bars/bars_stacked.js"></script>
     <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_charts/echarts/light/bars/bars_stacked_clustered.js"></script>
-<%--    <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_charts/echarts/light/pies/pie_basic.js"></script>--%>
-<%--    <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_charts/echarts/light/pies/pie_donut.js"></script>--%>
 
     <title>Budget</title>
 
@@ -65,17 +62,15 @@
                         <div class="card-body">
                             <div class="row">
                                 <!-- Pie chart -->
-                                <div class="col-sm-8">
+                                <div class="col-sm-7">
                                     <div class="chart-container">
-<%--                                        <div class="chart has-fixed-height" id="pie_basic"></div>--%>
-                                            <div id="piechart" style="width: 900px; height: 500px;"></div>
-
+                                        <div class="chart has-fixed-height" id="pie_basic"></div>
                                     </div>
                                 </div>
                                 <!-- /Pie chart -->
 
                                 <!-- Budget setting -->
-                                <div class="col-sm-4 .ml-md-auto">
+                                <div class="col-sm-5 .ml-md-auto">
                                     <div class="text-center">
                                         <h5 class="mt-2 mb-3">Budget &nbsp;&nbsp; <button type="button" class="btn btn-outline bg-slate-600 text-slate-600 border-slate-600 btn-icon rounded-round"><i class="mi-settings"></i></button></h5>
                                         <ul class="pricing-table-list list-unstyled mb-3">
@@ -96,7 +91,7 @@
             <!-- Stacked clustered bar -->
             <div class="card">
                 <div class="card-header header-elements-inline">
-                    <h5 class="card-title">Stacked clustered bar chart</h5>
+                    <h5 class="card-title">Bar chart</h5>
                     <div class="header-elements">
                         <div class="list-icons">
                             <a class="list-icons-item" data-action="collapse"></a>

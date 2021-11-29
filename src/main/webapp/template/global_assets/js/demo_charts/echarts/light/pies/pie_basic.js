@@ -11,7 +11,7 @@
 // ------------------------------
 
 var EchartsPieBasicLight = function() {
-
+    console.log('PIE_BASIC.JS FILE OPEN')
 
     //
     // Setup module components
@@ -47,10 +47,13 @@ var EchartsPieBasicLight = function() {
 
                 // Colors
                 color: [
-                    '#2ec7c9','#b6a2de','#5ab1ef','#ffb980','#d87a80',
-                    '#8d98b3','#e5cf0d','#97b552','#95706d','#dc69aa',
-                    '#07a2a4','#9a7fd1','#588dd5','#f5994e','#c05050',
-                    '#59678c','#c9ab00','#7eb00a','#6f5553','#c14089'
+                    // '#d87a80','#8d98b3', '#97b552'
+                    '#d87a80','#f5994e', '#07a2a4'
+
+                    // '#2ec7c9','#b6a2de','#5ab1ef','#ffb980','#d87a80',
+                    // '#8d98b3','#e5cf0d','#97b552','#95706d','#dc69aa',
+                    // '#07a2a4','#9a7fd1','#588dd5','#f5994e','#c05050',
+                    // '#59678c','#c9ab00','#7eb00a','#6f5553','#c14089'
                 ],
 
                 // Global text styles
