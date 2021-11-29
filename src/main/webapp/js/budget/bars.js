@@ -10,6 +10,22 @@
 // Setup module
 // ------------------------------
 
+var currentSavings;
+var currentNeeds;
+var currentWants;
+var budgetSavings;
+var budgetNeeds;
+var budgetWants;
+
+function getBarValues(currentWants, currentNeeds, currentSavings, budgetWants, budgetNeeds, budgetSavings){
+    this.currentWants = currentWants;
+    this.currentNeeds = currentNeeds;
+    this.currentSavings = currentSavings;
+    this.budgetWants = budgetWants;
+    this.budgetNeeds = budgetNeeds;
+    this.budgetSavings = budgetSavings;
+}
+
 var EchartsBarsStackedClusteredLight = function() {
     console.log('BARS_STACKED_CLUSTERED.JS FILE OPEN')
 
@@ -172,7 +188,7 @@ var EchartsBarsStackedClusteredLight = function() {
                                 }
                             }
                         },
-                        data: [5000]
+                        data: [currentWants]
                     },
                     {
                         name: 'Needs Status',
@@ -193,7 +209,7 @@ var EchartsBarsStackedClusteredLight = function() {
                                 }
                             }
                         },
-                        data: [3000]
+                        data: [currentNeeds]
                     },
                     {
                         name: 'Savings Status',
@@ -214,7 +230,7 @@ var EchartsBarsStackedClusteredLight = function() {
                                 }
                             }
                         },
-                        data: [2000]
+                        data: [currentSavings]
                     },
                     {
                         name: 'Wants Goal',
@@ -233,7 +249,7 @@ var EchartsBarsStackedClusteredLight = function() {
                                 }
                             }
                         },
-                        data: [10000]
+                        data: [budgetWants]
                     },
                     {
                         name: 'Needs Goal',
@@ -252,7 +268,7 @@ var EchartsBarsStackedClusteredLight = function() {
                                 }
                             }
                         },
-                        data: [5000]
+                        data: [budgetNeeds]
                     },
                     {
                         name: 'Savings Goal',
@@ -271,7 +287,7 @@ var EchartsBarsStackedClusteredLight = function() {
                                 }
                             }
                         },
-                        data: [5000]
+                        data: [budgetSavings]
                     }
                 ]
             });

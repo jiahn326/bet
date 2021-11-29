@@ -25,6 +25,13 @@
     <!-- Bar -->
     <script src="${pageContext.request.contextPath}/js/budget/bars.js"></script>
 <%--    <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_charts/echarts/light/bars/bars_stacked_clustered.js"></script>--%>
+    <script type="text/javascript">
+        getValues(${totalWants}, ${totalNeeds}, ${totalSavings});
+    </script>
+
+    <script type="text/javascript">
+        getBarValues(${totalWants}, ${totalNeeds}, ${totalSavings}, ${plannedWants}, ${plannedNeeds}, ${plannedSavings});
+    </script>
 
     <title>Budget</title>
 
