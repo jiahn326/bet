@@ -8,6 +8,7 @@ import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.QuerySnapshot;
 import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
@@ -225,7 +226,7 @@ public class MainController {
             String transaction = entryVO.getTransaction();
             String username = user.getUsername();
 
-            DocumentReference docRef = db.collection("entry").document(dateTime); //***need to find a unique string to replace childpath***
+            DocumentReference docRef = db.collection("entry").document(user.getUsername()+(user.getEntry().size()+1)); //***need to find a unique string to replace childpath***
             // Add document data  with id "alovelace" using a hashmap
             Map<String, Object> data = new HashMap<>();
 
@@ -257,6 +258,8 @@ public class MainController {
                 data.put("user", username);
             }
 
+            data.put("number", user.getEntry().size()+1);
+
             //asynchronously write data
             ApiFuture<WriteResult> result = docRef.set(data);
             // ...
@@ -272,33 +275,45 @@ public class MainController {
 
         return "redirect:/history/info";
     }
+
+    @RequestMapping("/history/update")
+    @ResponseBody
+    public String updateEntry(@RequestBody Entry entryVO) throws ExecutionException, InterruptedException {
+        try {
+
+            if (db == null){
+                initializeFirebase();
+            }
+
+            int number = entryVO.getNumber();
+            double amount = entryVO.getAmount();
+            String category = entryVO.getCategory();
+            String dateTime = entryVO.getDateTime();
+            String description = entryVO.getDescription();
+            String transaction = entryVO.getTransaction();
+            String username = user.getUsername();
+
+            for (Entry entry : this.entryList){
+                if (!dateTime.equals (entry.getDateTime())){
+
+                    DocumentReference docRef = db.collection("entry").document(this.user.getUsername()+number);
+                    /*Map<String, Object> data = new HashMap<>();;
+                    ApiFuture<QuerySnapshot> entryFuture = db.collection("entry").whereEqualTo("number", number).get(); //***need to find a unique string to replace childpath***
+                    // Add document data  with id "alovelace" using a hashmap*/
+
+                    ApiFuture<WriteResult> future = docRef.update("dateTime", dateTime);
+
+                    future = docRef.update("amount", amount);
+
+                    future = docRef.update("category", category);
+
+                    future = docRef.update("description", description);
+
+                    future = docRef.update("transaction", transaction);
+
+                    future = docRef.update("user", username);
+
 //
-//    @RequestMapping("/history/update")
-//    @ResponseBody
-//    public String updateEntry(@RequestBody Entry entryVO) throws ExecutionException, InterruptedException {
-//        try {
-//
-//            if (db == null){
-//                initializeFirebase();
-//            }
-//
-//
-//            double amount = entryVO.getAmount();
-//            String category = entryVO.getCategory();
-//            String dateTime = entryVO.getDateTime();
-//            String description = entryVO.getDescription();
-//            String transaction = entryVO.getTransaction();
-//            String username = user.getUsername();
-//
-//            for (Entry entry : this.entryList){
-//                if (!dateTime.equals (entry.getDateTime())){
-//
-//                    DocumentReference docRef;
-//                    Map<String, Object> data = new HashMap<>();;
-//                    docRef = db.collection("entry").document(entry.getDateTime()); //***need to find a unique string to replace childpath***
-//                    // Add document data  with id "alovelace" using a hashmap
-//
-//                    data.put("dateTime", dateTime);
 //
 //                    // amount이 null 이 아닌 경우 세션에 값을 저장
 //                    data.put("amount", amount);
@@ -327,24 +342,21 @@ public class MainController {
 //                    if(username != null) {
 //                        data.put("user", username);
 //                    }
-//
-//                    //asynchronously write data
-//                    ApiFuture<WriteResult> result = docRef.set(data);
-//                    // ...
-//                    // result.get() blocks on response
-//                    System.out.println("Update time : " + result.get().getUpdateTime());
-//                }
-//            }
-//
-//            //user.addAnEntry(entryVO);
-//            //mainService.loadEntriesToUser(user.getUsername(), db);
-//
-//        } catch(Exception e) {
-//            System.out.println("error occurred");
-//        }
-//
-//        return "redirect:/history/info";
-//    }
+
+                    WriteResult result = future.get();
+                    System.out.println("Write result: " + result);
+                }
+            }
+
+            //user.addAnEntry(entryVO);
+            //mainService.loadEntriesToUser(user.getUsername(), db);
+
+        } catch(Exception e) {
+            System.out.println("error occurred");
+        }
+
+        return "redirect:/history/info";
+    }
 
 
     @RequestMapping("/chart/info")

@@ -192,6 +192,7 @@
                     <th>Amount</th>
                     <th>Transaction</th>
                     <th>Category</th>
+                    <th>Entry ID</th>
                     <th class="text-center">Actions</th>
                 </tr>
                 </thead>
@@ -207,6 +208,7 @@
                             </td>
                             <td>${entry.transaction}</td>
                             <td><span class="badge badge-light">${entry.category}</span></td>
+                            <td>${entry.number}</td>
                             <td class="text-center">
                                 <div class="list-icons">
                                     <button type="button" class="btn btn-outline bg-primary text-primary-800 btn-icon ml-2" data-toggle="modal" data-target="#modal" id="detailButton" onclick="openModal('detail');" ><i class="icon-search4"></i></button>
@@ -277,11 +279,19 @@
                         <form action="/history/info" class="form-horizontal" id="create">
 <%--                            <input type="hidden" id="wordSeq" name="wordSeq">--%>
                             <div class="modal-body">
+                                <!-- EntryID -->
+                                <div class="form-group row">
+                                    <label class="col-form-label col-sm-3">Entry ID</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" id="entryID" name="entryID" placeholder="Write Entry ID (ex. 2)" class="form-control">
+                                    </div>
+                                </div>
+                                <!-- /EntryID -->
                                 <!-- Date -->
                                 <div class="form-group row">
                                     <label class="col-form-label col-sm-3">Date</label>
                                     <div class="col-sm-9">
-                                        <input type="text" id="dateTime" name="dateTime" placeholder="MM/DD/YYYY" class="form-control">
+                                        <input type="text" id="dateTime" name="dateTime" placeholder="MM-DD-YYYY" class="form-control">
                                     </div>
                                 </div>
                                 <!-- /Date -->

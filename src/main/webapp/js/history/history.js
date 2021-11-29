@@ -166,6 +166,7 @@ function openModal(type) {
         $("#wordEngNm").attr('readonly', false);
         $("#wordAbbr").attr('readonly', false);
 
+        $("#entryID").hide();
 
     } else if (type == 'edit'){
         // show 'EDIT' modal
@@ -208,12 +209,14 @@ function openModal(type) {
 
         $("#modal .modal-title").html('History Detail');
 
+        $("#entryID").show();
+
         // 비활성화
         $("#dateInput").attr('readonly', true);
         $("#descriptionInput").attr('readonly', true);
         $("#amountInput").attr('readonly', true);
         $("#transactionInput").attr('readonly', true);
-        $("#transactionInput").attr('readonly', true);
+        //$("#transactionInput").attr('readonly', true);
     }
 }
 
@@ -253,6 +256,7 @@ function saveConfirm(){
 // update function - when save button clicked
 function updateConfirm(){
     let sendData = {
+        "number": $("#entryID").val(),
         "dateTime": $("#dateTime").val(),
         "amount": $("#amount").val(),
         "description": $("#description").val(),
@@ -262,7 +266,7 @@ function updateConfirm(){
     let dataTable = $("#historyTable").DataTable();
 
     $.ajax({
-        url: contextPath + "/history/add",
+        url: contextPath + "/history/update",
         contentType: "application/json",
         type: "POST",
         data: JSON.stringify(sendData),
