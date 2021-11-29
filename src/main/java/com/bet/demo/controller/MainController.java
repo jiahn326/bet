@@ -231,7 +231,80 @@ public class MainController {
 
         return "redirect:/history/info";
     }
-
+//
+//    @RequestMapping("/history/update")
+//    @ResponseBody
+//    public String updateEntry(@RequestBody Entry entryVO) throws ExecutionException, InterruptedException {
+//        try {
+//
+//            if (db == null){
+//                initializeFirebase();
+//            }
+//
+//
+//            double amount = entryVO.getAmount();
+//            String category = entryVO.getCategory();
+//            String dateTime = entryVO.getDateTime();
+//            String description = entryVO.getDescription();
+//            String transaction = entryVO.getTransaction();
+//            String username = user.getUsername();
+//
+//            for (Entry entry : this.entryList){
+//                if (!dateTime.equals (entry.getDateTime())){
+//
+//                    DocumentReference docRef;
+//                    Map<String, Object> data = new HashMap<>();;
+//                    docRef = db.collection("entry").document(entry.getDateTime()); //***need to find a unique string to replace childpath***
+//                    // Add document data  with id "alovelace" using a hashmap
+//
+//                    data.put("dateTime", dateTime);
+//
+//                    // amount이 null 이 아닌 경우 세션에 값을 저장
+//                    data.put("amount", amount);
+//
+//                    // category이 null 이 아닌 경우 세션에 값을 저장
+//                    if(category != null) {
+//                        data.put("category", category);
+//                    }
+//
+//                    // dateTime이 null 이 아닌 경우 세션에 값을 저장
+//                    if(dateTime != null) {
+//                        data.put("dateTime", dateTime);
+//                    }
+//
+//                    // description이 null 이 아닌 경우 세션에 값을 저장
+//                    if(description != null) {
+//                        data.put("description", description);
+//                    }
+//
+//                    // transaction이 null 이 아닌 경우 세션에 값을 저장
+//                    if(transaction != null) {
+//                        data.put("transaction", transaction);
+//                    }
+//
+//                    // username이 null 이 아닌 경우 세션에 값을 저장
+//                    if(username != null) {
+//                        data.put("user", username);
+//                    }
+//
+//                    //asynchronously write data
+//                    ApiFuture<WriteResult> result = docRef.set(data);
+//                    // ...
+//                    // result.get() blocks on response
+//                    System.out.println("Update time : " + result.get().getUpdateTime());
+//                }
+//            }
+//
+//            //user.addAnEntry(entryVO);
+//            //mainService.loadEntriesToUser(user.getUsername(), db);
+//
+//        } catch(Exception e) {
+//            System.out.println("error occurred");
+//        }
+//
+//        return "redirect:/history/info";
+//    }
+    
     @RequestMapping("/history/searchType")
     @ResponseBody
     public String searchType(){

@@ -243,7 +243,37 @@ function saveConfirm(){
 }
 
 
+// update function - when save button clicked
+function updateConfirm(){
+    let sendData = {
+        "dateTime": $("#dateTime").val(),
+        "amount": $("#amount").val(),
+        "description": $("#description").val(),
+        "transaction": $("#transaction").val(),
+        "category": $("#category").val()
+    };
+    let dataTable = $("#historyTable").DataTable();
 
+    $.ajax({
+        url: contextPath + "/history/add",
+        contentType: "application/json",
+        type: "POST",
+        data: JSON.stringify(sendData),
+        success: function () {
+            // alertMessage("성공!","단어 등록 신청이 완료되었습니다.","success");
+            $("#cancelButton").click();
+            dataTable.destroy();
+            resetSearch();
+            // callHistoryList('','',0);
+        },
+        error: function () {
+            alert("failed")
+
+            // alertMessage("경고!","실패하였습니다. 관리자에게 문의해주세요.","danger");
+            // $("#cancelButton").click();
+        }
+    });
+}
 
 
 /* Template */
