@@ -187,7 +187,7 @@ function openModal(type, num) {
         //     $("select option[value*='wants']").prop('disabled',true);
         //     $("select option[value*='needs']").prop('disabled',true);
         // }
-        $("#entryID").hide();
+      //  $("#entryID").hide();
         $("#dateTime").show();
         $("#amount").show();
         $("#description").show();
@@ -238,7 +238,7 @@ function openModal(type, num) {
 
         $("#modal .modal-title").html('History Detail');
 
-        $("#entryID").show();
+       // $("#entryID").hide();
         $("#dateTime").show();
         $("#amount").show();
         $("#description").show();
@@ -263,11 +263,11 @@ function openModal(type, num) {
             type: "GET",
             data: sendData,
             success: function (data) {
-                $("#insert_form #dateTime").val(data.dateTime);
-                $("#insert_form #description").val(data.description);
-                $("#insert_form #amount").val(data.amount);
-                $("#insert_form #transaction").val(data.transaction);
-                $("#insert_form #category").val(data.category);
+                // $("#insert_form #dateTime").val(data.dateTime);
+                // $("#insert_form #description").val(data.description);
+                // $("#insert_form #amount").val(data.amount);
+                // $("#insert_form #transaction").val(data.transaction);
+                // $("#insert_form #category").val(data.category);
             },
             error: function () {
                 alert("failed")

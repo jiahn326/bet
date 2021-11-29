@@ -231,12 +231,12 @@
 <%--                            <input type="hidden" id="wordSeq" name="wordSeq">--%>
                             <div class="modal-body">
                                 <!-- EntryID -->
-                                <div class="form-group row">
-                                    <label class="col-form-label col-sm-3">Entry ID</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" id="entryID" name="entryID" placeholder="Write Entry ID (ex. 2)" class="form-control">
-                                    </div>
-                                </div>
+<%--                                <div class="form-group row">--%>
+<%--                                    <label class="col-form-label col-sm-3">Entry ID</label>--%>
+<%--                                    <div class="col-sm-9">--%>
+<%--                                        <input type="text" id="entryID" name="entryID" placeholder="Write Entry ID (ex. 2)" class="form-control">--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
                                 <!-- /EntryID -->
                                 <!-- Date -->
                                 <div class="form-group row">

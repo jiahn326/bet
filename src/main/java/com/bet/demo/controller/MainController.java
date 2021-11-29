@@ -48,6 +48,7 @@ public class MainController {
     Firestore db = null;
     User user = null;
     List<Entry> entryList = new ArrayList<>();
+    Entry currentEntry_Update = new Entry();
     HttpServletRequest request;
     HttpServletResponse response;
     @Autowired
@@ -288,6 +289,8 @@ public class MainController {
             }
 
             int number = entryVO.getNumber();
+            currentEntry_Update.setNumber(number);
+
             System.out.println(">>>>>>>>>>>>>>> number: " + number);
 //            double amount = entryVO.getAmount();
 //            String category = entryVO.getCategory();
@@ -357,7 +360,8 @@ public class MainController {
                 initializeFirebase();
             }
 
-            int number = entryVO.getNumber();
+            int number = currentEntry_Update.getNumber();
+            System.out.println("update number!="+number);
             double amount = entryVO.getAmount();
             String category = entryVO.getCategory();
             String dateTime = entryVO.getDateTime();
