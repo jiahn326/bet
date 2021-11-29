@@ -87,41 +87,42 @@
         <div class="card card-sidebar-mobile">
             <ul class="nav nav-sidebar">
                 <li class="nav-item nav-item-submenu">
-                <!-- Main -->
-                <%--                        <li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Main</div> <i class="icon-menu" title="Main"></i></li>--%>
-                <li class="nav-item" style="display: block;">
-                    <a href="#" class="nav-link active second" onclick="changeMenu('${pageContext.request.contextPath}/history/info',this)">
-                        <i class="icon-file-text3"></i>
-                        <span>
-                                    History
-                                </span>
-                    </a>
+                    <!-- Main -->
+                    <%--                        <li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Main</div> <i class="icon-menu" title="Main"></i></li>--%>
+                    <li class="nav-item" style="display: block;">
+                        <a href="#" class="nav-link active second" onclick="changeMenu('${pageContext.request.contextPath}/history/info',this)">
+                            <i class="icon-file-text3"></i>
+                            <span>
+                                        History
+                                    </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link second" onclick="changeMenu('${pageContext.request.contextPath}/chart/info',this)">
+                            <i class="icon-stats-bars"></i>
+                            <span>
+                                        Chart
+                                    </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link second" onclick="changeMenu('${pageContext.request.contextPath}/calendar/info',this)">
+                            <i class="icon-calendar2"></i>
+                            <span>
+                                        Calendar
+                                    </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link second" onclick="changeMenu('${pageContext.request.contextPath}/budget/info',this)">
+                            <i class="icon-piggy-bank"></i>
+                            <span>
+                                        Budget
+                                    </span>
+                        </a>
+                    </li>
+                    <!-- /Main -->
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link second" onclick="changeMenu('${pageContext.request.contextPath}/chart/info',this)">
-                        <i class="icon-stats-bars"></i>
-                        <span>
-                                    Chart
-                                </span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link second" onclick="changeMenu('${pageContext.request.contextPath}/calendar/info',this)">
-                        <i class="icon-calendar2"></i>
-                        <span>
-                                    Calendar
-                                </span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link second" onclick="changeMenu('${pageContext.request.contextPath}/budget/info',this)">
-                        <i class="icon-piggy-bank"></i>
-                        <span>
-                                    Budget
-                                </span>
-                    </a>
-                </li>
-                <!-- /Main -->
             </ul>
         </div>
         <!-- /Main navigation -->

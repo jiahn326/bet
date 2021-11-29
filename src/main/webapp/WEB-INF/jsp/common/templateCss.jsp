@@ -7,6 +7,8 @@
 <link href="${pageContext.request.contextPath}/template/assets/css/colors.min.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/template/global_assets/css/extras/animate.min.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/template/global_assets/css/icons/icomoon/styles.min.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/template/global_assets/css/icons/material/styles.min.css" rel="stylesheet" type="text/css">
+
 <!-- /global stylesheets -->
 
 <!-- Core JS files -->

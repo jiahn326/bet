@@ -19,14 +19,30 @@
     <script src="${pageContext.request.contextPath}/js/table/pageListBox.js"></script>
     <script src="${pageContext.request.contextPath}/js/table/dataTable.js"></script>
     <script src="${pageContext.request.contextPath}/js/history/history.js"></script>
+
     <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/tables/datatables/datatables.min.js"></script>
     <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/forms/selects/select2.min.js"></script>
     <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_pages/datatables_basic.js"></script>
 
     <!-- Modal -->
     <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/notifications/bootbox.min.js"></script>
-    <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/forms/selects/select2.min.js"></script>
     <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_pages/components_modals.js"></script>
+
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/forms/inputs/inputmask.js"></script>
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/forms/styling/uniform.min.js"></script>
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/forms/inputs/autosize.min.js"></script>
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/forms/inputs/formatter.min.js"></script>
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/forms/inputs/typeahead/typeahead.bundle.min.js"></script>
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/forms/inputs/typeahead/handlebars.min.js"></script>
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/forms/inputs/passy.js"></script>
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/forms/inputs/maxlength.min.js"></script>
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_pages/form_controls_extended.js"></script>
+
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/forms/validation/validate.min.js"></script>
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/forms/inputs/touchspin.min.js"></script>
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/forms/styling/switch.min.js"></script>
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/forms/styling/switchery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_pages/form_validation.js"></script>
 
     <title>History</title>
 
@@ -98,18 +114,25 @@
 <body>
 <!-- Table area Start-->
 <div class="content-wrapper">
+    <!-- Page header -->
+    <div class="page-header page-header-light">
+        <div class="page-header-content header-elements-md-inline">
+            <div class="page-title d-flex">
+                <h5><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">History</span></h5>
+                <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+            </div>
+        </div>
+    </div>
+    <!-- /page header -->
+
     <div class="content">
         <div class="card">
             <!-- card header -->
             <div class="card-header header-elements-inline font-size-base">
-                <!-- title of the page -->
-                <h5 class="card-title font-size-lg"><strong>History</strong></h5>
-                <!-- /title of the page -->
-
                 <!-- reload the search input -->
                 <div class="header-elements">
                     <div class="list-icons">
-                        <a class="list-icons-item" data-action="reload" onclick="resetSearch();"></a>
+                        <a class="list-icons-item" data-action="reload" onclick="resetSearch()"></a>
                     </div>
                 </div>
                 <!-- /reload the search input -->
@@ -137,16 +160,33 @@
                     </div>
                 </div>
                 <!-- /search input -->
+
+                <!-- New button -->
                 <button class="btn btn-outline bg-slate-600 text-slate-600 border-slate-600 font-size-xs" type="button" data-toggle="modal" data-target="#modal" id="newButton" onclick="openModal('add');" style="margin-left: auto; margin-right: 50px;">
                     New
                 </button>
+                <!-- /New button -->
+
+
             </div>
             <!-- /Drop box Start -->
 
-            <!-- History table -->
-            <table class="table-bordered-0 table-sm datatable-pagination table-striped table-hover" style="font-size: 12px">
+
+            <!-- Hover Table -->
+            <div class="card-header header-elements-inline">
+                <h5 class="card-title">Hover rows</h5>
+                <div class="header-elements">
+                    <div class="list-icons">
+                        <a class="list-icons-item" data-action="collapse"></a>
+                        <a class="list-icons-item" data-action="reload"></a>
+                        <a class="list-icons-item" data-action="remove"></a>
+                    </div>
+                </div>
+            </div>
+
+            <table class="table datatable-basic table-hover">
                 <thead>
-                <tr style="background-color: #4DB6AC; color: white">
+                <tr>
                     <th>Date</th>
                     <th>Description</th>
                     <th>Amount</th>
@@ -170,22 +210,57 @@
                             <td class="text-center">
                                 <div class="list-icons">
                                     <button type="button" class="btn btn-outline bg-primary text-primary-800 btn-icon ml-2" data-toggle="modal" data-target="#modal" id="detailButton" onclick="openModal('detail');" ><i class="icon-search4"></i></button>
-                                    <button type="button" class="btn btn-outline bg-danger text-danger-800 btn-icon ml-2" data-toggle="modal" data-target="#modal" id="detailButton" onclick="openModal('detail');" ><i class="icon-trash"></i></button>
-<%--                                    <a href="#" class="badge badge-flat border-primary text-primary-600 badge-icon" data-toggle="modal" data-target="#modal" id="detailButton" onclick="openModal('detail');" ><i class="icon-search4"></i></a>--%>
-<%--                                    <a href="#" class="badge badge-flat border-danger text-danger-600 badge-icon"><i class="icon-trash"></i></a>--%>
+                                    <button type="button" class="btn btn-outline bg-danger text-danger-800 btn-icon ml-2" data-toggle="modal" data-target="#modal" id="deleteButton" onclick="openModal('detail');" ><i class="icon-trash"></i></button>
                                 </div>
                             </td>
                         </tr>
                     </c:forEach>
                 </tr>
-                <%--<ul class="list-group">
-                <c:forEach var="entry" items="${entryList}">
-                    <li class="list-group-item list-group-item-action">${entry}</li>
-                </c:forEach>
-                </ul--%>
                 </tbody>
             </table>
-            <!-- /History table -->
+            <!-- /Hover Table -->
+
+<%--            <!-- History table -->--%>
+<%--            <table class="table-bordered-0 table-sm datatable-pagination table-striped table-hover" style="font-size: 12px" id="historyTable">--%>
+<%--                <thead>--%>
+<%--                <tr style="background-color: #4DB6AC; color: white">--%>
+<%--                    <th>Date</th>--%>
+<%--                    <th>Amount</th>--%>
+<%--                    <th>Description</th>--%>
+<%--                    <th>Transaction</th>--%>
+<%--                    <th>Category</th>--%>
+<%--                    <th class="text-center">Actions</th>--%>
+<%--                </tr>--%>
+<%--                </thead>--%>
+<%--                <tbody>--%>
+<%--                <tr>--%>
+<%--                    <c:forEach items="${entryList}" var="entry" varStatus="status">--%>
+<%--                        <tr>--%>
+<%--                            <td>${entry.dateTime}</td>--%>
+<%--                            <td>--%>
+<%--                                <fmt:setLocale value = "en_US"/>--%>
+<%--                                <fmt:formatNumber value = "${entry.amount}" type = "currency"/>--%>
+<%--                            </td>--%>
+<%--                            <td>${entry.description}</td>--%>
+<%--                            <td>${entry.transaction}</td>--%>
+<%--                            <td>${entry.category}</td>--%>
+<%--                            <td class="text-center">--%>
+<%--                                <div class="list-icons">--%>
+<%--                                    <button type="button" class="btn btn-outline bg-primary text-primary-800 btn-icon ml-2" data-toggle="modal" data-target="#modal" id="detailButton" onclick="openModal('detail');" ><i class="icon-search4"></i></button>--%>
+<%--                                    <button type="button" class="btn btn-outline bg-danger text-danger-800 btn-icon ml-2" data-toggle="modal" data-target="#modal" id="deleteButton" onclick="openModal('detail');" ><i class="icon-trash"></i></button>--%>
+<%--                                </div>--%>
+<%--                            </td>--%>
+<%--                        </tr>--%>
+<%--                    </c:forEach>--%>
+<%--                </tr>--%>
+<%--                &lt;%&ndash;<ul class="list-group">--%>
+<%--                <c:forEach var="entry" items="${entryList}">--%>
+<%--                    <li class="list-group-item list-group-item-action">${entry}</li>--%>
+<%--                </c:forEach>--%>
+<%--                </ul&ndash;%&gt;--%>
+<%--                </tbody>--%>
+<%--            </table>--%>
+<%--            <!-- /History table -->--%>
 
             <!-- Modal Start -->
             <div id="modal" class="modal fade" tabindex="-1" style="display: none; height: 1000px;" aria-hidden="true">
@@ -193,85 +268,61 @@
                     <div class="modal-content">
                         <!-- Modal header -->
                         <div class="modal-header">
-                            <h3 class="modal-title"><strong>Add History</strong></h3>
+                            <h3 class="modal-title"><strong>BET</strong></h3>
                             <button type="button" class="close" data-dismiss="modal" style="color: black">×</button>
                         </div>
                         <!-- /Modal header -->
 
                         <!-- Modal content -->
-                        <form action="#" class="form-horizontal" id="insert_form">
+                        <form action="/history/info" class="form-horizontal" id="create">
 <%--                            <input type="hidden" id="wordSeq" name="wordSeq">--%>
                             <div class="modal-body">
                                 <!-- Date -->
-                                <div class="form-group row" id="date">
+                                <div class="form-group row">
                                     <label class="col-form-label col-sm-3">Date</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="dateInput" placeholder="MM/DD/YYYY" class="form-control">
+                                        <input type="text" id="dateTime" name="dateTime" placeholder="MM/DD/YYYY" class="form-control">
                                     </div>
                                 </div>
                                 <!-- /Date -->
                                 <!-- Amount -->
-                                <div class="form-group row" id="amount">
-                                    <label class="col-form-label col-sm-3">Description</label>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-sm-3">Amount</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="amountInput" placeholder="Write description" class="form-control">
+                                        <input type="text" id="amount" name="amount" placeholder="Write amount (ex. 420)" class="form-control">
                                     </div>
                                 </div>
                                 <!-- /Amount -->
                                 <!-- Description -->
-                                <div class="form-group row" id="description">
+                                <div class="form-group row">
                                     <label class="col-form-label col-sm-3">Description</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="descriptionInput" placeholder="Write description" class="form-control">
+                                        <input type="text" id="description" name="description" placeholder="Write description" class="form-control">
                                     </div>
                                 </div>
                                 <!-- /Description -->
                                 <!-- Transaction -->
-                                <div class="form-group row" id="transaction">
+                                <div class="form-group row">
                                     <label class="col-form-label col-sm-3">Transaction</label>
 <%--                                    <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Transaction</button>--%>
-                                    <select class="form-control font-size-xs" style="width: 150px; margin-left: 10px;" aria-hidden="true" name="transactionInput">
+                                    <select class="form-control font-size-xs" style="width: 150px; margin-left: 10px;" aria-hidden="true" id="transaction" name="transaction">
                                         <option value="none">Select...</option>
                                         <option value="expense">Expense</option>
                                         <option value="income">Income</option>
                                     </select>
                                 </div>
-<%--                                <div class="btn-group" id="transaction">--%>
-<%--                                    <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Select transaction</button>--%>
-<%--                                    <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-73px, 36px, 0px);">--%>
-<%--                                        <a href="#" class="dropdown-item"> Action</a>--%>
-<%--                                        <a href="#" class="dropdown-item"> Another action</a>--%>
-<%--                                        <a href="#" class="dropdown-item"> One more action</a>--%>
-<%--                                        <div class="dropdown-divider"></div>--%>
-<%--                                        <a href="#" class="dropdown-item"><i class="icon-gear"></i> Separated line</a>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-
-
-<%--                                <div class="form-group row" id="transaction">--%>
-<%--                                    <label class="col-form-label col-sm-3">Transaction</label>--%>
-<%--                                    <div class="col-sm-9">--%>
-<%--                                        <input type="text" name="transcationInput" placeholder="Write Transaction" class="form-control">--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
                                 <!-- /Transaction -->
 
                                 <!-- Category -->
-                                <div class="form-group row" id="category">
+                                <div class="form-group row">
                                     <label class="col-form-label col-sm-3">Category</label>
-                                    <select class="form-control font-size-xs" aria-hidden="true" style="width: 150px; margin-left: 10px;" name="categoryInput">
+                                    <select class="form-control font-size-xs" aria-hidden="true" style="width: 150px; margin-left: 10px;" id="category" name="category">
                                         <option value="none">Select...</option>
                                         <option value="wants">Wants</option>
                                         <option value="needs">Needs</option>
                                         <option value="savings">Saving</option>
                                     </select>
                                 </div>
-<%--                                <div class="form-group row" id="category">--%>
-<%--                                    <label class="col-form-label col-sm-3">Category</label>--%>
-<%--                                    <div class="col-sm-9">--%>
-<%--                                        <input type="text" name="categoryInput" placeholder="Write Category" class="form-control">--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
                                 <!-- /Category -->
                             </div>
                         </form>
