@@ -13,6 +13,14 @@
     <script>
         var contextPath = "${pageContext.request.contextPath}";
     </script>
+
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/main/bootstrap.bundle.min.js"></script>
+<%--    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>--%>
+<%--    <script type="text/javascript">--%>
+<%-- --%>
+<%--    </script>--%>
+    <script src="${pageContext.request.contextPath}/js/budget/charts_loader.js"></script>
+
     <script src="${pageContext.request.contextPath}/js/budget/budget.js"></script>
 
     <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/visualization/echarts/echarts.min.js"></script>
@@ -59,7 +67,9 @@
                                 <!-- Pie chart -->
                                 <div class="col-sm-8">
                                     <div class="chart-container">
-                                        <div class="chart has-fixed-height" id="pie_basicc"></div>
+<%--                                        <div class="chart has-fixed-height" id="pie_basic"></div>--%>
+                                            <div id="piechart" style="width: 900px; height: 500px;"></div>
+
                                     </div>
                                 </div>
                                 <!-- /Pie chart -->

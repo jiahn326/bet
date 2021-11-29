@@ -224,7 +224,7 @@ function openModal(type, num) {
         // $('#wordAbbr').removeClass('input-short');
 
     } else if (type == 'detail'){
-        // show 'EDIT' modal
+        // show 'DETAIL' modal
 
         $("#modal #saveButton").hide();
         $("#modal #updateButton").show();

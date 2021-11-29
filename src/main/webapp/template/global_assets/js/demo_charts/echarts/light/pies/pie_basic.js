@@ -61,10 +61,11 @@ var EchartsPieBasicLight = function() {
 
                 // Add title
                 title: {
-                    text: 'Goals',
-                    left: 'left',
+                    text: 'Goal',
+                    // subtext: 'Open source information',
+                    left: 'center',
                     textStyle: {
-                        fontSize: 15,
+                        fontSize: 17,
                         fontWeight: 500
                     },
                     subtextStyle: {
@@ -96,7 +97,7 @@ var EchartsPieBasicLight = function() {
 
                 // Add series
                 series: [{
-                    name: 'Browsers',
+                    // name: 'Browsers',
                     type: 'pie',
                     radius: '70%',
                     center: ['50%', '57.5%'],
@@ -107,9 +108,9 @@ var EchartsPieBasicLight = function() {
                         }
                     },
                     data: [
-                        {value: 335, name: 'Wants'},
-                        {value: 310, name: 'Needs'},
-                        {value: 234, name: 'Savings'}
+                        {value: 500, name: 'Wants'},
+                        {value: 300, name: 'Needs'},
+                        {value: 200, name: 'Savings'}
                     ]
                 }]
             });

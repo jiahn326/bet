@@ -1,160 +1,20 @@
-/* ------------------------------------------------------------------------------
- *
- *  # Echarts - Basic pie example
- *
- *  Demo JS code for basic pie chart [light theme]
- *
- * ---------------------------------------------------------------------------- */
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
 
+function drawChart() {
 
-// Setup module
-// ------------------------------
+    var data = google.visualization.arrayToDataTable([
+        ['Task', 'Hours per Day'],
+        ['Wants',   50],
+        ['Needs',  30],
+        ['Savings',  20]
+    ]);
 
-var EchartsPieBasicLight = function() {
-
-
-    //
-    // Setup module components
-    //
-
-    // Basic pie chart
-    var _scatterPieBasicLightExample = function() {
-        if (typeof echarts == 'undefined') {
-            console.warn('Warning - echarts.min.js is not loaded.');
-            return;
-        }
-
-        // Define element
-        var pie_basic_element = document.getElementById('pie_basicc');
-
-
-        //
-        // Charts configuration
-        //
-
-        if (pie_basic_element) {
-
-            // Initialize chart
-            var pie_basic = echarts.init(pie_basic_element);
-
-
-            //
-            // Chart config
-            //
-
-            // Options
-            pie_basic.setOption({
-
-                // Colors
-                color: [
-                    '#2ec7c9','#b6a2de','#5ab1ef','#ffb980','#d87a80',
-                    '#8d98b3','#e5cf0d','#97b552','#95706d','#dc69aa',
-                    '#07a2a4','#9a7fd1','#588dd5','#f5994e','#c05050',
-                    '#59678c','#c9ab00','#7eb00a','#6f5553','#c14089'
-                ],
-
-                // Global text styles
-                textStyle: {
-                    fontFamily: 'Roboto, Arial, Verdana, sans-serif',
-                    fontSize: 13
-                },
-
-                // Add title
-                title: {
-                    text: 'Goals',
-                    left: 'left',
-                    textStyle: {
-                        fontSize: 15,
-                        fontWeight: 500
-                    },
-                    subtextStyle: {
-                        fontSize: 12
-                    }
-                },
-
-                // Add tooltip
-                tooltip: {
-                    trigger: 'item',
-                    backgroundColor: 'rgba(0,0,0,0.75)',
-                    padding: [10, 15],
-                    textStyle: {
-                        fontSize: 13,
-                        fontFamily: 'Roboto, sans-serif'
-                    },
-                    formatter: "{a} <br/>{b}: {c} ({d}%)"
-                },
-
-                // Add legend
-                legend: {
-                    orient: 'vertical',
-                    top: 'center',
-                    left: 0,
-                    data: ['Wants', 'Needs', 'Savings'],
-                    itemHeight: 8,
-                    itemWidth: 8
-                },
-
-                // Add series
-                series: [{
-                    name: 'Browsers',
-                    type: 'pie',
-                    radius: '70%',
-                    center: ['50%', '57.5%'],
-                    itemStyle: {
-                        normal: {
-                            borderWidth: 1,
-                            borderColor: '#fff'
-                        }
-                    },
-                    data: [
-                        {value: 335, name: 'Wants'},
-                        {value: 310, name: 'Needs'},
-                        {value: 234, name: 'Savings'}
-                    ]
-                }]
-            });
-        }
-
-
-        //
-        // Resize charts
-        //
-
-        // Resize function
-        var triggerChartResize = function() {
-            pie_basic_element && pie_basic.resize();
-        };
-
-        // On sidebar width change
-        var sidebarToggle = document.querySelector('.sidebar-control');
-        sidebarToggle && sidebarToggle.addEventListener('click', triggerChartResize);
-
-        // On window resize
-        var resizeCharts;
-        window.addEventListener('resize', function() {
-            clearTimeout(resizeCharts);
-            resizeCharts = setTimeout(function () {
-                triggerChartResize();
-            }, 200);
-        });
+    var options = {
+        title: 'Goal'
     };
 
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
-    //
-    // Return objects assigned to module
-    //
-
-    return {
-        init: function() {
-            _scatterPieBasicLightExample();
-        }
-    }
-}();
-
-
-// Initialize module
-// ------------------------------
-
-document.addEventListener('DOMContentLoaded', function() {
-    EchartsPieBasicLight.init();
-});
+    chart.draw(data, options);
+}
