@@ -186,6 +186,11 @@ function openModal(type, num) {
         //     $("select option[value*='needs']").prop('disabled',true);
         // }
         $("#entryID").hide();
+        $("#dateTime").show();
+        $("#amount").show();
+        $("#description").show();
+        $("#transaction").show();
+        $("#category").show();
 
     } else if (type == 'edit'){
         // show 'EDIT' modal
@@ -232,6 +237,11 @@ function openModal(type, num) {
         $("#modal .modal-title").html('History Detail');
 
         $("#entryID").show();
+        $("#dateTime").show();
+        $("#amount").show();
+        $("#description").show();
+        $("#transaction").show();
+        $("#category").show();
 
         // 비활성화
         $("#dateInput").attr('readonly', true);
