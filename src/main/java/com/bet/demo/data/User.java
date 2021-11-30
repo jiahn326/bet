@@ -228,6 +228,63 @@ public class User {
         return total;
     }
 
+    public double getBudgetWants(){
+        return this.getTotalExpense() * (this.budget.getWants()*1.0/100);
+    }
+
+    public double getBudgetNeeds(){
+        return this.getTotalExpense() * (this.budget.getNeeds()*1.0/100);
+    }
+
+    public double getBudgetSavings(){
+        return this.getTotalExpense() * (this.budget.getSavings()*1.0/100);
+    }
+
+    public boolean superSmile(){
+        return !moreWants() && !moreNeeds() && moreSavings();
+    }
+
+    public boolean smile(){
+        if (moreWants() && !moreNeeds() && moreSavings()){
+            return true;
+        } else if (!moreWants() && moreNeeds() && moreSavings()){
+            return true;
+        } else if (moreWants() && moreNeeds() && !moreSavings()){
+            return true;
+        } else
+            return false;
+    }
+
+    public boolean sad(){
+        if (moreWants() && moreNeeds() && moreSavings()){
+            return true;
+        } else if (!moreWants() && moreNeeds() && !moreSavings()){
+            return true;
+        } else if (moreWants() && !moreNeeds() && !moreSavings()){
+            return true;
+        } else
+            return false;
+    }
+
+    public boolean angry(){
+        return moreWants() && moreNeeds() && !moreSavings();
+    }
+
+    //returns true if curWants > budgetWants
+    private boolean moreWants(){
+        return this.getBudgetWants() > this.getBudgetWants();
+    }
+
+    //returns true if curNeeds > budgetNeeds
+    private boolean moreNeeds(){
+        return this.getTotalNeeds() > this.getBudgetNeeds();
+    }
+
+    //returns true if curSavings > budgetSavings
+    private boolean moreSavings(){
+        return this.getTotalSavings() > this.getBudgetSavings()*.7;
+    }
+
     @Override
     public String toString() {
         return "User{" +

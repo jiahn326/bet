@@ -6,18 +6,18 @@ function updateConfirm(){
     };
 
     $.ajax({
-        url: contextPath + "/budget/updateBudget",
+        url: contextPath + "/budget/update",
         contentType: "application/json",
         type: "POST",
         data: JSON.stringify(sendData),
         success: function () {
-            resetSearch();
             // alertMessage("성공!","단어 등록 신청이 완료되었습니다.","success");
             $("#cancelButton").click();
             //dataTable.destroy();
             // callHistoryList('','',0);
 
             $("#c3-pie-chart").reload();
+            $("#bars_stacked_clustered").reload();
         },
         error: function () {
             alert("failed")
@@ -27,4 +27,8 @@ function updateConfirm(){
         }
     });
 
+}
+
+function refreshPage(){
+    window.location.reload();
 }

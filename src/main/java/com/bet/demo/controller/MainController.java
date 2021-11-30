@@ -48,8 +48,7 @@ public class MainController {
     User user = null;
     List<Entry> entryList = new ArrayList<>();
     Entry currentEntry_Update = new Entry();
-    HttpServletRequest request;
-    HttpServletResponse response;
+
     @Autowired
     private MainService mainService;
 
@@ -78,8 +77,8 @@ public class MainController {
     @RequestMapping("/login")
     public String login(HttpServletRequest request, HttpServletResponse response) throws ExecutionException, InterruptedException, IOException {
         HttpSession session = request.getSession();
-        this.request = request;
-        this.response = response;
+        
+        
 
         if (db == null){
             initializeFirebase();
@@ -107,8 +106,8 @@ public class MainController {
     @RequestMapping(value = "/signUp")
     public String signUp(HttpServletRequest request, HttpServletResponse response) throws ExecutionException, InterruptedException, IOException {
         HttpSession session = request.getSession();
-        this.request = request;
-        this.response = response;
+        
+        
 
         if (db == null){
             initializeFirebase();
@@ -146,8 +145,8 @@ public class MainController {
     public String history(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ExecutionException, InterruptedException {
         //System.out.println("supersuper");
         HttpSession session = request.getSession();
-        this.request = request;
-        this.response = response;
+        
+        
 
         System.out.println(request.toString());
         this.entryList = null; //reset
@@ -198,8 +197,6 @@ public class MainController {
 
         String entryType = search.getEntryType();
         String keyword = search.getKeyword();
-
-        System.out.println(request.toString());
 
         System.out.println(entryType + " " + keyword);
 
@@ -421,7 +418,8 @@ public class MainController {
 
     @RequestMapping("/budget/info")
     public String budget(HttpServletRequest request, HttpServletResponse response) throws ExecutionException, InterruptedException {
-        mainService.reloadBudget(user, db);
+        System.out.println("reloaded");
+        System.out.println(this.user.getBudget());
 
         double totalWants = Precision.round(this.user.getTotalWants(), 2);
         double totalNeeds = Precision.round(this.user.getTotalNeeds(),2);
@@ -447,24 +445,39 @@ public class MainController {
         return "budgetView/budget";
     }
 
-    @RequestMapping("/budget/updateBudget")
+    @RequestMapping("/budget/update")
     @ResponseBody
-    public String updateBudget(@RequestBody Budget budget) throws IOException {
-        int newNeeds = budget.getNeeds();
-        int newWants = budget.getWants();
-        int newSavings = budget.getSavings();
+    public String updateBudget(@RequestBody Budget budget) throws IOException, ExecutionException, InterruptedException {
+        try{
+            int newNeeds = budget.getNeeds();
+            int newWants = budget.getWants();
+            int newSavings = budget.getSavings();
 
-        if (db == null){
-            this.initializeFirebase();
+            System.out.println("input budget" + budget);
+
+            if (db == null){
+                this.initializeFirebase();
+            }
+
+            DocumentReference docRef = db.collection("budget").document(this.user.getUsername());
+            ApiFuture<WriteResult> future;
+            future = docRef.update("needs", newNeeds);
+            future = docRef.update("wants", newWants);
+            future = docRef.update("savings", newSavings);
+
+            WriteResult result = future.get();
+
+            System.out.println("Write result: " + result);
+
+
+            this.user.setBudget(null);
+            mainService.reloadBudget(user, db);
+            System.out.println("new budget" + this.user.getBudget());
+        } catch (Exception e){
+            System.err.println(e);
         }
-        DocumentReference docRef = db.collection("budget").document(this.user.getUsername());
-        ApiFuture<WriteResult> future = docRef.update("needs", newNeeds);
-        future = docRef.update("wants", newWants);
-        future = docRef.update("needs", newNeeds);
-        future = docRef.update("savings", newSavings);
 
         return "redirect:/budget/info";
-
     }
 
     //sets up firebase and connects to the firestore database

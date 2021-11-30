@@ -168,7 +168,7 @@ public class MainService {
         if (document.exists()){
             budget = document.toObject(Budget.class);
             user.setBudget(budget);
-            System.out.println("budget:"+user.getBudget());
+            System.out.println("db budget:"+user.getBudget());
         } else{
             budget = new Budget(30,50,20);
             user.setBudget(budget);
@@ -178,7 +178,7 @@ public class MainService {
             docData.put("savings", 20);
             ApiFuture<WriteResult> result = db.collection("budget").document(username).set(docData);
             System.out.println("Update time : " + future.get().getUpdateTime());
-            System.out.println("budget:"+user.getBudget());
+            System.out.println("new db budget:"+user.getBudget());
         }
     }
 }
