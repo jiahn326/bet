@@ -141,7 +141,7 @@ public class MainController {
 //
 //        return "loginView/login";
 //    }
-    
+
     /* page info */
     @RequestMapping("/user/info")
     public String userPage(HttpServletRequest request, HttpServletResponse response) throws IOException, ExecutionException, InterruptedException{
@@ -151,14 +151,13 @@ public class MainController {
 
     @RequestMapping("/history/info")
     public String history(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ExecutionException, InterruptedException {
-        //System.out.println("supersuper");
+        System.out.println("supersuper");
         HttpSession session = request.getSession();
         
-        
-        /*this.entryList = null; //reset
 
+        this.entryList = null; //reset
         mainService.reloadEntries(user, db); // refresh
-*/
+
         if (db == null){
             initializeFirebase();
         }
@@ -166,6 +165,8 @@ public class MainController {
         if (this.entryList == null){
             mainService.reloadEntries(user,db);
         }
+
+        System.out.println(user.getEntry());
 
         if (user != null && !user.isEntryEmpty() && this.entryList == null){
             this.entryList = user.getEntry();
@@ -241,7 +242,6 @@ public class MainController {
                 initializeFirebase();
             }
 
-
             double amount = entryVO.getAmount();
             String category = entryVO.getCategory();
             String dateTime = entryVO.getDateTime();
@@ -249,7 +249,7 @@ public class MainController {
             String transaction = entryVO.getTransaction();
             String username = user.getUsername();
 
-            DocumentReference docRef = db.collection("entry").document(user.getUsername()+(user.getEntry().size()+1)); //***need to find a unique string to replace childpath***
+            DocumentReference docRef = db.collection("entry").document(user.getUsername()+(user.getMaxID()+1)); //***need to find a unique string to replace childpath***
             // Add document data  with id "alovelace" using a hashmap
             Map<String, Object> data = new HashMap<>();
 
@@ -281,7 +281,7 @@ public class MainController {
                 data.put("user", username);
             }
 
-            data.put("number", user.getEntry().size()+1);
+            data.put("number", user.getMaxID()+1);
 
             //asynchronously write data
             ApiFuture<WriteResult> result = docRef.set(data);
@@ -295,8 +295,6 @@ public class MainController {
         } catch(Exception e) {
             System.out.println("error occurred");
         }
-
-        this.entryList = null;
 
         return "redirect:/history/info";
     }
@@ -393,9 +391,6 @@ public class MainController {
             String username = user.getUsername();
 
             DocumentReference docRef = db.collection("entry").document(this.user.getUsername()+number);
-            /*Map<String, Object> data = new HashMap<>();;
-                   ApiFuture<QuerySnapshot> entryFuture = db.collection("entry").whereEqualTo("number", number).get(); //***need to find a unique string to replace childpath***
-            // Add document data  with id "alovelace" using a hashmap*/
 
             ApiFuture<WriteResult> future = docRef.update("dateTime", dateTime);
 
@@ -419,8 +414,6 @@ public class MainController {
             System.out.println("error occurred");
         }
 
-        this.entryList = null;
-
         return "redirect:/history/info";
     }
 
@@ -431,7 +424,7 @@ public class MainController {
         System.out.println("entryID = " + entryID);
         ApiFuture<WriteResult> writeResult = db.collection("entry").document(this.user.getUsername()+entryID).delete();
 
-        return "redirect:/content";
+        return "redirect:/history/info";
     }
 
 
@@ -447,6 +440,11 @@ public class MainController {
 
     @RequestMapping("/budget/info")
     public String budget(HttpServletRequest request, HttpServletResponse response) throws ExecutionException, InterruptedException {
+        this.entryList = null; //reset
+        mainService.reloadEntries(user, db); // refresh
+        this.user.setBudget(null);
+        mainService.reloadBudget(user, db);
+
         System.out.println("reloaded");
         System.out.println(this.user.getBudget());
 
@@ -498,9 +496,6 @@ public class MainController {
 
             System.out.println("Write result: " + result);
 
-
-            this.user.setBudget(null);
-            mainService.reloadBudget(user, db);
             System.out.println("new budget" + this.user.getBudget());
         } catch (Exception e){
             System.err.println(e);

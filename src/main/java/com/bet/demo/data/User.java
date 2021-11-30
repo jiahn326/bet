@@ -307,6 +307,16 @@ public class User {
         return total;
     }
 
+    public int getMaxID(){
+        int max = 0;
+        for (Entry entry: entries){
+            if (entry.getNumber()>max){
+                max = entry.getNumber();
+            }
+        }
+        return max;
+    }
+
     @Override
     public String toString() {
         return "User{" +

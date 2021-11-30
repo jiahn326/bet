@@ -201,7 +201,7 @@
                             <td class="text-center">
                                 <div class="list-icons">
                                     <button type="button" class="btn btn-outline bg-primary text-primary-800 btn-icon ml-2" data-toggle="modal" data-target="#modal" id="detailButton" onclick="openModal('detail', ${entry.number});" ><i class="icon-pencil"></i></button>
-                                    <button type="button" class="btn btn-outline bg-danger text-danger-800 btn-icon ml-2" id="deleteButton" onclick="deleteConfirm(${entry.number})" ><i class="icon-trash"></i></button>
+                                    <button type="button" class="btn btn-outline bg-danger text-danger-800 btn-icon ml-2" id="deleteButton" onclick="deleteConfirm(${entry.number}); location.href='/refresh'" ><i class="icon-trash"></i></button>
                                 </div>
                             </td>
                         </tr>
@@ -292,7 +292,7 @@
 
                         <!-- Button -->
                         <div class="modal-footer">
-                            <button type="button" id="saveButton" class="btn bg-teal" onclick="saveConfirm();">Save</button>
+                            <button type="button" id="saveButton" class="btn bg-teal" onclick="saveConfirm(); location.href='/refresh'">Save</button>
                             <button type="button" id="updateButton" class="btn bg-teal" onclick="updateConfirm();">Edit Save</button>
 <%--                            <button type="button" id="deleteEntry" class="btn bg-teal" onclick="deleteConfirm();">Delete</button>--%>
                             <button type="button" id="cancelButton" class="btn btn-outline" data-dismiss="modal">Close</button>
