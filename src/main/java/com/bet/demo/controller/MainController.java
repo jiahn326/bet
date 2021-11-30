@@ -46,7 +46,7 @@ public class MainController {
 
     Firestore db = null;
     User user = null;
-    List<Entry> entryList = new ArrayList<>();
+    List<Entry> entryList = null;
     Entry currentEntry_Update = new Entry();
 
     @Autowired
@@ -90,6 +90,8 @@ public class MainController {
             //this.entryList = user.getEntry();
             //System.out.println(this.user.toString());
             //System.out.println(this.user.getEntry().toString());
+//            System.out.println("current month expense" + user.getCurMonthExpense("10", "2021"));
+//            System.out.println("current month income" + user.getCurMonthIncome("11", "2021"));
             page = "content";
         } else{
             page = "loginView/login";
@@ -141,30 +143,30 @@ public class MainController {
     /* page info */
 
     @RequestMapping("/history/info")
-
     public String history(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ExecutionException, InterruptedException {
         //System.out.println("supersuper");
         HttpSession session = request.getSession();
         
         
-
-        System.out.println(request.toString());
-        this.entryList = null; //reset
+        /*this.entryList = null; //reset
 
         mainService.reloadEntries(user, db); // refresh
-
+*/
         if (db == null){
             initializeFirebase();
         }
 
+        if (this.entryList == null){
+            mainService.reloadEntries(user,db);
+        }
 
-        if (user != null && !user.isEntryEmpty()){
+        if (user != null && !user.isEntryEmpty() && this.entryList == null){
             this.entryList = user.getEntry();
         }
 
-        System.out.println(this.entryList.toString());
-
         request.setAttribute("entryList", this.entryList);
+
+        System.out.println(this.entryList.toString());
 
         if(session != null) {
             session.invalidate();
@@ -173,21 +175,36 @@ public class MainController {
         return "historyView/history";
     }
 
-//    @RequestMapping("/searchHistory")
-//    public String search(HttpServletRequest request, HttpServletResponse response){
-//        String entryType = request.getParameter("entryType");
-//        String keyword = request.getParameter("keyword");
-//
-//        System.out.println(request.toString());
-//
-//        System.out.println(entryType + " " + keyword);
-//
-//        this.entryList = mainService.searchHistory("category", "wants");
-//        System.out.println(this.entryList.toString());
-//
-//        return "redirect:/history/info";
-//
-//    }
+    @RequestMapping("/searchHistory")
+    public String search(HttpServletRequest request, HttpServletResponse response){
+        String entryType = request.getParameter("entryType");
+        String keyword = request.getParameter("keyword");
+
+        System.out.println(request.toString());
+
+        System.out.println(entryType + " " + keyword);
+
+        this.entryList = mainService.searchHistory("category", "savings");
+
+        request.setAttribute("entryList", this.entryList);
+        System.out.println(this.entryList.toString());
+
+        return "redirect:/history/info";
+    }
+
+    @RequestMapping("/refresh")
+    public String refresh(HttpServletRequest request, HttpServletResponse response) throws ExecutionException, InterruptedException {
+
+        mainService.reloadEntries(user,db);
+        this.user = mainService.getUser();
+        this.entryList = this.user.getEntry();
+
+        request.setAttribute("entryList", this.entryList);
+        System.out.println(this.entryList.toString());
+
+        return "redirect:/history/info";
+
+    }
 
     @RequestMapping("/history/search")
     @ResponseBody
@@ -201,6 +218,7 @@ public class MainController {
         System.out.println(entryType + " " + keyword);
 
         this.entryList = mainService.searchHistory(entryType, keyword);
+
         System.out.println(this.entryList.toString());
 
         return "redirect:/history/info";
@@ -270,6 +288,8 @@ public class MainController {
         } catch(Exception e) {
             System.out.println("error occurred");
         }
+
+        this.entryList = null;
 
         return "redirect:/history/info";
     }
@@ -391,6 +411,8 @@ public class MainController {
         } catch(Exception e) {
             System.out.println("error occurred");
         }
+
+        this.entryList = null;
 
         return "redirect:/history/info";
     }

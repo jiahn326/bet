@@ -132,7 +132,7 @@
                 <!-- reload the search input -->
                 <div class="header-elements">
                     <div class="list-icons">
-                        <a class="list-icons-item" data-action="reload" onclick="resetSearch()"></a>
+                        <a class="list-icons-item" data-action="reload" onclick="location.href='/refresh'"></a>
                     </div>
                 </div>
                 <!-- /reload the search input -->
@@ -155,7 +155,7 @@
                     <div class="input-group" style="width: 400px;">
                         <input type="text" class="form-control border-right-0 font-size-xs" placeholder="Search..." name="keyword" id="keyword">
                         <span class="input-group-append">
-                            <button class="btn border font-size-xs" type="button" value = "searchButton" onclick="searchHistory()"><i class="icon-search4"></i></button>
+                            <button class="btn border font-size-xs" type="button" value = "searchButton" onclick="location.href='/searchHistory'"><i class="icon-search4"></i></button>
                         </span>
                     </div>
                 </div>
