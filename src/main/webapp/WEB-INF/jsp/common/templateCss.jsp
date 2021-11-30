@@ -50,8 +50,11 @@
 <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/forms/inputs/formatter.min.js"></script>
 
 <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_pages/form_floating_labels.js"></script>
+<script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/ui/prism.min.js"></script>
+<script src="${pageContext.request.contextPath}/template/global_assets/js/demo_pages/extension_blockui.js"></script>
 <!-- /theme JS files -->
 
 <!-- common JS files -->
 <script src="${pageContext.request.contextPath}/js/common/common.js"></script>
+<script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/loaders/blockui.min.js"></script>
 <!-- /common JS files -->
