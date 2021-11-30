@@ -9,6 +9,7 @@ public class Entry {
     private int number;
     private String transaction;
     private String user;
+    private String sign;
 
     public Entry(){
     }
@@ -21,6 +22,15 @@ public class Entry {
         this.number = number;
         this.transaction = transaction;
         this.user = user;
+        this.setSign();
+    }
+
+    public void setSign() {
+        if (transaction.equals("expense")){
+            this.sign = "-";
+        } else if (transaction.equals("income")){
+            this.sign = "+";
+        }
     }
 
     public double getAmount(){
@@ -79,10 +89,14 @@ public class Entry {
         this.user = user;
     }
 
+    public String getSign(){
+        return this.sign;
+    }
+
     @Override
     public String toString(){
         return "Entry{" +
-                "amount='" + amount + '\'' +
+                "amount='" + this.sign+amount + '\'' +
                 ", category='" + category + '\'' +
                 ", date time='" + dateTime + '\'' +
                 ", number='" + number + '\'' +

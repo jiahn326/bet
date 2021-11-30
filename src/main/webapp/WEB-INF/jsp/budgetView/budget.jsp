@@ -145,27 +145,27 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-sm-3">Wants</label>
                                     <div class="col-sm-9">
-                                        <input type="number" class="form-control rounded-round col-sm-2" value="${budgetWants}" placeholder="Enter new percentage">
+                                        <input type="number" class="form-control rounded-round col-sm-2" value="${budgetWants}" placeholder="Enter new percentage" id="newWants" name="newWants">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label class="col-form-label col-sm-3">Needs</label>
                                     <div class="col-sm-9">
-                                        <input type="number" class="form-control rounded-round col-sm-2" value="${budgetNeeds}" placeholder="Enter new needs">
+                                        <input type="number" class="form-control rounded-round col-sm-2" value="${budgetNeeds}" placeholder="Enter new needs" id="newNeeds" name="newNeeds">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label class="col-form-label col-sm-3">Savings</label>
                                     <div class="col-sm-9">
-                                        <input type="number" class="form-control rounded-round col-sm-2" value="${budgetSavings}" placeholder="Enter new savings">
+                                        <input type="number" class="form-control rounded-round col-sm-2" value="${budgetSavings}" placeholder="Enter new savings" id="newSavings" name="newSavings">
                                     </div>
                                 </div>
                             </div>
 
                             <div class="modal-footer">
-                                <button type="submit" class="btn bg-slate">Save</button>
+                                <button type="submit" class="btn bg-slate" onclick="updateConfirm()">Save</button>
                                 <button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
                             </div>
                         </form>

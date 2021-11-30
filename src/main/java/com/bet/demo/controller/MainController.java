@@ -1,9 +1,7 @@
 package com.bet.demo.controller;
 
-import com.bet.demo.data.Entry;
+import com.bet.demo.data.*;
 import com.bet.demo.data.Number;
-import com.bet.demo.data.Search;
-import com.bet.demo.data.User;
 import com.bet.demo.service.MainService;
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
@@ -50,8 +48,7 @@ public class MainController {
     User user = null;
     List<Entry> entryList = new ArrayList<>();
     Entry currentEntry_Update = new Entry();
-    HttpServletRequest request;
-    HttpServletResponse response;
+
     @Autowired
     private MainService mainService;
 
@@ -80,8 +77,8 @@ public class MainController {
     @RequestMapping("/login")
     public String login(HttpServletRequest request, HttpServletResponse response) throws ExecutionException, InterruptedException, IOException {
         HttpSession session = request.getSession();
-        this.request = request;
-        this.response = response;
+        
+        
 
         if (db == null){
             initializeFirebase();
@@ -114,8 +111,8 @@ public class MainController {
     @RequestMapping(value = "/signUp")
     public String signUp(HttpServletRequest request, HttpServletResponse response) throws ExecutionException, InterruptedException, IOException {
         HttpSession session = request.getSession();
-        this.request = request;
-        this.response = response;
+        
+        
 
         if (db == null){
             initializeFirebase();
@@ -158,8 +155,8 @@ public class MainController {
     public String history(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ExecutionException, InterruptedException {
         //System.out.println("supersuper");
         HttpSession session = request.getSession();
-        this.request = request;
-        this.response = response;
+        
+        
 
         System.out.println(request.toString());
         this.entryList = null; //reset
@@ -210,8 +207,6 @@ public class MainController {
 
         String entryType = search.getEntryType();
         String keyword = search.getKeyword();
-
-        System.out.println(request.toString());
 
         System.out.println(entryType + " " + keyword);
 
@@ -380,30 +375,25 @@ public class MainController {
             String transaction = entryVO.getTransaction();
             String username = user.getUsername();
 
-            for (Entry entry : this.entryList){
-                if (!dateTime.equals (entry.getDateTime())){
+            DocumentReference docRef = db.collection("entry").document(this.user.getUsername()+number);
+            /*Map<String, Object> data = new HashMap<>();;
+                   ApiFuture<QuerySnapshot> entryFuture = db.collection("entry").whereEqualTo("number", number).get(); //***need to find a unique string to replace childpath***
+            // Add document data  with id "alovelace" using a hashmap*/
 
-                    DocumentReference docRef = db.collection("entry").document(this.user.getUsername()+number);
-                    /*Map<String, Object> data = new HashMap<>();;
-                    ApiFuture<QuerySnapshot> entryFuture = db.collection("entry").whereEqualTo("number", number).get(); //***need to find a unique string to replace childpath***
-                    // Add document data  with id "alovelace" using a hashmap*/
+            ApiFuture<WriteResult> future = docRef.update("dateTime", dateTime);
 
-                    ApiFuture<WriteResult> future = docRef.update("dateTime", dateTime);
+            future = docRef.update("amount", amount);
 
-                    future = docRef.update("amount", amount);
+            future = docRef.update("category", category);
 
-                    future = docRef.update("category", category);
+            future = docRef.update("description", description);
 
-                    future = docRef.update("description", description);
+            future = docRef.update("transaction", transaction);
 
-                    future = docRef.update("transaction", transaction);
+            future = docRef.update("user", username);
 
-                    future = docRef.update("user", username);
-
-                    WriteResult result = future.get();
-                    System.out.println("Write result: " + result);
-                }
-            }
+            WriteResult result = future.get();
+            System.out.println("Write result: " + result);
 
 //            user.addAnEntry(entryVO);
 //            mainService.loadEntriesToUser(user.getUsername(), db);
@@ -437,7 +427,11 @@ public class MainController {
     }
 
     @RequestMapping("/budget/info")
-    public String budget(HttpServletRequest request, HttpServletResponse response){    double totalWants = Precision.round(this.user.getTotalWants(), 2);
+    public String budget(HttpServletRequest request, HttpServletResponse response) throws ExecutionException, InterruptedException {
+        System.out.println("reloaded");
+        System.out.println(this.user.getBudget());
+
+        double totalWants = Precision.round(this.user.getTotalWants(), 2);
         double totalNeeds = Precision.round(this.user.getTotalNeeds(),2);
         double totalSavings = Precision.round(this.user.getTotalSavings(), 2);
         double totalExpense = Precision.round(this.user.getTotalExpense(), 2);
@@ -459,6 +453,41 @@ public class MainController {
         request.setAttribute("plannedSavings", Precision.round(totalExpense * (budgetSavings*1.0/100),2));
 
         return "budgetView/budget";
+    }
+
+    @RequestMapping("/budget/update")
+    @ResponseBody
+    public String updateBudget(@RequestBody Budget budget) throws IOException, ExecutionException, InterruptedException {
+        try{
+            int newNeeds = budget.getNeeds();
+            int newWants = budget.getWants();
+            int newSavings = budget.getSavings();
+
+            System.out.println("input budget" + budget);
+
+            if (db == null){
+                this.initializeFirebase();
+            }
+
+            DocumentReference docRef = db.collection("budget").document(this.user.getUsername());
+            ApiFuture<WriteResult> future;
+            future = docRef.update("needs", newNeeds);
+            future = docRef.update("wants", newWants);
+            future = docRef.update("savings", newSavings);
+
+            WriteResult result = future.get();
+
+            System.out.println("Write result: " + result);
+
+
+            this.user.setBudget(null);
+            mainService.reloadBudget(user, db);
+            System.out.println("new budget" + this.user.getBudget());
+        } catch (Exception e){
+            System.err.println(e);
+        }
+
+        return "redirect:/budget/info";
     }
 
     //sets up firebase and connects to the firestore database

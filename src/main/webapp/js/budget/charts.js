@@ -77,7 +77,7 @@ var EchartsPieBasicLight = function() {
 
                 // Add title
                 title: {
-                    text: 'Goal',
+                    text: 'Current Status',
                     // subtext: 'Open source information',
                     left: 'center',
                     textStyle: {

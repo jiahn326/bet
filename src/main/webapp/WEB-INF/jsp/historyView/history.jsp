@@ -191,6 +191,7 @@
                             <td>${entry.dateTime}</td>
                             <td>${entry.description}</td>
                             <td>
+                                ${entry.sign}
                                 <fmt:setLocale value = "en_US"/>
                                 <fmt:formatNumber value = "${entry.amount}" type = "currency"/>
                             </td>

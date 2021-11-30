@@ -148,10 +148,16 @@ public class MainService {
         System.out.println(documents.size());
         for (QueryDocumentSnapshot document : documents) {
             Entry entry = document.toObject(Entry.class);
+            entry.setSign();
             user.addAnEntry(entry);
             System.out.println(entry.toString());
             list.add(entry);
         }
+    }
+
+    public void reloadBudget(User user, Firestore db) throws ExecutionException, InterruptedException {
+        user.setBudget(null);
+        loadBudgetToUser(user.getUsername(), db);
     }
 
     public void loadBudgetToUser(String username, Firestore db) throws ExecutionException, InterruptedException {
@@ -163,7 +169,7 @@ public class MainService {
         if (document.exists()){
             budget = document.toObject(Budget.class);
             user.setBudget(budget);
-            System.out.println("budget:"+user.getBudget());
+            System.out.println("db budget:"+user.getBudget());
         } else{
             budget = new Budget(30,50,20);
             user.setBudget(budget);
@@ -173,7 +179,7 @@ public class MainService {
             docData.put("savings", 20);
             ApiFuture<WriteResult> result = db.collection("budget").document(username).set(docData);
             System.out.println("Update time : " + future.get().getUpdateTime());
-            System.out.println("budget:"+user.getBudget());
+            System.out.println("new db budget:"+user.getBudget());
         }
     }
 }
