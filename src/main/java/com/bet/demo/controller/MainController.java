@@ -90,6 +90,11 @@ public class MainController {
         String page = "";
         if (mainService.login(request, response, session, db)){
             this.user = mainService.getUser();
+
+            String userName = this.user.getFirstname() + this.user.getLastname();
+            System.out.println(">>>>>>>>>>> username: " + userName);
+            request.setAttribute("userName", userName);
+
             //this.entryList = user.getEntry();
             //System.out.println(this.user.toString());
             //System.out.println(this.user.getEntry().toString());
@@ -142,9 +147,14 @@ public class MainController {
 
 
     /* page info */
+    @RequestMapping("/user/info")
+    public String userPage(HttpServletRequest request, HttpServletResponse response) throws IOException, ExecutionException, InterruptedException{
+
+        return "loginView/accountSetting";
+    }
+
 
     @RequestMapping("/history/info")
-
     public String history(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ExecutionException, InterruptedException {
         //System.out.println("supersuper");
         HttpSession session = request.getSession();

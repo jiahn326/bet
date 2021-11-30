@@ -64,20 +64,28 @@
         <div class="sidebar-user">
             <div class="card-body">
                 <div class="media">
-                    <div class="mr-3">
-                        <a href="#"><img src="${pageContext.request.contextPath}/template/global_assets/images/placeholders/placeholder.jpg" width="38" height="38" class="rounded-circle" alt=""></a>
-                    </div>
+<%--                    <div class="mr-3">--%>
+<%--                        <a href="#"><img src="${pageContext.request.contextPath}/images/BET_EMOJI_SUPERSMILE.png" width="200" height="auto" class="rounded-circle" alt=""></a>--%>
+<%--                    </div>--%>
 
-                    <div class="media-body">
-                        <div class="media-title font-weight-semibold">Jihyun Ahn</div>
-                        <div class="font-size-xs opacity-50">
-                            <i class="icon-pin font-size-sm"></i> &nbsp;Bridgeport, CT
+                    <div class="card" id="emojiStatus">
+                        <div class="card-img-actions">
+                            <img class="card-img-top img-fluid" src="${pageContext.request.contextPath}/images/BET_EMOJI_SUPERSMILE.png" align="center" width="100" height="auto" alt="">
                         </div>
+
+                        <h5 class="card-title">Current Status: </h5>
                     </div>
 
-                    <div class="ml-3 align-self-center">
-                        <a href="#" class="text-white"><i class="icon-cog3"></i></a>
-                    </div>
+<%--                    <div class="media-body">--%>
+<%--                        <div class="media-title font-weight-semibold">Jihyun Ahn</div>--%>
+<%--                        <div class="font-size-xs opacity-50">--%>
+<%--                            <i class="icon-pin font-size-sm"></i> &nbsp;Bridgeport, CT--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+
+<%--                    <div class="ml-3 align-self-center">--%>
+<%--                        <a href="#" class="text-white"><i class="icon-cog3"></i></a>--%>
+<%--                    </div>--%>
                 </div>
             </div>
         </div>
@@ -93,7 +101,7 @@
                         <a href="#" class="nav-link active second" onclick="changeMenu('${pageContext.request.contextPath}/history/info',this)">
                             <i class="icon-file-text3"></i>
                             <span>
-                                        History
+                                        Account
                                     </span>
                         </a>
                     </li>
