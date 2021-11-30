@@ -24,7 +24,6 @@
     </script>
     <!-- /change page when user click the sidebar -->
 
-
     <!-- Sidebar mobile toggler -->
     <div class="sidebar-mobile-toggler text-center">
         <a href="#" class="sidebar-mobile-main-toggle">
@@ -44,7 +43,6 @@
         <div class="sidebar-user">
             <div class="card-body">
                 <div class="media">
-
                     <!-- Emoji -->
                     <div class="card-body bg-indigo-400 text-center card-img-top" style="background-color: #263238; background-size: contain;">
                         <div class="card-img-actions d-inline-block mb-3">
@@ -71,6 +69,14 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="#" class="nav-link second" onclick="changeMenu('${pageContext.request.contextPath}/budget/info',this)">
+                            <i class="icon-piggy-bank"></i>
+                            <span>
+                                            Budget
+                                        </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="#" class="nav-link second" onclick="changeMenu('${pageContext.request.contextPath}/chart/info',this)">
                             <i class="icon-stats-bars"></i>
                             <span>
@@ -83,14 +89,6 @@
                             <i class="icon-calendar2"></i>
                             <span>
                                         Calendar
-                                    </span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link second" onclick="changeMenu('${pageContext.request.contextPath}/budget/info',this)">
-                            <i class="icon-piggy-bank"></i>
-                            <span>
-                                        Budget
                                     </span>
                         </a>
                     </li>

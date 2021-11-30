@@ -156,7 +156,7 @@ function searchHistory() {
 function openModal(type, num) {
     clearFormData();
 
-    //add = add, update = edit, detail = detail :)
+    //add = add, detail = edit, detail = detail :)
 
     if(type == 'add') {
 
@@ -204,20 +204,7 @@ function openModal(type, num) {
         $("#modal #updateButton").show();
         $("#modal #deleteEntry").hide();
 
-
-        // $('div.stage').css('display', 'none');
-        //
-        // $('#wordEngNm').addClass('input-short');
-        // $('#wordAbbr').addClass('input-short');
-
         $("#modal .modal-title").html('Edit History');
-
-       // $("#entryID").hide();
-        $("#dateTime").show();
-        $("#amount").show();
-        $("#description").show();
-        $("#transaction").show();
-        $("#category").show();
 
         // 비활성화
         $("#dateInput").attr('readonly', true);
@@ -238,17 +225,14 @@ function openModal(type, num) {
             data: sendData,
             success: function (data) {
                 console.log(data);
-                // $("#insert_form #dateTime").val(data.dateTime);
-                // $("#insert_form #description").val(data.description);
-                // $("#insert_form #amount").val(data.amount);
-                // $("#insert_form #transaction").val(data.transaction);
-                // $("#insert_form #category").val(data.category);
+                $("#dateTime").val("dateTime");
+                $("#amount").show();
+                $("#description").show();
+                $("#transaction").show();
+                $("#category").show();
             },
             error: function () {
-                alert("failed")
-
-                // alertMessage("경고!","실패하였습니다. 관리자에게 문의해주세요.","danger");
-                // $("#cancelButton").click();
+                alert("failed");
             }
         });
 
@@ -401,244 +385,3 @@ function deleteConfirm(num){
     location.reload();
 
 }
-
-/* Template */
-//데이터 타입 선택 시 데이터 길이 및 소수점 길이 설정
-// function readOnlyOption(dataType) {
-//     if(dataType == '') {
-//         $("#insert_form input[name=dataLen]").attr('readonly', true);
-//         $("#insert_form input[name=dcmlLen]").attr('readonly', true);
-//         $("#insert_form input[name=dataLen]").val('');
-//         $("#insert_form input[name=dcmlLen]").val('');
-//
-//         $("#dataLenStar").hide();
-//         $("#dcmlLenStar").hide();
-//     } else {
-//         let data = {
-//             cdNm : dataType
-//         }
-//
-//         $.ajax({
-//             url : contextPath +"/code/list",
-//             contentType : "application/json",
-//             type : "POST",
-//             data : JSON.stringify(data),
-//             async : false,
-//             success : function(data) {
-//                 console.log(data);
-//                 if(data.length > 0) {
-//                     if(data[0].dataLenYn == 'N') {
-//                         $("#insert_form input[name=dataLen]").attr('readonly', true);
-//                         $("#insert_form input[name=dcmlLen]").attr('readonly', true);
-//                         $("#insert_form input[name=dataLen]").val('');
-//                         $("#insert_form input[name=dcmlLen]").val('');
-//
-//                         $("#dataLenStar").hide();
-//                         $("#dcmlLenStar").hide();
-//                     } else if(data[0].dataLenYn == 'Y' && data[0].dcmlLenYn == 'N') {
-//                         $("#insert_form input[name=dataLen]").attr('readonly', false);
-//                         $("#insert_form input[name=dcmlLen]").attr('readonly', true);
-//                         $("#insert_form input[name=dcmlLen]").val('');
-//
-//                         $("#dataLenStar").show();
-//                         $("#dcmlLenStar").hide();
-//                     } else {
-//                         $("#insert_form input[name=dataLen]").attr('readonly', false);
-//                         $("#insert_form input[name=dcmlLen]").attr('readonly', false);
-//
-//                         $("#dataLenStar").show();
-//                         $("#dcmlLenStar").show();
-//                     }
-//                 }
-//             }
-//         });
-//     }
-// }
-//
-// //검색 SelectBox 초기화
-// // reset search SelectBox
-// function categorySelect() {
-//     $.ajax({
-//         url : contextPath +"/domain/searchType",
-//         contentType : "application/json",
-//         type : "GET",
-//         success : function(data){
-//             for(var i = 0; i < data.length; i++) {
-//                 if(data[i].columnName == 'DOMAIN_NM') {
-//                     let option  = $("<option>");
-//                     $(option).val('domainNm').text('도메인명');
-//                     $("#searchType").append($(option));
-//                 }
-//
-//                 if(data[i].columnName == 'DOMAIN_TYPE_NM') {
-//                     let option  = $("<option>");
-//                     $(option).val('domainTypeNm').text('도메인 분류명');
-//                     $("#searchType").append($(option));
-//                 }
-//
-//                 if(data[i].columnName == 'DOMAIN_DSCRPT') {
-//                     let option  = $("<option>");
-//                     $(option).val('domainDscrpt').text('도메인 설명');
-//                     $("#searchType").append($(option));
-//                 }
-//             }
-//         }
-//
-//     });
-//
-// }
-//
-// //데이터 타입 선택 셀렉트 박스 초기화
-// function dataTypeSelect() {
-//
-//     let data = new Object();
-//
-//     $.ajax({
-//         url : contextPath +"/code/list",
-//         contentType : "application/json",
-//         type : "POST",
-//         data : JSON.stringify(data),
-//         async : false,
-//         success : function(data){
-//             $('#dataType').children('option:not(:first)').remove();
-//             for(var i = 0; i < data.length; i++) {
-//                 let option  = $("<option>");
-//                 $(option).val(data[i].cdNm).text(data[i].cdNm);
-//                 $("#dataType").append($(option));
-//             }
-//         }
-//
-//     });
-// }
-//
-// // list of History
-// function searchList(searchType, keyword, orderNumber) {
-//
-//     // columns of History
-//     let columns = ['DOMAIN_SEQ','DOMAIN_NM','DOMAIN_TYPE_NM','DATA_TYPE', 'DATA_LEN', 'DCML_LEN', 'DOMAIN_DSCRPT', 'UPD_DT'];
-//     let order = 'asc';
-//
-//     if(orderNumber == undefined) {
-//         orderNumber = 1;
-//     }
-//
-//     if(orderNumber == 1) {
-//         order = 'asc';
-//     } else {
-//         order = 'desc'
-//     }
-//
-//
-//     //sAjaxSource 를 사용하면 기본적인 DataTable에 사용되는 옵션들을 객체로 가지고 감. 서버의 DomainVO 객체 확인하기
-//     $("#historyTable").DataTable({
-//         processing: true,
-//         serverSide: true,
-//         responsive: true,
-//         autoWidth: true,
-//         sAjaxSource : contextPath + '/domain/list?columns='+columns +'&keyword=' + keyword + '&searchType=' + searchType,
-//         sServerMethod: "POST",
-//
-//         // popover
-//         "drawCallback": function (settings, json) {
-//             //$('[data-toggle="tooltip"]').tooltip('update');
-//             $('[data-toggle="popover"]').popover('update');
-//         },
-//         columns: [
-//             { data: 'domainSeq', width: "10%" },
-//             { data: 'domainNm' },
-//             { data: 'domainTypeNm' },
-//             { data: 'dataType' }
-//         ],
-//         columnDefs: [
-//             { targets:[0], title: 'Date' },
-//             { targets:[1], title: 'Description' },
-//             { targets:[2], title: 'Type' },
-//             { targets:[3], title: 'Category' }
-//         ],
-//         order: [[orderNumber, order]],
-//
-//         // popover
-//         createdRow: function (row, data, dataIndex) {
-//             // $(row).find('td:eq(6)').attr('data-toggle', "tooltip");
-//
-//             // $(row).find('td:eq(6)').attr('title', data["domainDscrpt"]);
-//
-//             // 설명이 존재할 경우에만 popover 사용
-//             if (data["domainDscrpt"] != "-"){
-//                 $(row).find('td:eq(6)').attr('data-container', 'body');
-//                 $(row).find('td:eq(6)').attr('data-content', data["domainDscrpt"]);
-//                 $(row).find('td:eq(6)').attr('data-toggle', "popover");
-//                 $(row).find('td:eq(6)').attr('data-trigger', "hover");
-//             }
-//
-//         }
-//     });
-//
-//     $('#historyTable tbody').on('dblclick', 'tr', function () {
-//
-//         let table = $("#historyTable").DataTable();
-//         let rowData = table.row( this ).data();
-//
-//         if(rowData != undefined) {
-//             $("#newButton").click();
-//             openModal('update', rowData.domainSeq);
-//         }
-//
-//     });
-//
-//     $("#searchType").change(function () {
-//         $("#keyword").focus();
-//     });
-//
-//     let dataTableHeight = document.getElementsByClassName('dataTables_scrollBody')[0];
-//     dataTableHeight.style.minHeight = '580px';
-// }
-//
-//
-// //도메인 분류명 목록
-// function searchList2() {
-//
-//     let keyword = $("#domainTypeNm").val().trim();
-//     let searchType = 'domainTypeNm';
-//     let domainSeq = $("#domainSeq").val().trim();
-//
-//
-//     $("#domainTypeTable").DataTable({
-//         dom: '<"datatable-scroll"t><"datatable-footer">',
-//         paging: false,
-//         autoWidth: false,
-//         scrollY: "210",
-//         language: {},
-//         sAjaxSource : contextPath + '/domain/list?keyword=' + keyword + '&searchType=' + searchType + '&domainSeq=' + domainSeq,
-//         sServerMethod: "POST",
-//         columns: [
-//             { data: 'domainSeq' },
-//             { data: 'domainNm' },
-//             { data: 'domainTypeNm' },
-//             { data: 'dataType' },
-//             { data: 'dataLen' },
-//             { data: 'dcmlLen' }
-//         ],
-//         initComplete: function(settings, json) {
-//             setTimeout(function() {
-//                 $("#orderId").click();
-//             }, 200);
-//         }
-//     });
-//
-// }
-//
-//
-//
-// // reset Search input
-// function resetSearch() {
-//
-//     $("#searchType").val('all');
-//     $("#keyword").val('');
-//
-//     let dataTable = $("#historyTable").DataTable();
-//     dataTable.destroy();
-//     searchList();
-//
-// }
-/* /Template */
