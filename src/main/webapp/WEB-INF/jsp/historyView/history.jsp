@@ -160,7 +160,7 @@
                     </div>
 
                     <div class="text-sm-right mb-0 mt-3 mt-sm-0 ml-auto">
-                        <h5>Available Balance: <h3 class="pricing-table-price"><span class="mr-1">$</span>(available Balance)</h3></h5>
+                        <h5>Available Balance: <h3 class="pricing-table-price"><span class="mr-1">$</span>${currentBalance}</h3></h5>
                     </div>
                 </div>
                 <!-- /available balance -->
@@ -168,12 +168,12 @@
                 <!-- total deposit and income -->
                 <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
                     <ul class="list list-unstyled mb-0">
-                        <li>Total Deposit of the Month: <span class="font-weight-semibold">$ (totalDeposit)</span></li>
+                        <li>Total Income of the Month: <span class="font-weight-semibold">$ ${monthlyIncome}</span></li>
                     </ul>
                 </div>
                 <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
                     <ul class="list list-unstyled mb-0 mb-auto">
-                        <li>Total Income of the Month: <span class="font-weight-semibold">$ (totalIncome)</span></li>
+                        <li>Total Expense of the Month: <span class="font-weight-semibold">$ ${monthlyExpense}</span></li>
                     </ul>
                 </div>
                 <!-- /total deposit and income -->
@@ -306,22 +306,22 @@
                                     </div>
                                 </div>
                                 <!-- /Date -->
-                                <!-- Amount -->
-                                <div class="form-group row">
-                                    <label class="col-form-label col-sm-3">Amount</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" id="amount" name="amount" placeholder="Write amount (ex. 420)" class="form-control">
-                                    </div>
-                                </div>
-                                <!-- /Amount -->
                                 <!-- Description -->
                                 <div class="form-group row">
                                     <label class="col-form-label col-sm-3">Description</label>
                                     <div class="col-sm-9">
-                                        <input type="text" id="description" name="description" placeholder="Write description" class="form-control">
+                                        <input type="text" id="description" name="description" placeholder="Write description (ex. Coffee)" class="form-control">
                                     </div>
                                 </div>
                                 <!-- /Description -->
+                                <!-- Amount -->
+                                <div class="form-group row">
+                                    <label class="col-form-label col-sm-3">Amount</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" id="amount" name="amount" placeholder="Write amount (ex. 4.89)" class="form-control">
+                                    </div>
+                                </div>
+                                <!-- /Amount -->
                                 <!-- Transaction -->
                                 <div class="form-group row">
                                     <label class="col-form-label col-sm-3">Transaction</label>

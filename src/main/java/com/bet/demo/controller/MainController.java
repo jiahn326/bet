@@ -173,6 +173,9 @@ public class MainController {
         }
 
         request.setAttribute("entryList", this.entryList);
+        request.setAttribute("currentBalance", Precision.round(this.user.getCurrentBalance(),2));
+        request.setAttribute("monthlyExpense", Precision.round(user.getCurMonthExpense("11", "2021"),2));
+        request.setAttribute("monthlyIncome", Precision.round(user.getCurMonthIncome("11", "2021"),2));
 
         System.out.println(this.entryList.toString());
 
