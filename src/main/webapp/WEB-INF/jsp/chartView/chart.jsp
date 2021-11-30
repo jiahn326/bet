@@ -127,7 +127,7 @@
 
         <!-- Block -->
         <div class="card-img-actions-overlay">
-            <h4>For the next update...</h4>
+            <h4>For next update...</h4>
         </div>
         <!-- /Block -->
         </div>
