@@ -20,7 +20,7 @@ var Modals = function () {
     // Load remote content
     var _componentModalRemote = function() {
         $('#modal_remote').on('show.bs.modal', function() {
-            $(this).find('.modal-body').load('../../../../global_assets/demo_data/wizard/education.html', function() {
+            $(this).find('.modal-body').load('${pageContext.request.contextPath}/template/global_assets/demo_data/wizard/education.html', function() {
                 _componentSelect2();
             });
         });

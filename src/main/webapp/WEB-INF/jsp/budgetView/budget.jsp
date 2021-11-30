@@ -17,19 +17,22 @@
     <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/visualization/echarts/echarts.min.js"></script>
     <script src="${pageContext.request.contextPath}/template/global_assets/js/main/bootstrap.bundle.min.js"></script>
 
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/notifications/bootbox.min.js"></script>
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/forms/selects/select2.min.js"></script>
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_pages/components_modals.js"></script>
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/forms/styling/uniform.min.js"></script>
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_pages/form_inputs.js"></script>
+
+    <script src="${pageContext.request.contextPath}/js/budget/budget.js"></script>
 
     <!-- Pie chart -->
-    <script src="${pageContext.request.contextPath}/js/budget/budget.js"></script>
-<%--    <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_charts/echarts/light/pies/pie_basic.js"></script>--%>
+    <script src="${pageContext.request.contextPath}/js/budget/charts.js"></script>
 
     <!-- Bar -->
     <script src="${pageContext.request.contextPath}/js/budget/bars.js"></script>
-<%--    <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_charts/echarts/light/bars/bars_stacked_clustered.js"></script>--%>
-    <script type="text/javascript">
-        getValues(${totalWants}, ${totalNeeds}, ${totalSavings});
-    </script>
 
     <script type="text/javascript">
+        getValues(${totalWants}, ${totalNeeds}, ${totalSavings});
         getBarValues(${totalWants}, ${totalNeeds}, ${totalSavings}, ${plannedWants}, ${plannedNeeds}, ${plannedSavings});
     </script>
 
@@ -79,15 +82,18 @@
                                 <!-- Budget setting -->
                                 <div class="col-sm-5 .ml-md-auto">
                                     <div class="text-center">
-                                        <h5 class="mt-2 mb-3">Budget &nbsp;&nbsp; <button type="button" class="btn btn-outline bg-slate-600 text-slate-600 border-slate-600 btn-icon rounded-round"><i class="mi-settings"></i></button></h5>
+                                        <h5 class="mt-2 mb-3">Budget &nbsp;&nbsp;
+
+                                            <button type="button" class="btn btn-outline bg-slate-600 text-slate-600 border-slate-600 btn-icon rounded-round" data-toggle="modal" data-target="#modal_form_horizontal"><i class="mi-settings"></i></button></h5>
+
                                         <ul class="pricing-table-list list-unstyled mb-3">
-                                            <li><strong>Needs</strong> (${budgetNeeds}%) &nbsp;&nbsp;
-                                                Current: <fmt:setLocale value = "en_US"/><fmt:formatNumber value = "${totalNeeds}" type = "currency"/>&nbsp;&nbsp;
-                                                Budget: <fmt:setLocale value = "en_US"/><fmt:formatNumber value = "${plannedNeeds}" type = "currency"/>
-                                            </li>
                                             <li><strong>Wants</strong> (${budgetWants}%) &nbsp;&nbsp;
                                                 Current: <fmt:setLocale value = "en_US"/><fmt:formatNumber value = "${totalWants}" type = "currency"/>&nbsp;&nbsp;
                                                 Budget: <fmt:setLocale value = "en_US"/><fmt:formatNumber value = "${plannedWants}" type = "currency"/>
+                                            </li>
+                                            <li><strong>Needs</strong> (${budgetNeeds}%) &nbsp;&nbsp;
+                                                Current: <fmt:setLocale value = "en_US"/><fmt:formatNumber value = "${totalNeeds}" type = "currency"/>&nbsp;&nbsp;
+                                                Budget: <fmt:setLocale value = "en_US"/><fmt:formatNumber value = "${plannedNeeds}" type = "currency"/>
                                             </li>
                                             <li><strong>Savings</strong> (${budgetSavings}%) &nbsp;&nbsp;
                                                 Current: <fmt:setLocale value = "en_US"/><fmt:formatNumber value = "${totalSavings}" type = "currency"/>&nbsp;&nbsp;
@@ -123,6 +129,51 @@
                 </div>
             </div>
             <!-- /stacked clustered bar -->
+
+            <!-- Horizontal form modal -->
+            <div id="modal_form_horizontal" class="modal fade" tabindex="-1" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit Goals</h5>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- New Goal Input -->
+                        <form action="#" class="form-horizontal">
+                            <div class="modal-body">
+                                <div class="form-group row">
+                                    <label class="col-form-label col-sm-3">Wants</label>
+                                    <div class="col-sm-9">
+                                        <input type="number" class="form-control rounded-round col-sm-2" value="${budgetWants}" placeholder="Enter new percentage">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-form-label col-sm-3">Needs</label>
+                                    <div class="col-sm-9">
+                                        <input type="number" class="form-control rounded-round col-sm-2" value="${budgetNeeds}" placeholder="Enter new needs">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-form-label col-sm-3">Savings</label>
+                                    <div class="col-sm-9">
+                                        <input type="number" class="form-control rounded-round col-sm-2" value="${budgetSavings}" placeholder="Enter new savings">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="submit" class="btn bg-slate">Save</button>
+                                <button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
+                            </div>
+                        </form>
+                        <!-- /New Goal Input -->
+                    </div>
+                </div>
+            </div>
+            <!-- /vertical form modal -->
         </div>
         <!-- /Content area -->
     </div>

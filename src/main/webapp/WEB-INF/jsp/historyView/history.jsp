@@ -242,7 +242,7 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-sm-3">Date</label>
                                     <div class="col-sm-9">
-                                        <input type="text" id="dateTime" name="dateTime" placeholder="MM-DD-YYYY" class="form-control">
+                                        <input type="text" id="dateTime" name="dateTime" placeholder="MM/DD/YYYY" class="form-control">
                                     </div>
                                 </div>
                                 <!-- /Date -->
