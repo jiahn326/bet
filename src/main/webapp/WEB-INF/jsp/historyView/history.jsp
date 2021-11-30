@@ -54,7 +54,7 @@
     <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_charts/pages/profile/light/balance_stats.js"></script>
     <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_charts/pages/profile/light/available_hours.js"></script>
 
-    <title>History</title>
+    <title>Account</title>
 
     <style>
 
@@ -127,7 +127,7 @@
     <div class="page-header page-header-light">
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h5><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">History</span></h5>
+                <h5><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Account</span></h5>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
         </div>
@@ -139,9 +139,7 @@
         <div class="card border-left-3 border-left-success rounded-left-0">
             <!-- card header -->
             <div class="card-header header-elements-inline">
-                <div>
-                    <h5 style="font-weight: bold"> OVERVIEW &nbsp; </h5>
-                </div>
+                <h5 class="card-title">Overview &nbsp;</h5>
 <%--                <span class="badge ml-md-3 mr-md-auto"> &nbsp; </span>--%>
 
                 <div class="header-elements">
@@ -156,7 +154,7 @@
                 <!-- available balance -->
                 <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
                     <div>
-                        <h5 style="font-weight: bold"> &nbsp; </h5>
+                        <h4 style="font-weight: bold"> &nbsp; </h4>
                     </div>
 
                     <div class="text-sm-right mb-0 mt-3 mt-sm-0 ml-auto">
@@ -188,7 +186,9 @@
         <div class="card" style="height: 820px">
             <!-- card header -->
             <div class="card-header header-elements-inline font-size-base">
-                <span class="badge ml-md-3 mr-md-auto"> &nbsp; </span>
+                <h5 class="card-title">Overview &nbsp;</h5>
+
+<%--                <span class="badge ml-md-3 mr-md-auto"> &nbsp; </span>--%>
 
                 <!-- reload the search input -->
                 <div class="header-elements">
@@ -257,9 +257,26 @@
                                 <fmt:setLocale value = "en_US"/>
                                 <fmt:formatNumber value = "${entry.amount}" type = "currency"/>
                             </td>
-                            <td>${entry.transaction}</td>
-                            <td><span class="badge badge-light">${entry.category}</span></td>
-<%--                            <td>${entry.number}</td>--%>
+                            <c:choose>
+                                <c:when test="${entry.transaction eq 'income'}">
+                                    <td><span class="badge badge-primary">income</span></td>
+                                </c:when>
+                                <c:when test="${entry.transaction eq 'expense'}">
+                                    <td><span class="badge badge-danger">expense</span></td>
+                                </c:when>
+                            </c:choose>
+
+                            <c:choose>
+                                <c:when test="${entry.category eq 'wants'}">
+                                    <td><span class="badge badge-light badge-striped badge-striped-left border-left-danger">Wants</span></td>
+                                </c:when>
+                                <c:when test="${entry.category eq 'needs'}">
+                                    <td><span class="badge badge-light badge-striped badge-striped-left border-left-warning">Needs</span></td>
+                                </c:when>
+                                <c:when test="${entry.category eq 'savings'}">
+                                    <td><span class="badge badge-light badge-striped badge-striped-left border-left-info">Savings</span></td>
+                                </c:when>
+                            </c:choose>
                             <td class="text-center">
                                 <div class="list-icons">
                                     <button type="button" class="btn btn-outline bg-primary text-primary-800 btn-icon ml-2" data-toggle="modal" data-target="#modal" id="detailButton" onclick="openModal('detail', ${entry.number});" ><i class="icon-pencil"></i></button>
