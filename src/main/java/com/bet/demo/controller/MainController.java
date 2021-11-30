@@ -65,6 +65,24 @@ public class MainController {
     }
 
 
+    @RequestMapping("/content")
+    public String content(HttpServletRequest request, HttpServletResponse response){
+        if (this.user.superSmile()){
+            request.setAttribute("emoji", "supersmile");
+        } else if (this.user.smile()){
+            request.setAttribute("emoji", "smile");
+        } else if (this.user.sad()){
+            request.setAttribute("emoji", "sad");
+        } else if (this.user.angry()){
+            request.setAttribute("emoji", "angry");
+        } else{
+            request.setAttribute("emoji", "smile");
+        }
+
+        return "content";
+    }
+
+
 /*    @RequestMapping("/login")
     public ModelAndView test() throws Exception{
         ModelAndView mv = new ModelAndView();
