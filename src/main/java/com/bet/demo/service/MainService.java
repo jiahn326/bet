@@ -148,6 +148,7 @@ public class MainService {
         System.out.println(documents.size());
         for (QueryDocumentSnapshot document : documents) {
             Entry entry = document.toObject(Entry.class);
+            entry.setSign();
             user.addAnEntry(entry);
             System.out.println(entry.toString());
             list.add(entry);
