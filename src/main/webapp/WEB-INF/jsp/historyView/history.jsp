@@ -191,6 +191,7 @@
                             <td>${entry.dateTime}</td>
                             <td>${entry.description}</td>
                             <td>
+                                ${entry.sign}
                                 <fmt:setLocale value = "en_US"/>
                                 <fmt:formatNumber value = "${entry.amount}" type = "currency"/>
                             </td>
@@ -242,7 +243,7 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-sm-3">Date</label>
                                     <div class="col-sm-9">
-                                        <input type="text" id="dateTime" name="dateTime" placeholder="MM-DD-YYYY" class="form-control">
+                                        <input type="text" id="dateTime" name="dateTime" placeholder="MM/DD/YYYY" class="form-control">
                                     </div>
                                 </div>
                                 <!-- /Date -->
@@ -292,7 +293,7 @@
                         <!-- Button -->
                         <div class="modal-footer">
                             <button type="button" id="saveButton" class="btn bg-teal" onclick="saveConfirm();">Save</button>
-                            <button type="button" id="updateButton" class="btn bg-teal" onclick="updateConfirm();">Edit</button>
+                            <button type="button" id="updateButton" class="btn bg-teal" onclick="updateConfirm();">Edit Save</button>
 <%--                            <button type="button" id="deleteEntry" class="btn bg-teal" onclick="deleteConfirm();">Delete</button>--%>
                             <button type="button" id="cancelButton" class="btn btn-outline" data-dismiss="modal">Close</button>
                         </div>
