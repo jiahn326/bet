@@ -11,7 +11,7 @@ function updateConfirm(){
         type: "POST",
         data: JSON.stringify(sendData),
         success: function () {
-            // alertMessage("성공!","단어 등록 신청이 완료되었습니다.","success");
+            alertMessage("Plese reload the page to see updated changes","success");
             $("#cancelButton").click();
             //dataTable.destroy();
             // callHistoryList('','',0);

@@ -182,4 +182,8 @@ public class MainService {
             System.out.println("new db budget:"+user.getBudget());
         }
     }
+
+    public void setUserToNull(){
+        this.user = null;
+    }
 }

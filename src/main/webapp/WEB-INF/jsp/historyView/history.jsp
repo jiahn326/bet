@@ -158,7 +158,7 @@
                     </div>
 
                     <div class="text-sm-right mb-0 mt-3 mt-sm-0 ml-auto">
-                        <h5>Available Balance: <h3 class="pricing-table-price"><span class="mr-1">$</span>(available Balance)</h3></h5>
+                        <h5>Available Balance: <h3 class="pricing-table-price"><span class="mr-1">$</span>${currentBalance}</h3></h5>
                     </div>
                 </div>
                 <!-- /available balance -->
@@ -166,12 +166,12 @@
                 <!-- total deposit and income -->
                 <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
                     <ul class="list list-unstyled mb-0">
-                        <li>Total Deposit of the Month: <span class="font-weight-semibold">$ (totalDeposit)</span></li>
+                        <li>Total Income of the Month: <span class="font-weight-semibold">$ ${monthlyIncome}</span></li>
                     </ul>
                 </div>
                 <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
                     <ul class="list list-unstyled mb-0 mb-auto">
-                        <li>Total Income of the Month: <span class="font-weight-semibold">$ (totalIncome)</span></li>
+                        <li>Total Expense of the Month: <span class="font-weight-semibold">$ ${monthlyExpense}</span></li>
                     </ul>
                 </div>
                 <!-- /total deposit and income -->
@@ -277,7 +277,7 @@
                             <td class="text-center">
                                 <div class="list-icons">
                                     <button type="button" class="btn btn-outline bg-primary text-primary-800 btn-icon ml-2" data-toggle="modal" data-target="#modal" id="detailButton" onclick="openModal('detail', ${entry.number});" ><i class="icon-pencil"></i></button>
-                                    <button type="button" class="btn btn-outline bg-danger text-danger-800 btn-icon ml-2" id="deleteButton" onclick="deleteConfirm(${entry.number})" ><i class="icon-trash"></i></button>
+                                    <button type="button" class="btn btn-outline bg-danger text-danger-800 btn-icon ml-2" id="deleteButton" onclick="deleteConfirm(${entry.number}); location.href='/refresh'" ><i class="icon-trash"></i></button>
                                 </div>
                             </td>
                         </tr>
@@ -323,22 +323,22 @@
                                     </div>
                                 </div>
                                 <!-- /Date -->
-                                <!-- Amount -->
-                                <div class="form-group row">
-                                    <label class="col-form-label col-sm-3">Amount</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" id="amount" name="amount" placeholder="Write amount (ex. 420)" class="form-control">
-                                    </div>
-                                </div>
-                                <!-- /Amount -->
                                 <!-- Description -->
                                 <div class="form-group row">
                                     <label class="col-form-label col-sm-3">Description</label>
                                     <div class="col-sm-9">
-                                        <input type="text" id="description" name="description" placeholder="Write description" class="form-control">
+                                        <input type="text" id="description" name="description" placeholder="Write description (ex. Coffee)" class="form-control">
                                     </div>
                                 </div>
                                 <!-- /Description -->
+                                <!-- Amount -->
+                                <div class="form-group row">
+                                    <label class="col-form-label col-sm-3">Amount</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" id="amount" name="amount" placeholder="Write amount (ex. 4.89)" class="form-control">
+                                    </div>
+                                </div>
+                                <!-- /Amount -->
                                 <!-- Transaction -->
                                 <div class="form-group row">
                                     <label class="col-form-label col-sm-3">Transaction</label>
@@ -368,7 +368,7 @@
 
                         <!-- Button -->
                         <div class="modal-footer">
-                            <button type="button" id="saveButton" class="btn bg-teal" onclick="saveConfirm();">Save</button>
+                            <button type="button" id="saveButton" class="btn bg-teal" onclick="saveConfirm(); location.href='/refresh'">Save</button>
                             <button type="button" id="updateButton" class="btn bg-teal" onclick="updateConfirm();">Edit Save</button>
 <%--                            <button type="button" id="deleteEntry" class="btn bg-teal" onclick="deleteConfirm();">Delete</button>--%>
                             <button type="button" id="cancelButton" class="btn btn-outline" data-dismiss="modal">Close</button>
