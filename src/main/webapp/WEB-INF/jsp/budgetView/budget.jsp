@@ -133,7 +133,7 @@
             <!-- Horizontal form modal -->
             <div id="modal_form_horizontal" class="modal fade" tabindex="-1" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog">
-                    <div class="modal-content">
+                    <div class="modal-content" style="size: 150px;">
                         <div class="modal-header">
                             <h5 class="modal-title">Edit Goals</h5>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>

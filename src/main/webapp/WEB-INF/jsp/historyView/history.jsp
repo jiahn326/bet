@@ -183,7 +183,7 @@
         <div class="card" style="height: 820px">
             <!-- card header -->
             <div class="card-header header-elements-inline font-size-base">
-                <h5 class="card-title">Overview &nbsp;</h5>
+                <h5 class="card-title">History &nbsp;</h5>
 
 <%--                <span class="badge ml-md-3 mr-md-auto"> &nbsp; </span>--%>
 
