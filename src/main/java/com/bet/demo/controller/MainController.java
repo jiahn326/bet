@@ -129,18 +129,23 @@ public class MainController {
         return "loginView/login";
     }
 
-//
-//    // logout page --> return to login page
-//    @RequestMapping(value = "/logout")
-//    public String logout(HttpServletRequest request, HttpServletResponse response){
-//        HttpSession session = request.getSession();
-//
-//        if(session != null) {
-//            session.invalidate();
-//        }
-//
-//        return "loginView/login";
-//    }
+
+    // logout page --> return to login page
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response){
+        HttpSession session = request.getSession();
+
+        this.user = null;
+        this.entryList = null;
+        this.currentEntry_Update = null;
+        this.mainService.setUserToNull();
+
+        if(session != null) {
+            session.invalidate();
+        }
+
+        return "loginView/login";
+    }
 
     /* page info */
     @RequestMapping("/user/info")

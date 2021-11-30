@@ -47,7 +47,7 @@
                 <div class="dropdown-menu dropdown-menu-right">
 <%--                    <div class="dropdown-divider"></div>--%>
                     <a href="#" class="dropdown-item" onclick="changeMenu('${pageContext.request.contextPath}/user/info',this)"><i class="icon-cog5"></i> Account settings</a>
-                    <a href="#" class="dropdown-item"><i class="icon-switch2"></i> Logout</a>
+                    <a href="#" class="dropdown-item" onclick="location.href='/logout'"><i class="icon-switch2"></i> Logout</a>
                 </div>
             </li>
         </ul>
