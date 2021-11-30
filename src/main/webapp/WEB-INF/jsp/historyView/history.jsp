@@ -166,12 +166,15 @@
                 <!-- total deposit and income -->
                 <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
                     <ul class="list list-unstyled mb-0">
-                        <li>Total Income of the Month: <span class="font-weight-semibold">$ ${monthlyIncome}</span></li>
+                        <li>Total Income of the Month: <span class="font-weight-semibold"><fmt:setLocale value = "en_US"/>
+                        <fmt:formatNumber value = "${monthlyIncome}" type = "currency"/></span></li>
+
                     </ul>
                 </div>
                 <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
                     <ul class="list list-unstyled mb-0 mb-auto">
-                        <li>Total Expense of the Month: <span class="font-weight-semibold">$ ${monthlyExpense}</span></li>
+                        <li>Total Expense of the Month: <span class="font-weight-semibold"><fmt:setLocale value = "en_US"/>
+                        <fmt:formatNumber value = "${monthlyExpense}" type = "currency"/></span></li>
                     </ul>
                 </div>
                 <!-- /total deposit and income -->
