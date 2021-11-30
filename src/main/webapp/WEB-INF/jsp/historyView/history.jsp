@@ -191,7 +191,7 @@
                 <div class="header-elements">
 
                     <div class="list-icons">
-                        <a class="list-icons-item" data-action="reload" onclick="resetSearch()"></a>
+                        <a class="list-icons-item" data-action="reload" onclick="location.href='/refresh'"></a>
                     </div>
                 </div>
                 <!-- /reload the search input -->
@@ -214,7 +214,7 @@
                     <div class="input-group" style="width: 400px;">
                         <input type="text" class="form-control border-right-0 font-size-xs" placeholder="Search..." name="keyword" id="keyword">
                         <span class="input-group-append">
-                            <button class="btn border font-size-xs" type="button" value = "searchButton" onclick="searchHistory()"><i class="icon-search4"></i></button>
+                            <button class="btn border font-size-xs" type="button" value = "searchButton" onclick="location.href='/searchHistory'"><i class="icon-search4"></i></button>
                         </span>
                     </div>
                 </div>
@@ -259,7 +259,7 @@
 <%--                            <td>${entry.number}</td>--%>
                             <td class="text-center">
                                 <div class="list-icons">
-                                    <button type="button" class="btn btn-outline bg-primary text-primary-800 btn-icon ml-2" data-toggle="modal" data-target="#modal" id="detailButton" onclick="openModal('detail', ${entry.number});" ><i class="icon-search4"></i></button>
+                                    <button type="button" class="btn btn-outline bg-primary text-primary-800 btn-icon ml-2" data-toggle="modal" data-target="#modal" id="detailButton" onclick="openModal('detail', ${entry.number});" ><i class="icon-pencil"></i></button>
                                     <button type="button" class="btn btn-outline bg-danger text-danger-800 btn-icon ml-2" id="deleteButton" onclick="deleteConfirm(${entry.number})" ><i class="icon-trash"></i></button>
                                 </div>
                             </td>

@@ -285,6 +285,28 @@ public class User {
         return this.getTotalSavings() > this.getBudgetSavings()*.7;
     }
 
+    public double getCurMonthExpense(String month, String year){
+        splitEntries();
+        double total = 0.0;
+        for (Entry entry : this.expenses){
+            if (entry.getDateTime().contains(year) && entry.getDateTime().substring(0,2).equals(month)){
+                total+=entry.getAmount();
+            }
+        }
+        return total;
+    }
+
+    public double getCurMonthIncome(String month, String year){
+        splitEntries();
+        double total = 0.0;
+        for (Entry entry : this.income){
+            if (entry.getDateTime().contains(year) && entry.getDateTime().substring(0,2).equals(month)){
+                total+=entry.getAmount();
+            }
+        }
+        return total;
+    }
+
     @Override
     public String toString() {
         return "User{" +
