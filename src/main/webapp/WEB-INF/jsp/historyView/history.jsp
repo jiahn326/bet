@@ -44,6 +44,16 @@
     <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/forms/styling/switchery.min.js"></script>
     <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_pages/form_validation.js"></script>
 
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/ui/fullcalendar/core/main.min.js"></script>
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/ui/fullcalendar/daygrid/main.min.js"></script>
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/ui/fullcalendar/timegrid/main.min.js"></script>
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/plugins/ui/fullcalendar/interaction/main.min.js"></script>
+
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_pages/user_pages_profile_tabbed.js"></script>
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_charts/echarts/light/bars/tornado_negative_stack.js"></script>
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_charts/pages/profile/light/balance_stats.js"></script>
+    <script src="${pageContext.request.contextPath}/template/global_assets/js/demo_charts/pages/profile/light/available_hours.js"></script>
+
     <title>History</title>
 
     <style>
@@ -107,7 +117,6 @@
         .card {
             float: left;
             width: 100%;
-            height: 820px;
         }
     </style>
 </head>
@@ -126,11 +135,61 @@
     <!-- /page header -->
 
     <div class="content">
-        <div class="card">
+        <!-- Overview Card -->
+        <div class="card border-left-3 border-left-success rounded-left-0">
+            <!-- card header -->
+            <div class="card-header header-elements-inline">
+                <div>
+                    <h5 style="font-weight: bold"> OVERVIEW &nbsp; </h5>
+                </div>
+<%--                <span class="badge ml-md-3 mr-md-auto"> &nbsp; </span>--%>
+
+                <div class="header-elements">
+                    <div class="list-icons">
+                        <a class="list-icons-item" data-action="collapse"></a>
+                    </div>
+                </div>
+            </div>
+            <!-- /card header -->
+
+            <div class="card-body">
+                <!-- available balance -->
+                <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                    <div>
+                        <h5 style="font-weight: bold"> &nbsp; </h5>
+                    </div>
+
+                    <div class="text-sm-right mb-0 mt-3 mt-sm-0 ml-auto">
+                        <h5>Available Balance: <h3 class="pricing-table-price"><span class="mr-1">$</span>(available Balance)</h3></h5>
+                    </div>
+                </div>
+                <!-- /available balance -->
+
+                <!-- total deposit and income -->
+                <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                    <ul class="list list-unstyled mb-0">
+                        <li>Total Deposit of the Month: <span class="font-weight-semibold">$ (totalDeposit)</span></li>
+                    </ul>
+                </div>
+                <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                    <ul class="list list-unstyled mb-0 mb-auto">
+                        <li>Total Income of the Month: <span class="font-weight-semibold">$ (totalIncome)</span></li>
+                    </ul>
+                </div>
+                <!-- /total deposit and income -->
+            </div>
+        </div>
+        <!-- Overview Card -->
+
+        <!-- History Table Card -->
+        <div class="card" style="height: 820px">
             <!-- card header -->
             <div class="card-header header-elements-inline font-size-base">
+                <span class="badge ml-md-3 mr-md-auto"> &nbsp; </span>
+
                 <!-- reload the search input -->
                 <div class="header-elements">
+
                     <div class="list-icons">
                         <a class="list-icons-item" data-action="reload" onclick="location.href='/refresh'"></a>
                     </div>
@@ -303,6 +362,7 @@
             </div>
             <!-- /Modal End -->
         </div>
+        <!-- History Table Card -->
     </div>
 </div>
 <!-- Table area End-->
