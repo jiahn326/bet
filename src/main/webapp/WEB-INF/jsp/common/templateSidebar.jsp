@@ -13,25 +13,6 @@
     <!-- change page when user click the sidebar -->
     <script>
         function changeMenu(menuUrl, selectItem){
-            /* Block current page on button click */
-            // $('#block-page').on('click', function() {
-            //     $.blockUI({
-            //         message: '<i class="icon-spinner4 spinner"></i>',
-            //         timeout: 300,
-            //         overlayCSS: {
-            //             backgroundColor: '#1b2024',
-            //             opacity: 0.8,
-            //             cursor: 'wait'
-            //         },
-            //         css: {
-            //             border: 0,
-            //             color: '#fff',
-            //             padding: 0,
-            //             backgroundColor: 'transparent'
-            //         }
-            //     });
-            // });
-
             // to active the submenus
             var second = document.getElementsByClassName('second');
             for(var i=0; i < second.length; i++) {
@@ -39,7 +20,6 @@
             }
             $(selectItem).addClass('active');
             $("#contentMain").attr("src",menuUrl);
-
         }
     </script>
     <!-- /change page when user click the sidebar -->
@@ -68,13 +48,31 @@
 <%--                        <a href="#"><img src="${pageContext.request.contextPath}/images/BET_EMOJI_SUPERSMILE.png" width="200" height="auto" class="rounded-circle" alt=""></a>--%>
 <%--                    </div>--%>
 
-                    <div class="card" id="emojiStatus">
-                        <div class="card-img-actions">
-                            <img class="card-img-top img-fluid" src="${pageContext.request.contextPath}/images/BET_EMOJI_SUPERSMILE.png" align="center" width="100" height="auto" alt="">
+                    <div class="card-body bg-indigo-400 text-center card-img-top" style="background-color: #263238; background-size: contain;">
+                        <div class="card-img-actions d-inline-block mb-3">
+                            <img class="img-fluid rounded-circle" src="${pageContext.request.contextPath}/images/BET_EMOJI_SUPERSMILE.png" width="170" height="170" alt="">
+<%--                            <div class="card-img-actions-overlay rounded-circle">--%>
+<%--                                <a href="#" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round">--%>
+<%--                                    <i class="icon-plus3"></i>--%>
+<%--                                </a>--%>
+<%--                                <a href="user_pages_profile.html" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round ml-2">--%>
+<%--                                    <i class="icon-link"></i>--%>
+<%--                                </a>--%>
+<%--                            </div>--%>
                         </div>
 
-                        <h5 class="card-title">Current Status: </h5>
+<%--                        <h6 class="font-weight-semibold mb-0">Victoria Davidson</h6>--%>
+<%--                        <span class="d-block opacity-75">Head of UX</span>--%>
                     </div>
+
+                    <!-- Emoji -->
+<%--                    <div class="card" id="emojiStatus">--%>
+<%--                        <div class="card-img-actions">--%>
+<%--                            <img class="card-img-top img-fluid" src="${pageContext.request.contextPath}/images/BET_EMOJI_SUPERSMILE.png" align="center" width="100" height="auto" alt="">--%>
+<%--                        </div>--%>
+
+<%--                        <h5 class="card-title">Current Status: </h5>--%>
+<%--                    </div>--%>
 
 <%--                    <div class="media-body">--%>
 <%--                        <div class="media-title font-weight-semibold">Jihyun Ahn</div>--%>
