@@ -154,6 +154,11 @@ public class MainService {
         }
     }
 
+    public void reloadBudget(User user, Firestore db) throws ExecutionException, InterruptedException {
+        user.setBudget(null);
+        loadBudgetToUser(user.getUsername(), db);
+    }
+
     public void loadBudgetToUser(String username, Firestore db) throws ExecutionException, InterruptedException {
         DocumentReference docRef = db.collection("budget").document(username);
         ApiFuture<DocumentSnapshot> future = docRef.get();

@@ -1,9 +1,7 @@
 package com.bet.demo.controller;
 
-import com.bet.demo.data.Entry;
+import com.bet.demo.data.*;
 import com.bet.demo.data.Number;
-import com.bet.demo.data.Search;
-import com.bet.demo.data.User;
 import com.bet.demo.service.MainService;
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
@@ -370,30 +368,25 @@ public class MainController {
             String transaction = entryVO.getTransaction();
             String username = user.getUsername();
 
-            for (Entry entry : this.entryList){
-                if (!dateTime.equals (entry.getDateTime())){
+            DocumentReference docRef = db.collection("entry").document(this.user.getUsername()+number);
+            /*Map<String, Object> data = new HashMap<>();;
+                   ApiFuture<QuerySnapshot> entryFuture = db.collection("entry").whereEqualTo("number", number).get(); //***need to find a unique string to replace childpath***
+            // Add document data  with id "alovelace" using a hashmap*/
 
-                    DocumentReference docRef = db.collection("entry").document(this.user.getUsername()+number);
-                    /*Map<String, Object> data = new HashMap<>();;
-                    ApiFuture<QuerySnapshot> entryFuture = db.collection("entry").whereEqualTo("number", number).get(); //***need to find a unique string to replace childpath***
-                    // Add document data  with id "alovelace" using a hashmap*/
+            ApiFuture<WriteResult> future = docRef.update("dateTime", dateTime);
 
-                    ApiFuture<WriteResult> future = docRef.update("dateTime", dateTime);
+            future = docRef.update("amount", amount);
 
-                    future = docRef.update("amount", amount);
+            future = docRef.update("category", category);
 
-                    future = docRef.update("category", category);
+            future = docRef.update("description", description);
 
-                    future = docRef.update("description", description);
+            future = docRef.update("transaction", transaction);
 
-                    future = docRef.update("transaction", transaction);
+            future = docRef.update("user", username);
 
-                    future = docRef.update("user", username);
-
-                    WriteResult result = future.get();
-                    System.out.println("Write result: " + result);
-                }
-            }
+            WriteResult result = future.get();
+            System.out.println("Write result: " + result);
 
 //            user.addAnEntry(entryVO);
 //            mainService.loadEntriesToUser(user.getUsername(), db);
@@ -427,7 +420,10 @@ public class MainController {
     }
 
     @RequestMapping("/budget/info")
-    public String budget(HttpServletRequest request, HttpServletResponse response){    double totalWants = Precision.round(this.user.getTotalWants(), 2);
+    public String budget(HttpServletRequest request, HttpServletResponse response) throws ExecutionException, InterruptedException {
+        mainService.reloadBudget(user, db);
+
+        double totalWants = Precision.round(this.user.getTotalWants(), 2);
         double totalNeeds = Precision.round(this.user.getTotalNeeds(),2);
         double totalSavings = Precision.round(this.user.getTotalSavings(), 2);
         double totalExpense = Precision.round(this.user.getTotalExpense(), 2);
@@ -449,6 +445,26 @@ public class MainController {
         request.setAttribute("plannedSavings", Precision.round(totalExpense * (budgetSavings*1.0/100),2));
 
         return "budgetView/budget";
+    }
+
+    @RequestMapping("/budget/updateBudget")
+    @ResponseBody
+    public String updateBudget(@RequestBody Budget budget) throws IOException {
+        int newNeeds = budget.getNeeds();
+        int newWants = budget.getWants();
+        int newSavings = budget.getSavings();
+
+        if (db == null){
+            this.initializeFirebase();
+        }
+        DocumentReference docRef = db.collection("budget").document(this.user.getUsername());
+        ApiFuture<WriteResult> future = docRef.update("needs", newNeeds);
+        future = docRef.update("wants", newWants);
+        future = docRef.update("needs", newNeeds);
+        future = docRef.update("savings", newSavings);
+
+        return "redirect:/budget/info";
+
     }
 
     //sets up firebase and connects to the firestore database
