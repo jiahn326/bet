@@ -31,7 +31,7 @@
     <!-- /page header -->
 
     <div class="content">
-        <div class="card">
+        <div class="card-img-actions">
 <%--            <!-- card header -->--%>
 <%--            <div class="card-header header-elements-inline font-size-base">--%>
 <%--                <!-- title of the page -->--%>
@@ -124,6 +124,12 @@
                     </div>
                 </div>
             </div>
+
+        <!-- Block -->
+        <div class="card-img-actions-overlay">
+            <h4>For the next update...</h4>
+        </div>
+        <!-- /Block -->
         </div>
     </div>
 </div>

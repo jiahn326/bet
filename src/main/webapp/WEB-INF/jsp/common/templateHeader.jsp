@@ -35,21 +35,18 @@
             </li>
         </ul>
 
-        <span class="badge bg-success ml-md-3 mr-md-auto">Online</span>
+        <span class="badge ml-md-3 mr-md-auto"> &nbsp; </span>
 
         <ul class="navbar-nav">
             <li class="nav-item dropdown dropdown-user">
                 <a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
                     <img src="${pageContext.request.contextPath}/template/global_assets/images/placeholders/placeholder.jpg" class="rounded-circle mr-2" height="34" alt="">
-                    <span>Jihyun</span>
+                    <span>${userName}</span>
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a href="#" class="dropdown-item"><i class="icon-user-plus"></i> My profile</a>
-                    <a href="#" class="dropdown-item"><i class="icon-coins"></i> My balance</a>
-                    <a href="#" class="dropdown-item"><i class="icon-comment-discussion"></i> Messages <span class="badge badge-pill bg-blue ml-auto">58</span></a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item"><i class="icon-cog5"></i> Account settings</a>
+<%--                    <div class="dropdown-divider"></div>--%>
+                    <a href="#" class="dropdown-item" onclick="changeMenu('${pageContext.request.contextPath}/user/info',this)"><i class="icon-cog5"></i> Account settings</a>
                     <a href="#" class="dropdown-item"><i class="icon-switch2"></i> Logout</a>
                 </div>
             </li>
