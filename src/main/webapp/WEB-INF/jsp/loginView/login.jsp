@@ -72,14 +72,14 @@
 
                         <!-- Remember user email&password -->
                         <div class="form-group d-flex align-items-center">
-                            <div class="dt-checkbox d-block mb-6">
+                            <div class="form-check mb-0">
                                 <label class="form-check-label">
-                                    <input type="checkbox" name="boxRemember" class="form-input-styled" checked data-fouc>
+                                    <input type="checkbox" name="remember" class="form-input-styled" checked data-fouc>
                                     Remember
                                 </label>
                             </div>
 
-                            <a href="login_password_recover.html" class="ml-auto">Forgot password?</a>
+<%--                            <a href="login_password_recover.html" class="ml-auto">Forgot password?</a>--%>
                         </div>
                         <!-- /Remember user email&password -->
 
@@ -101,10 +101,10 @@
                         </div>
 
                         <div class="form-group">
-                            <a href="#" class="btn btn-light btn-block">Sign up</a>
+                            <a href="#" class="btn btn-light btn-block" onclick="location.href='/loginView/signUp'">Sign up</a>
                         </div>
 
-                        <span class="form-text text-center text-muted">By continuing, you're confirming that you've read our <a href="#">Terms &amp; Conditions</a> and <a href="#">Cookie Policy</a></span>
+<%--                        <span class="form-text text-center text-muted">By continuing, you're confirming that you've read our <a href="#">Terms &amp; Conditions</a> and <a href="#">Cookie Policy</a></span>--%>
                     </div>
                 </div>
             </form>
