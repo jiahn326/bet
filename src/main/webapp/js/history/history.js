@@ -225,7 +225,7 @@ function openModal(type, num) {
             data: sendData,
             success: function (data) {
                 console.log(data);
-                $("#dateTime").val("dateTime");
+                $("#dateTime").show();
                 $("#amount").show();
                 $("#description").show();
                 $("#transaction").show();
