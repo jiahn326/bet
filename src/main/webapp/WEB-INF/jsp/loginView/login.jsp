@@ -101,7 +101,7 @@
                         </div>
 
                         <div class="form-group">
-                            <a href="#" class="btn btn-light btn-block" onclick="location.href='/loginView/signUp'">Sign up</a>
+                            <a href="#" class="btn btn-light btn-block" onclick="location.href='/signUpButton'">Sign up</a>
                         </div>
 
 <%--                        <span class="form-text text-center text-muted">By continuing, you're confirming that you've read our <a href="#">Terms &amp; Conditions</a> and <a href="#">Cookie Policy</a></span>--%>

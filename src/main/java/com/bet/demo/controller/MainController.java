@@ -153,6 +153,10 @@ public class MainController {
         return "loginView/login";
     }
 
+    @RequestMapping("/signUpButton")
+    public String signUpButton(){
+        return "loginView/signUp";
+    }
 
     // logout page --> return to login page
     @RequestMapping("/logout")
