@@ -119,28 +119,41 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <div class="form-check">
+<%--                                <div class="form-group">--%>
+<%--                                    <div class="form-check">--%>
+<%--                                        <label class="form-check-label">--%>
+<%--                                            <input type="checkbox" class="form-input-styled" checked data-fouc>--%>
+<%--                                            Send me <a href="#">test account settings</a>--%>
+<%--                                        </label>--%>
+<%--                                    </div>--%>
+
+<%--                                    <div class="form-check">--%>
+<%--                                        <label class="form-check-label">--%>
+<%--                                            <input type="checkbox" class="form-input-styled" checked data-fouc>--%>
+<%--                                            Subscribe to monthly newsletter--%>
+<%--                                        </label>--%>
+<%--                                    </div>--%>
+
+<%--                                    <div class="form-check">--%>
+<%--                                        <label class="form-check-label">--%>
+<%--                                            <input type="checkbox" class="form-input-styled" data-fouc>--%>
+<%--                                            Accept <a href="#">terms of service</a>--%>
+<%--                                        </label>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+
+                                <!-- Remember user email&password -->
+                                <div class="form-group d-flex align-items-center">
+                                    <div class="form-check mb-0">
                                         <label class="form-check-label">
-                                            <input type="checkbox" class="form-input-styled" checked data-fouc>
-                                            Send me <a href="#">test account settings</a>
+                                            <input type="checkbox" name="remember" class="form-input-styled" checked data-fouc>
+                                            Remember me
                                         </label>
                                     </div>
 
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input type="checkbox" class="form-input-styled" checked data-fouc>
-                                            Subscribe to monthly newsletter
-                                        </label>
-                                    </div>
-
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input type="checkbox" class="form-input-styled" data-fouc>
-                                            Accept <a href="#">terms of service</a>
-                                        </label>
-                                    </div>
+                                    <%--                            <a href="login_password_recover.html" class="ml-auto">Forgot password?</a>--%>
                                 </div>
+                                <!-- /Remember user email&password -->
 
                                 <button type="submit" class="btn bg-teal-400 btn-labeled btn-labeled-right"><b><i class="icon-plus3"></i></b> Create account</button>
                             </div>
