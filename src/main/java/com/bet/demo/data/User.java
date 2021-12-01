@@ -249,7 +249,7 @@ public class User {
             return true;
         } else if (!moreWants() && moreNeeds() && moreSavings()){
             return true;
-        } else if (moreWants() && moreNeeds() && !moreSavings()){
+        } else if (moreWants() && !moreNeeds() && !moreSavings()){
             return true;
         } else
             return false;
@@ -260,7 +260,7 @@ public class User {
             return true;
         } else if (!moreWants() && moreNeeds() && !moreSavings()){
             return true;
-        } else if (moreWants() && !moreNeeds() && !moreSavings()){
+        } else if (moreWants() && moreNeeds() && !moreSavings()){
             return true;
         } else
             return false;
@@ -272,7 +272,7 @@ public class User {
 
     //returns true if curWants > budgetWants
     private boolean moreWants(){
-        return this.getBudgetWants() > this.getBudgetWants();
+        return this.getTotalWants() > this.getBudgetWants();
     }
 
     //returns true if curNeeds > budgetNeeds
@@ -309,11 +309,13 @@ public class User {
 
     public int getMaxID(){
         int max = 0;
-        for (Entry entry: entries){
+        System.out.println("user class expenses"+this.entries);
+        for (Entry entry: this.entries){
             if (entry.getNumber()>max){
                 max = entry.getNumber();
             }
         }
+        System.out.println("max : "+ max);
         return max;
     }
 

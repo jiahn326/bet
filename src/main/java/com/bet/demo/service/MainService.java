@@ -186,4 +186,23 @@ public class MainService {
     public void setUserToNull(){
         this.user = null;
     }
+
+    public void setEmoji(HttpServletRequest request, HttpServletResponse response){
+        if (this.user.superSmile()){
+            System.out.println("SUPER SMILE");
+            request.setAttribute("emoji", "supersmile");
+        } else if (this.user.smile()){
+            System.out.println("SMILE");
+            request.setAttribute("emoji", "smile");
+        } else if (this.user.sad()){
+            System.out.println("SAD");
+            request.setAttribute("emoji", "sad");
+        } else if (this.user.angry()){
+            System.out.println("ANGRY");
+            request.setAttribute("emoji", "angry");
+        } else{
+            System.out.println("default");
+            request.setAttribute("emoji", "smile");
+        }
+    }
 }

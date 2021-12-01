@@ -48,6 +48,7 @@ public class MainController {
     User user = null;
     List<Entry> entryList = null;
     Entry currentEntry_Update = new Entry();
+    int maxID = 0;
 
     @Autowired
     private MainService mainService;
@@ -65,22 +66,23 @@ public class MainController {
     }
 
 
-    @RequestMapping("/content")
-    public String content(HttpServletRequest request, HttpServletResponse response){
-        if (this.user.superSmile()){
-            request.setAttribute("emoji", "supersmile");
-        } else if (this.user.smile()){
-            request.setAttribute("emoji", "smile");
-        } else if (this.user.sad()){
-            request.setAttribute("emoji", "sad");
-        } else if (this.user.angry()){
-            request.setAttribute("emoji", "angry");
-        } else{
-            request.setAttribute("emoji", "smile");
-        }
-
-        return "content";
-    }
+//    @RequestMapping("/content")
+//    public String content(HttpServletRequest request, HttpServletResponse response){
+//        if (this.user.superSmile()){
+//            request.setAttribute("emoji", "supersmile");
+//        } else if (this.user.smile()){
+//            request.setAttribute("emoji", "smile");
+//        } else if (this.user.sad()){
+//            request.setAttribute("emoji", "sad");
+//        } else if (this.user.angry()){
+//            request.setAttribute("emoji", "angry");
+//        } else{
+//            request.setAttribute("emoji", "smile");
+//        }
+//        System.out.println("<<<< Check!");
+//
+//        return "content";
+//    }
 
 
 /*    @RequestMapping("/login")
@@ -109,6 +111,10 @@ public class MainController {
             String userName = this.user.getFirstname() + this.user.getLastname();
             System.out.println(">>>>>>>>>>> username: " + userName);
             request.setAttribute("userName", userName);
+
+
+            mainService.setEmoji(request, response);
+            System.out.println("<<<< Check!");
 
             //this.entryList = user.getEntry();
             //System.out.println(this.user.toString());
@@ -176,7 +182,8 @@ public class MainController {
     public String history(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ExecutionException, InterruptedException {
         System.out.println("supersuper");
         HttpSession session = request.getSession();
-        
+
+        mainService.setEmoji(request, response);
 
         this.entryList = null; //reset
         mainService.reloadEntries(user, db); // refresh
@@ -194,6 +201,8 @@ public class MainController {
         if (user != null && !user.isEntryEmpty() && this.entryList == null){
             this.entryList = user.getEntry();
         }
+
+        this.maxID = user.getMaxID();
 
         request.setAttribute("entryList", this.entryList);
         request.setAttribute("currentBalance", Precision.round(this.user.getCurrentBalance(),2));
@@ -275,7 +284,7 @@ public class MainController {
             String transaction = entryVO.getTransaction();
             String username = user.getUsername();
 
-            DocumentReference docRef = db.collection("entry").document(user.getUsername()+(user.getMaxID()+1)); //***need to find a unique string to replace childpath***
+            DocumentReference docRef = db.collection("entry").document(user.getUsername()+(this.maxID+1)); //***need to find a unique string to replace childpath***
             // Add document data  with id "alovelace" using a hashmap
             Map<String, Object> data = new HashMap<>();
 
@@ -307,7 +316,7 @@ public class MainController {
                 data.put("user", username);
             }
 
-            data.put("number", user.getMaxID()+1);
+            data.put("number", this.maxID+1);
 
             //asynchronously write data
             ApiFuture<WriteResult> result = docRef.set(data);
@@ -461,11 +470,15 @@ public class MainController {
 
     @RequestMapping("/calendar/info")
     public String calendar(){
+
         return "calendarView/calendar";
     }
 
     @RequestMapping("/budget/info")
     public String budget(HttpServletRequest request, HttpServletResponse response) throws ExecutionException, InterruptedException {
+
+        mainService.setEmoji(request, response);
+
         this.entryList = null; //reset
         mainService.reloadEntries(user, db); // refresh
         this.user.setBudget(null);

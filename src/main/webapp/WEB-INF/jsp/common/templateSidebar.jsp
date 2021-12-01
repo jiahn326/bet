@@ -46,7 +46,20 @@
                     <!-- Emoji -->
                     <div class="card-body bg-indigo-400 text-center card-img-top" style="background-color: #263238; background-size: contain;">
                         <div class="card-img-actions d-inline-block mb-3">
-                            <img class="img-fluid rounded-circle" src="${pageContext.request.contextPath}/images/${emoji}}" width="170" height="170" alt="">
+                            <c:choose>
+                                <c:when test="${emoji eq 'supersmile'}">
+                                    <img class="img-fluid rounded-circle" src="${pageContext.request.contextPath}/images/BET_EMOJI_SUPERSMILE.png" width="170" height="170" alt="">
+                                </c:when>
+                                <c:when test="${emoji eq 'smile'}">
+                                    <img class="img-fluid rounded-circle" src="${pageContext.request.contextPath}/images/BET_EMOJI_SMILE.png" width="170" height="170" alt="">
+                                </c:when>
+                                <c:when test="${emoji eq 'sad'}">
+                                    <img class="img-fluid rounded-circle" src="${pageContext.request.contextPath}/images/BET_EMOJI_SAD.png" width="170" height="170" alt="">
+                                </c:when>
+                                <c:when test="${emoji eq 'angry'}">
+                                    <img class="img-fluid rounded-circle" src="${pageContext.request.contextPath}/images/BET_EMOJI_ANGRY.png" width="170" height="170" alt="">
+                                </c:when>
+                            </c:choose>
                         </div>
                     </div>
                 </div>
